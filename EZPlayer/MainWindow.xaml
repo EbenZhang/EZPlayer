@@ -1,0 +1,52 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
+        xmlns:local="clr-namespace:EZPlayer"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="EZPlayer.MainWindow"
+        Title="EZPlayer" Height="260.1" Width="509.2"
+        >
+    <Window.Background>
+        <SolidColorBrush Color ="Black" />
+    </Window.Background>
+    <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Width="1109.821">
+            <Grid Grid.Row="0">
+                <Grid.Background>
+                    <VisualBrush Stretch="Uniform">
+                        <VisualBrush.Visual>
+                            <Image Source="{Binding VideoSource, ElementName=m_vlcControl}" />
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.Background>
+                <Wpf:VlcControl x:Name="m_vlcControl">
+                </Wpf:VlcControl>
+
+                <Button Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick">
+                    <Image Source="Image/play.png" />
+                </Button>
+            </Grid>
+            <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid Margin="0,-393.392,0,0">
+                        <Slider x:Name="sliderPosition" Maximum="1" LargeChange="0.05" ValueChanged="SliderValueChanged" PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown" PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp" SmallChange="0.01" Margin="0,378.769,10,104.76" Background="#00FCFCFC" />
+                    </Grid>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Button Height="50" Width="50" x:Name="buttonOpen" Click="ButtonOpenClick" Content="Open..." Margin="10,0,0,0"/>
+                            <Button Height="50" Width="50" x:Name="buttonPrevious" Click="ButtonPreviousClick" Content="&lt;&lt;" Margin="10,0,0,0"/>
+                            <Button Height="50" Width="50" x:Name="buttonPlay" Click="ButtonPlayClick" Content="&gt;" Margin="10,0,0,0"/>
+                            <Button Height="50" Width="50" x:Name="buttonNext" Click="ButtonNextClick" Content="&gt;&gt;" Margin="10,0,0,0"/>
+                            <Button Height="50" Width="50" x:Name="buttonPause" Click="ButtonPauseClick" Margin="10,0,0,0" Content="||"/>
+                            <Button Height="50" Width="50" x:Name="buttonStop" Click="ButtonStopClick" Margin="10,0,0,0" Content="Stop" VerticalAlignment="Center"/>
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
+                            <Slider x:Name="sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
+                            <CheckBox x:Name="checkboxMute" IsChecked="False" Checked="CheckboxMuteCheckedChanged" Unchecked="CheckboxMuteCheckedChanged" VerticalAlignment="Center" Content="Mute" Margin="10,29,0,28.6" Width="47"/>
+                            <TextBlock x:Name="textBlock"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Viewbox>
+</Window>
