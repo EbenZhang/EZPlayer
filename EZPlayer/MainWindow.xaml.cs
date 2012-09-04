@@ -12,7 +12,7 @@ using Vlc.DotNet.Wpf;
 
 namespace EZPlayer
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         /// <summary>
         /// Used to indicate that the user is currently changing the position (and the position bar shall not be updated). 
@@ -20,6 +20,23 @@ namespace EZPlayer
         private bool m_positionChanging;
 
         private readonly DispatcherTimer m_activityTimer;
+
+        public DependencyProperty IsPlayingProperty =
+            DependencyProperty.Register("IsPlaying", typeof(bool),
+            typeof(MainWindow), new FrameworkPropertyMetadata(true,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        private bool IsPlaying
+        {
+            get
+            {
+                return (bool)GetValue(IsPlayingProperty);
+            }
+            set
+            {
+                SetValue(IsPlayingProperty, value);
+            }
+        }
 
         #region Constructor / destructor
 
@@ -62,6 +79,8 @@ namespace EZPlayer
             VlcContext.Initialize();
 
             InitializeComponent();
+
+            DataContext = this;
 
             m_vlcControl.VideoProperties.Scale = 2;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
@@ -106,6 +125,7 @@ namespace EZPlayer
             if (m_vlcControl.Media != null)
             {
                 m_vlcControl.Play();
+                this.IsPlaying = true;
             }
         }
 
@@ -117,6 +137,7 @@ namespace EZPlayer
         private void ButtonPauseClick(object sender, RoutedEventArgs e)
         {
             m_vlcControl.Pause();
+            IsPlaying = false;
         }
 
         /// <summary>
@@ -128,6 +149,7 @@ namespace EZPlayer
         {
             m_vlcControl.Stop();
             sliderPosition.Value = 0;
+            IsPlaying = false;
         }
 
         /// <summary>
@@ -157,13 +179,8 @@ namespace EZPlayer
 
             m_vlcControl.Media = new PathMedia(openFileDialog.FileName);
             m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
-            
-            m_vlcControl.Play();
-            
-            /* Instead of opening a file for playback you can also connect to media streams using
-             *     myVlcControl.Media = new LocationMedia(@"http://88.190.232.102:6404");
-             *     myVlcControl.Play();
-             */
+
+            ButtonPlayClick(sender, e);
         }
 
         /// <summary>
@@ -356,5 +373,7 @@ namespace EZPlayer
             }
         }
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

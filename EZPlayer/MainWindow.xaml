@@ -1,14 +1,18 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
         xmlns:local="clr-namespace:EZPlayer"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="EZPlayer.MainWindow"
         Title="EZPlayer" Height="260.1" Width="509.2"
+        Name ="ThisWindow"
         >
     <Window.Background>
         <SolidColorBrush Color ="Black" />
     </Window.Background>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Width="1109.821">
             <Grid Grid.Row="0">
@@ -22,7 +26,11 @@
                 <Wpf:VlcControl x:Name="m_vlcControl">
                 </Wpf:VlcControl>
 
-                <Button Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick">
+                <Button Visibility="{Binding Path=IsPlayingProperty, 
+                    ElementName=ThisWindow,
+                    Mode=TwoWay,
+                    Converter={StaticResource BoolToVis}}"
+                    Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick">
                     <Image Source="Image/play.png" />
                 </Button>
             </Grid>
