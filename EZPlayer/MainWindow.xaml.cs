@@ -22,11 +22,11 @@ namespace EZPlayer
         private readonly DispatcherTimer m_activityTimer;
 
         public static DependencyProperty IsPlayingProperty =
-            DependencyProperty.Register("IsNotPlaying", typeof(bool),
+            DependencyProperty.Register("IsPlaying", typeof(bool),
             typeof(MainWindow), new FrameworkPropertyMetadata(true,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        private bool IsNotPlaying
+        private bool IsPlaying
         {
             get
             {
@@ -80,7 +80,7 @@ namespace EZPlayer
 
             InitializeComponent();
 
-            IsNotPlaying = true;
+            IsPlaying = false;
 
             m_vlcControl.VideoProperties.Scale = 2;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
@@ -124,7 +124,7 @@ namespace EZPlayer
             }
             if (m_vlcControl.Media != null)
             {
-                this.IsNotPlaying = false;
+                this.IsPlaying = true;
                 m_vlcControl.Play();
             }
         }
@@ -136,8 +136,8 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void ButtonPauseClick(object sender, RoutedEventArgs e)
         {
+            IsPlaying = false;
             m_vlcControl.Pause();
-            IsNotPlaying = true;
         }
 
         /// <summary>
@@ -147,9 +147,9 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void ButtonStopClick(object sender, RoutedEventArgs e)
         {
+            IsPlaying = false;
             m_vlcControl.Stop();
             sliderPosition.Value = 0;
-            IsNotPlaying = true;
         }
 
         /// <summary>
