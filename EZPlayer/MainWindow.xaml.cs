@@ -12,7 +12,7 @@ using Vlc.DotNet.Wpf;
 
 namespace EZPlayer
 {
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         /// <summary>
         /// Used to indicate that the user is currently changing the position (and the position bar shall not be updated). 
@@ -21,12 +21,12 @@ namespace EZPlayer
 
         private readonly DispatcherTimer m_activityTimer;
 
-        public DependencyProperty IsPlayingProperty =
-            DependencyProperty.Register("IsPlaying", typeof(bool),
+        public static DependencyProperty IsPlayingProperty =
+            DependencyProperty.Register("IsNotPlaying", typeof(bool),
             typeof(MainWindow), new FrameworkPropertyMetadata(true,
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        private bool IsPlaying
+        private bool IsNotPlaying
         {
             get
             {
@@ -35,7 +35,7 @@ namespace EZPlayer
             set
             {
                 SetValue(IsPlayingProperty, value);
-            }
+            }
         }
 
         #region Constructor / destructor
@@ -80,7 +80,7 @@ namespace EZPlayer
 
             InitializeComponent();
 
-            DataContext = this;
+            IsNotPlaying = true;
 
             m_vlcControl.VideoProperties.Scale = 2;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
@@ -124,8 +124,8 @@ namespace EZPlayer
             }
             if (m_vlcControl.Media != null)
             {
+                this.IsNotPlaying = false;
                 m_vlcControl.Play();
-                this.IsPlaying = true;
             }
         }
 
@@ -137,7 +137,7 @@ namespace EZPlayer
         private void ButtonPauseClick(object sender, RoutedEventArgs e)
         {
             m_vlcControl.Pause();
-            IsPlaying = false;
+            IsNotPlaying = true;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace EZPlayer
         {
             m_vlcControl.Stop();
             sliderPosition.Value = 0;
-            IsPlaying = false;
+            IsNotPlaying = true;
         }
 
         /// <summary>
@@ -373,7 +373,5 @@ namespace EZPlayer
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
