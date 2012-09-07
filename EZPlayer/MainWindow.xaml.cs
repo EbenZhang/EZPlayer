@@ -1,11 +1,12 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
@@ -46,10 +47,10 @@ namespace EZPlayer
         public MainWindow()
         {
             // Set libvlc.dll and libvlccore.dll directory path
-            VlcContext.LibVlcDllsPath = @"C:\Program Files (x86)\VideoLAN\VLC";
+            VlcContext.LibVlcDllsPath = Path.Combine(Directory.GetCurrentDirectory(), "VLC");
 
             // Set the vlc plugins directory path
-            VlcContext.LibVlcPluginsPath = @"C:\Program Files (x86)\VideoLAN\VLC\plugins";
+            VlcContext.LibVlcPluginsPath = Path.Combine(VlcContext.LibVlcDllsPath, "plugins");
 
             /* Setting up the configuration of the VLC instance.
              * You can use any available command-line option using the AddOption function (see last two options). 
