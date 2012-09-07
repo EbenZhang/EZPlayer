@@ -149,7 +149,7 @@ namespace EZPlayer
         {
             IsPlaying = false;
             m_vlcControl.Stop();
-            sliderPosition.Value = 0;
+            m_sliderPosition.Value = 0;
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderVolumeValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            m_vlcControl.AudioProperties.Volume = Convert.ToInt32(sliderVolume.Value);
+            m_vlcControl.AudioProperties.Volume = Convert.ToInt32(m_sliderVolume.Value);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void CheckboxMuteCheckedChanged(object sender, RoutedEventArgs e)
         {
-            m_vlcControl.AudioProperties.IsMute = checkboxMute.IsChecked == true;
+            m_vlcControl.AudioProperties.IsMute = m_checkboxMute.IsChecked == true;
         }
 
         /// <summary>
@@ -220,14 +220,14 @@ namespace EZPlayer
         /// <param name="e">VLC event arguments. </param>
         private void MediaOnParsedChanged(MediaBase sender, VlcEventArgs<int> e)
         {
-            textBlock.Text = string.Format(
+            m_timeIndicator.Text = string.Format(
                 "Duration: {0:00}:{1:00}:{2:00}",
                 m_vlcControl.Media.Duration.Hours,
                 m_vlcControl.Media.Duration.Minutes,
                 m_vlcControl.Media.Duration.Seconds);
 
-            sliderVolume.Value = m_vlcControl.AudioProperties.Volume;
-            checkboxMute.IsChecked = m_vlcControl.AudioProperties.IsMute;
+            m_sliderVolume.Value = m_vlcControl.AudioProperties.Volume;
+            m_checkboxMute.IsChecked = m_vlcControl.AudioProperties.IsMute;
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace EZPlayer
                 return;
             }
 
-            sliderPosition.Value = e.Data;
+            m_sliderPosition.Value = e.Data;
         }
 
         private void VlcControlOnTimeChanged(VlcControl sender, VlcEventArgs<TimeSpan> e)
@@ -251,7 +251,7 @@ namespace EZPlayer
             if (m_vlcControl.Media == null)
                 return;
             var duration = m_vlcControl.Media.Duration;
-            textBlock.Text = string.Format(
+            m_timeIndicator.Text = string.Format(
                 "{0:00}:{1:00}:{2:00} / {3:00}:{4:00}:{5:00}",
                 e.Data.Hours,
                 e.Data.Minutes,
@@ -279,7 +279,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            m_vlcControl.Position = (float)sliderPosition.Value;
+            m_vlcControl.Position = (float)m_sliderPosition.Value;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
 
             m_positionChanging = false;
@@ -299,7 +299,7 @@ namespace EZPlayer
             //Update the current position text when it is in pause
             var duration = m_vlcControl.Media == null ? TimeSpan.Zero : m_vlcControl.Media.Duration;
             var time = TimeSpan.FromMilliseconds(duration.TotalMilliseconds * m_vlcControl.Position);
-            textBlock.Text = string.Format(
+            m_timeIndicator.Text = string.Format(
                 "{0:00}:{1:00}:{2:00} / {3:00}:{4:00}:{5:00}",
                 time.Hours,
                 time.Minutes,
