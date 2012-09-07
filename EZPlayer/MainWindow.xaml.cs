@@ -21,6 +21,23 @@ namespace EZPlayer
 
         private readonly DispatcherTimer m_activityTimer;
 
+        public static DependencyProperty IsPlayingProperty =
+            DependencyProperty.Register("IsPlaying", typeof(bool),
+            typeof(MainWindow), new FrameworkPropertyMetadata(true,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        private bool IsPlaying
+        {
+            get
+            {
+                return (bool)GetValue(IsPlayingProperty);
+            }
+            set
+            {
+                SetValue(IsPlayingProperty, value);
+            }
+        }
+
         #region Constructor / destructor
 
         /// <summary>
@@ -62,6 +79,8 @@ namespace EZPlayer
             VlcContext.Initialize();
 
             InitializeComponent();
+
+            IsPlaying = false;
 
             m_vlcControl.VideoProperties.Scale = 2;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
@@ -105,6 +124,7 @@ namespace EZPlayer
             }
             if (m_vlcControl.Media != null)
             {
+                this.IsPlaying = true;
                 m_vlcControl.Play();
             }
         }
@@ -116,6 +136,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void ButtonPauseClick(object sender, RoutedEventArgs e)
         {
+            IsPlaying = false;
             m_vlcControl.Pause();
         }
 
@@ -126,6 +147,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void ButtonStopClick(object sender, RoutedEventArgs e)
         {
+            IsPlaying = false;
             m_vlcControl.Stop();
             sliderPosition.Value = 0;
         }
@@ -157,13 +179,8 @@ namespace EZPlayer
 
             m_vlcControl.Media = new PathMedia(openFileDialog.FileName);
             m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
-            
-            m_vlcControl.Play();
-            
-            /* Instead of opening a file for playback you can also connect to media streams using
-             *     myVlcControl.Media = new LocationMedia(@"http://88.190.232.102:6404");
-             *     myVlcControl.Play();
-             */
+
+            ButtonPlayClick(sender, e);
         }
 
         /// <summary>
