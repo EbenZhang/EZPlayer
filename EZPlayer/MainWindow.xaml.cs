@@ -61,14 +61,15 @@ namespace EZPlayer
             // Ignore the VLC configuration file
             VlcContext.StartupOptions.IgnoreConfig = true;
 
-            // Enable file based logging
             VlcContext.StartupOptions.LogOptions.LogInFile = true;
-
-            // Shows the VLC log console (in addition to the applications window)
-            VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = true;
-
-            // Set the log level for the VLC instance
+#if DEBUG
             VlcContext.StartupOptions.LogOptions.Verbosity = VlcLogVerbosities.Debug;
+            VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = true;
+#else
+            //Set the startup options
+            VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = false;
+            VlcContext.StartupOptions.LogOptions.Verbosity = VlcLogVerbosities.None;
+#endif
 
             // Disable showing the movie file name as an overlay
             VlcContext.StartupOptions.AddOption("--no-video-title-show");
