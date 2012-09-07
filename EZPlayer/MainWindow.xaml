@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
         xmlns:local="clr-namespace:EZPlayer"
+        xmlns:BindingUtils="clr-namespace:EZPlayer.BindingUtils"
         x:Class="EZPlayer.MainWindow"
         Title="EZPlayer" Height="260.1" Width="509.2"
         Name ="ThisWindow"
@@ -12,7 +13,10 @@
     </Window.Background>
 
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="boolToVis" />
+        <BindingUtils:CompositeConverter x:Key="FalseToVisible">
+            <BindingUtils:InverseBooleanConverter/>
+            <BooleanToVisibilityConverter/>
+        </BindingUtils:CompositeConverter>
     </Window.Resources>
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Width="1109.821">
@@ -26,8 +30,8 @@
                 </Grid.Background>
                 <Wpf:VlcControl x:Name="m_vlcControl" />
 
-                <Button Visibility="{Binding IsNotPlaying, ElementName=ThisWindow, 
-                             Converter={StaticResource boolToVis}}"
+                <Button Visibility="{Binding IsPlaying, ElementName=ThisWindow, 
+                             Converter={StaticResource FalseToVisible}}"
                     Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick">
                     <Image Source="Image/play.png" />
                 </Button>

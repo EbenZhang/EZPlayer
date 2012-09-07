@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
