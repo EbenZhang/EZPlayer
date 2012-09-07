@@ -325,8 +325,11 @@ namespace EZPlayer
         {
             LASTINPUTINFO lastInputInfo = new LASTINPUTINFO();
             lastInputInfo.cbSize = Marshal.SizeOf(typeof(LASTINPUTINFO));
-            if (GetLastInputInfo(out lastInputInfo))
+            bool succeed = GetLastInputInfo(out lastInputInfo);
+            if (!succeed)
             {
+                return;
+            }
                 TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
                 if (idleFor > TimeSpan.FromSeconds(1.5))
                 {
@@ -345,7 +348,6 @@ namespace EZPlayer
                     }
                 }
                 RestartInputMonitorTimer();
-            }
         }
 
         private void RestartInputMonitorTimer()
@@ -360,17 +362,38 @@ namespace EZPlayer
         {
             if (e.ClickCount == 2)
             {
-                if (this.WindowState == WindowState.Maximized)
-                {
-                    this.WindowStyle = WindowStyle.SingleBorderWindow;
-                    this.WindowState = WindowState.Normal;
-                }
-                else
-                {
-                    this.WindowStyle = WindowStyle.None;
-                    this.WindowState = WindowState.Maximized;
-                }
+                ToggleFullScreenMode();
             }
+        }
+
+        private void ToggleFullScreenMode()
+        {
+            if (IsInFullScreenMode())
+            {
+                SwitchToNormalMode();
+            }
+            else
+            {
+                SwitchToFullScreenMode();
+            }
+        }
+
+        private void SwitchToFullScreenMode()
+        {
+            this.WindowStyle = WindowStyle.None;
+            this.WindowState = WindowState.Maximized;
+        }
+
+        private void SwitchToNormalMode()
+        {
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.WindowState = WindowState.Normal;
+        }
+
+        private bool IsInFullScreenMode()
+        {
+            return this.WindowState == WindowState.Maximized &&
+                                this.WindowStyle == WindowStyle.None;
         }
         #endregion
     }
