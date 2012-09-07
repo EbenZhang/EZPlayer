@@ -47,8 +47,12 @@
                             <Button Height="50" Width="50" x:Name="buttonPrevious" Click="ButtonPreviousClick" Content="&lt;&lt;" Margin="10,0,0,0"/>
                             <Button Height="50" Width="50" x:Name="buttonPlay" Click="ButtonPlayClick" Content="&gt;" Margin="10,0,0,0"/>
                             <Button Height="50" Width="50" x:Name="buttonNext" Click="ButtonNextClick" Content="&gt;&gt;" Margin="10,0,0,0"/>
-                            <Button Height="50" Width="50" x:Name="buttonPause" Click="ButtonPauseClick" Margin="10,0,0,0" Content="||"/>
-                            <Button Height="50" Width="50" x:Name="buttonStop" Click="ButtonStopClick" Margin="10,0,0,0" Content="Stop" VerticalAlignment="Center"/>
+                            <Button Height="50" Width="50" x:Name="buttonPause"
+                                    IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
+                                    Click="ButtonPauseClick" Margin="10,0,0,0" Content="||"/>
+                            <Button Height="50" Width="50" x:Name="buttonStop"
+                                    IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
+                                    Click="ButtonStopClick" Margin="10,0,0,0" Content="Stop" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
                             <Slider x:Name="sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
                             <CheckBox x:Name="checkboxMute" IsChecked="False" Checked="CheckboxMuteCheckedChanged" Unchecked="CheckboxMuteCheckedChanged" VerticalAlignment="Center" Content="Mute" Margin="10,29,0,28.6" Width="47"/>
