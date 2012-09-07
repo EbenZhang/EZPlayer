@@ -39,7 +39,7 @@
             <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid Margin="0,-393.392,0,0">
-                        <Slider x:Name="sliderPosition" Maximum="1" LargeChange="0.05" ValueChanged="SliderValueChanged" PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown" PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp" SmallChange="0.01" Margin="0,378.769,10,104.76" Background="#00FCFCFC" />
+                        <Slider x:Name="m_sliderPosition" Maximum="1" LargeChange="0.05" ValueChanged="SliderValueChanged" PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown" PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp" SmallChange="0.01" Margin="0,378.769,10,104.76" Background="#00FCFCFC" />
                     </Grid>
                     <Grid>
                         <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
@@ -54,9 +54,9 @@
                                     IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
                                     Click="ButtonStopClick" Margin="10,0,0,0" Content="Stop" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
-                            <Slider x:Name="sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
-                            <CheckBox x:Name="checkboxMute" IsChecked="False" Checked="CheckboxMuteCheckedChanged" Unchecked="CheckboxMuteCheckedChanged" VerticalAlignment="Center" Content="Mute" Margin="10,29,0,28.6" Width="47"/>
-                            <TextBlock x:Name="textBlock"/>
+                            <Slider x:Name="m_sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
+                            <CheckBox x:Name="m_checkboxMute" IsChecked="False" Checked="CheckboxMuteCheckedChanged" Unchecked="CheckboxMuteCheckedChanged" VerticalAlignment="Center" Content="Mute" Margin="10,29,0,28.6" Width="47"/>
+                            <TextBlock x:Name="m_timeIndicator"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
