@@ -82,6 +82,8 @@ namespace EZPlayer
 
             InitializeComponent();
 
+            this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
+
             IsPlaying = false;
 
             m_vlcControl.VideoProperties.Scale = 2;
@@ -96,6 +98,13 @@ namespace EZPlayer
             };
             m_activityTimer.Tick += OnCheckInputStatus;
             m_activityTimer.Start();
+        }
+
+        void OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            m_vlcControl.AudioProperties.Volume += e.Delta/10;
+            m_vlcControl.AudioProperties.Volume = Math.Min(m_vlcControl.AudioProperties.Volume, 100);
+            m_vlcControl.AudioProperties.Volume = Math.Max(m_vlcControl.AudioProperties.Volume, 0);
         }
 
         /// <summary>
