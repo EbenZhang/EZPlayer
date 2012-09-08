@@ -39,6 +39,24 @@ namespace EZPlayer
             }
         }
 
+        public static readonly DependencyProperty VolumeProperty =
+            DependencyProperty.Register("Volume", typeof(double),
+            typeof(MainWindow), 
+            new PropertyMetadata(0.0));
+
+        private double Volume
+        {
+            get
+            {
+                return (double)GetValue(VolumeProperty);
+            }
+            set
+            {
+                m_vlcControl.AudioProperties.Volume = (int)value;
+                SetValue(VolumeProperty, value);
+            }
+        }
+
         #region Constructor / destructor
 
         /// <summary>
@@ -82,6 +100,8 @@ namespace EZPlayer
 
             InitializeComponent();
 
+            Volume = 100;
+
             this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
 
             IsPlaying = false;
@@ -102,9 +122,9 @@ namespace EZPlayer
 
         void OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            m_vlcControl.AudioProperties.Volume += e.Delta/10;
-            m_vlcControl.AudioProperties.Volume = Math.Min(m_vlcControl.AudioProperties.Volume, 100);
-            m_vlcControl.AudioProperties.Volume = Math.Max(m_vlcControl.AudioProperties.Volume, 0);
+            var volume = Volume + e.Delta / 10;
+            volume = Math.Min(volume, 100);
+            Volume = Math.Max(volume, 0);
         }
 
         /// <summary>
@@ -171,7 +191,7 @@ namespace EZPlayer
         private void ButtonOpenClick(object sender, RoutedEventArgs e)
         {
             if (m_vlcControl.Media != null)
-            {    
+            {
                 m_vlcControl.Pause();
                 m_vlcControl.Media.ParsedChanged -= MediaOnParsedChanged;
             }
@@ -211,7 +231,7 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderVolumeValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            m_vlcControl.AudioProperties.Volume = Convert.ToInt32(m_sliderVolume.Value);
+            Volume = Convert.ToInt32(m_sliderVolume.Value);
         }
 
         /// <summary>
@@ -237,7 +257,7 @@ namespace EZPlayer
                 m_vlcControl.Media.Duration.Minutes,
                 m_vlcControl.Media.Duration.Seconds);
 
-            m_sliderVolume.Value = m_vlcControl.AudioProperties.Volume;
+            Volume = m_vlcControl.AudioProperties.Volume;
             m_checkboxMute.IsChecked = m_vlcControl.AudioProperties.IsMute;
         }
 
@@ -351,24 +371,24 @@ namespace EZPlayer
             {
                 return;
             }
-                TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
-                if (idleFor > TimeSpan.FromSeconds(1.5))
+            TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
+            if (idleFor > TimeSpan.FromSeconds(1.5))
+            {
+                if (m_vlcControl.IsPlaying)
                 {
-                    if (m_vlcControl.IsPlaying)
-                    {
-                        this.m_gridConsole.Visibility = Visibility.Hidden;
-                        Mouse.OverrideCursor = Cursors.None;
-                    }
+                    this.m_gridConsole.Visibility = Visibility.Hidden;
+                    Mouse.OverrideCursor = Cursors.None;
                 }
-                else
+            }
+            else
+            {
+                if (m_gridConsole.Visibility != Visibility.Visible)
                 {
-                    if (m_gridConsole.Visibility != Visibility.Visible)
-                    {
-                        m_gridConsole.Visibility = Visibility.Visible;
-                        Mouse.OverrideCursor = null;
-                    }
+                    m_gridConsole.Visibility = Visibility.Visible;
+                    Mouse.OverrideCursor = null;
                 }
-                RestartInputMonitorTimer();
+            }
+            RestartInputMonitorTimer();
         }
 
         private void RestartInputMonitorTimer()
