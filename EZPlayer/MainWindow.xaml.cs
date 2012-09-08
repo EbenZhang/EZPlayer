@@ -35,6 +35,7 @@ namespace EZPlayer
             }
             set
             {
+                this.Topmost = value;
                 SetValue(IsPlayingProperty, value);
             }
         }
