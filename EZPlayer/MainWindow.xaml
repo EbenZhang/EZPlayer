@@ -54,7 +54,7 @@
                                     IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
                                     Click="ButtonStopClick" Margin="10,0,0,0" Content="Stop" VerticalAlignment="Center"/>
                             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
-                            <Slider x:Name="m_sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
+                            <Slider x:Name="m_sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" Value="{Binding Path=Volume, ElementName=ThisWindow}" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
                             <CheckBox x:Name="m_checkboxMute" IsChecked="False" Checked="CheckboxMuteCheckedChanged" Unchecked="CheckboxMuteCheckedChanged" VerticalAlignment="Center" Content="Mute" Margin="10,29,0,28.6" Width="47"/>
                             <TextBlock x:Name="m_timeIndicator"/>
                         </StackPanel>
