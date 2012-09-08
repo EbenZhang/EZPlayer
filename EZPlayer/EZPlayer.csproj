@@ -126,9 +126,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="image\open.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="image\next.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="image\play.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="image\previous.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="image\stop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -235,16 +235,6 @@ namespace EZPlayer
         }
 
         /// <summary>
-        /// Mute audio check changed
-        /// </summary>
-        /// <param name="sender">Event sender. </param>
-        /// <param name="e">Event arguments. </param>
-        private void CheckboxMuteCheckedChanged(object sender, RoutedEventArgs e)
-        {
-            m_vlcControl.AudioProperties.IsMute = m_checkboxMute.IsChecked == true;
-        }
-
-        /// <summary>
         /// Called by <see cref="VlcControl.Media"/> when the media information was parsed. 
         /// </summary>
         /// <param name="sender">Event sending media. </param>
@@ -258,7 +248,6 @@ namespace EZPlayer
                 m_vlcControl.Media.Duration.Seconds);
 
             Volume = m_vlcControl.AudioProperties.Volume;
-            m_checkboxMute.IsChecked = m_vlcControl.AudioProperties.IsMute;
         }
 
         /// <summary>
