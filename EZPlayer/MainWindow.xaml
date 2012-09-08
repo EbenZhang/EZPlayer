@@ -17,6 +17,17 @@
             <BindingUtils:InverseBooleanConverter/>
             <BooleanToVisibilityConverter/>
         </BindingUtils:CompositeConverter>
+        <Style TargetType="Button" x:Key="TransparentButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="Transparent">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Width="1109.821">
@@ -30,9 +41,11 @@
                 </Grid.Background>
                 <Wpf:VlcControl x:Name="m_vlcControl" />
 
-                <Button Visibility="{Binding IsPlaying, ElementName=ThisWindow, 
-                             Converter={StaticResource FalseToVisible}}"
-                    Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick">
+                <Button 
+                    Visibility="{Binding IsPlaying, ElementName=ThisWindow, Converter={StaticResource FalseToVisible}}"
+                    Height="80" Width="80" x:Name="buttonPlayShortCut" Click="ButtonPlayClick"
+                    Style="{StaticResource TransparentButton}"
+                    >
                     <Image Source="Image/play.png" />
                 </Button>
             </Grid>
