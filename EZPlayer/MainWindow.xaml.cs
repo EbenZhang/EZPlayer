@@ -411,6 +411,10 @@ namespace EZPlayer
         private void SwitchToFullScreenMode()
         {
             this.WindowStyle = WindowStyle.None;
+            
+            // workaround to hide taskbar when swith from maximised to fullscreen
+            this.WindowState = WindowState.Normal;
+
             this.WindowState = WindowState.Maximized;
         }
 
