@@ -361,6 +361,7 @@ namespace EZPlayer
                 return;
             }
             TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
+
             if (idleFor > TimeSpan.FromSeconds(1.5))
             {
                 if (m_vlcControl.IsPlaying)
@@ -371,13 +372,20 @@ namespace EZPlayer
             }
             else
             {
-                if (m_gridConsole.Visibility != Visibility.Visible)
+                bool isMouseInWnd = IsMouseInWnd();
+                if (isMouseInWnd && m_gridConsole.Visibility != Visibility.Visible)
                 {
                     m_gridConsole.Visibility = Visibility.Visible;
                     Mouse.OverrideCursor = null;
                 }
             }
             RestartInputMonitorTimer();
+        }
+
+        private bool IsMouseInWnd()
+        {
+            var point = Mouse.GetPosition(this);
+            return point.X >= 0 && point.Y >= 0;
         }
 
         private void RestartInputMonitorTimer()
