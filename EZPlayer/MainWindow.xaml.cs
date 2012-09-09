@@ -10,7 +10,6 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
-using System.Windows.Controls;
 
 namespace EZPlayer
 {
@@ -248,21 +247,16 @@ namespace EZPlayer
             var files = FindAllSubtitleFiles();
             foreach (var f in files)
             {
-                string subtitleNeedConvertToUTF8 = null;
-                using (var s = new FileStream(f, FileMode.Open))
+                var fileContent = File.ReadAllBytes(f);
+                var detectedEncoding = EncodingDetector.Detect(fileContent);
+
+                if (detectedEncoding != Encoding.UTF8.EncodingName)
                 {
-                    using (var r = new StreamReader(s, true))
-                    {
-                        if (r.CurrentEncoding != Encoding.UTF8)
-                        {
-                            subtitleNeedConvertToUTF8 = r.ReadToEnd();
-                        }
-                    }
-                }
-                if (!string.IsNullOrEmpty(subtitleNeedConvertToUTF8))
-                {
-                    File.Copy(f, f + ".bak", true);
-                    File.WriteAllText(f, subtitleNeedConvertToUTF8, Encoding.UTF8);
+                    File.Copy(f, f + "." + detectedEncoding, true);
+                    var utf8Bytes = Encoding.Convert(Encoding.GetEncoding(detectedEncoding),
+                        Encoding.UTF8,
+                        fileContent);
+                    File.WriteAllBytes(f, utf8Bytes);
                 }
             }
         }
