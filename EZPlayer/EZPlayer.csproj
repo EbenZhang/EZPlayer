@@ -63,6 +63,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Vlc.DotNet.Core.Interops, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Core.Interops.dll</HintPath>
+    </Reference>
     <Reference Include="Vlc.DotNet.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Wpf.dll</HintPath>
