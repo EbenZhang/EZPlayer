@@ -1,13 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZPlayer", "EZPlayer\EZPlayer.csproj", "{EBEEAA78-CDE5-403B-A157-559656B1C063}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlc.DotNet.Core", "Vlc.DotNet\Vlc.DotNet.Core\Vlc.DotNet.Core.csproj", "{0DC24B0B-6862-4615-B62D-81795D2CDD07}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlc.DotNet.Wpf", "Vlc.DotNet\Vlc.DotNet.Wpf\Vlc.DotNet.Wpf.csproj", "{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vlc.DotNet.Core.Interops", "Vlc.DotNet\Vlc.DotNet.Core.Interops\Vlc.DotNet.Core.Interops.csproj", "{7506DDE6-1D45-4FE0-8239-985C5F6EB605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,36 +23,6 @@ Global
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|x86.ActiveCfg = Release|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0DC24B0B-6862-4615-B62D-81795D2CDD07}.Release|x86.ActiveCfg = Release|Any CPU
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Debug|x86.ActiveCfg = Debug|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Debug|x86.Build.0 = Debug|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Release|Any CPU.ActiveCfg = Release|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Release|x86.ActiveCfg = Release|x86
-		{F0657B1B-8F6C-4D9E-978A-021EF77AA0E7}.Release|x86.Build.0 = Release|x86
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{7506DDE6-1D45-4FE0-8239-985C5F6EB605}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
