@@ -59,6 +59,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\UDE\bin\$(Configuration)\Ude.dll</HintPath>
     </Reference>
+    <Reference Include="Vlc.DotNet.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Core.Interops, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Core.Interops.dll</HintPath>
+    </Reference>
+    <Reference Include="Vlc.DotNet.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Vlc.DotNet\bin\$(Configuration)\Vlc.DotNet.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -119,20 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Vlc.DotNet\Vlc.DotNet.Core.Interops\Vlc.DotNet.Core.Interops.csproj">
-      <Project>{7506dde6-1d45-4fe0-8239-985c5f6eb605}</Project>
-      <Name>Vlc.DotNet.Core.Interops</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vlc.DotNet\Vlc.DotNet.Core\Vlc.DotNet.Core.csproj">
-      <Project>{0dc24b0b-6862-4615-b62d-81795d2cdd07}</Project>
-      <Name>Vlc.DotNet.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vlc.DotNet\Vlc.DotNet.Wpf\Vlc.DotNet.Wpf.csproj">
-      <Project>{f0657b1b-8f6c-4d9e-978a-021ef77aa0e7}</Project>
-      <Name>Vlc.DotNet.Wpf</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="application.ico" />
