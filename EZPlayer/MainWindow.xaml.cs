@@ -53,7 +53,7 @@ namespace EZPlayer
 
         public static readonly DependencyProperty VolumeProperty =
             DependencyProperty.Register("Volume", typeof(double),
-            typeof(MainWindow), 
+            typeof(MainWindow),
             new PropertyMetadata(0.0));
 
         private double Volume
@@ -253,34 +253,6 @@ namespace EZPlayer
             ButtonPlayClick(sender, e);
         }
 
-        private void PrepareSubtitle()
-        {
-            var files = FindAllSubtitleFiles();
-            foreach (var f in files)
-            {
-                var fileContent = File.ReadAllBytes(f);
-                var detectedEncoding = EncodingDetector.Detect(fileContent);
-
-                if (detectedEncoding != Encoding.UTF8.EncodingName)
-                {
-                    File.Copy(f, f + "." + detectedEncoding, true);
-                    var utf8Bytes = Encoding.Convert(Encoding.GetEncoding(detectedEncoding),
-                        Encoding.UTF8,
-                        fileContent);
-                    File.WriteAllBytes(f, utf8Bytes);
-                }
-            }
-        }
-
-        private string[] FindAllSubtitleFiles()
-        {
-            var dir = Path.GetDirectoryName(m_playingFilePath);
-            var fileName = Path.GetFileNameWithoutExtension(m_playingFilePath);
-            var pattern = string.Format("*{0}*.srt", fileName);
-            var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
-            return files;
-        }
-
         /// <summary>
         /// Volume value changed by the user. 
         /// </summary>
@@ -476,7 +448,7 @@ namespace EZPlayer
         private void SwitchToFullScreenMode()
         {
             this.WindowStyle = WindowStyle.None;
-            
+
             // workaround to hide taskbar when swith from maximised to fullscreen
             this.WindowState = WindowState.Normal;
 
@@ -502,6 +474,34 @@ namespace EZPlayer
             {
                 Mouse.OverrideCursor = null;
             }
+        }
+
+        private void PrepareSubtitle()
+        {
+            var files = FindAllSubtitleFiles();
+            foreach (var f in files)
+            {
+                var fileContent = File.ReadAllBytes(f);
+                var detectedEncoding = EncodingDetector.Detect(fileContent);
+
+                if (detectedEncoding != Encoding.UTF8.EncodingName)
+                {
+                    File.Copy(f, f + "." + detectedEncoding, true);
+                    var utf8Bytes = Encoding.Convert(Encoding.GetEncoding(detectedEncoding),
+                        Encoding.UTF8,
+                        fileContent);
+                    File.WriteAllBytes(f, utf8Bytes);
+                }
+            }
+        }
+
+        private string[] FindAllSubtitleFiles()
+        {
+            var dir = Path.GetDirectoryName(m_playingFilePath);
+            var fileName = Path.GetFileNameWithoutExtension(m_playingFilePath);
+            var pattern = string.Format("*{0}*.srt", fileName);
+            var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
+            return files;
         }
     }
 }
