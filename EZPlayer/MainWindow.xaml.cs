@@ -173,6 +173,7 @@ namespace EZPlayer
             {
                 this.IsPlaying = true;
                 m_vlcControl.Play();
+                this.Title = m_vlcControl.Media.Metadatas.Title;
             }
         }
 
