@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using System.Windows.Controls;
 
 namespace EZPlayer
 {
@@ -38,6 +39,15 @@ namespace EZPlayer
             set
             {
                 this.Topmost = value;
+                if (value)
+                {
+                    this.m_gridConsole.Opacity = 0.4;
+                }
+                else
+                {
+                    this.m_gridConsole.Opacity = 1;
+                }
+
                 SetValue(IsPlayingProperty, value);
             }
         }
@@ -413,19 +423,19 @@ namespace EZPlayer
             }
             else
             {
-                bool isMouseInWnd = IsMouseInWnd();
-                if (isMouseInWnd && m_gridConsole.Visibility != Visibility.Visible)
+                Mouse.OverrideCursor = null;
+                bool isMouseConsoleWnd = IsMouseInControl(m_gridConsole);
+                if (isMouseConsoleWnd && m_gridConsole.Visibility != Visibility.Visible)
                 {
                     m_gridConsole.Visibility = Visibility.Visible;
-                    Mouse.OverrideCursor = null;
                 }
             }
             RestartInputMonitorTimer();
         }
 
-        private bool IsMouseInWnd()
+        private bool IsMouseInControl(IInputElement control)
         {
-            var point = Mouse.GetPosition(this);
+            var point = Mouse.GetPosition(control);
             return point.X >= 0 && point.Y >= 0;
         }
 
