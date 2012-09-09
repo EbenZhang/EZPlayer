@@ -183,8 +183,19 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void ButtonPauseClick(object sender, RoutedEventArgs e)
         {
-            IsPlaying = false;
-            m_vlcControl.Pause();
+            if (m_vlcControl.Media == null)
+            {
+                return;
+            }
+            if (m_vlcControl.IsPlaying)
+            {
+                m_vlcControl.Pause();
+            }
+            else
+            {
+                m_vlcControl.Play();
+            }
+            IsPlaying = !IsPlaying;
         }
 
         /// <summary>
