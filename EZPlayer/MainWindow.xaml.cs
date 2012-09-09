@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -20,7 +22,9 @@ namespace EZPlayer
         /// </summary>
         private bool m_positionChanging;
 
-        private string m_playingFilePath = null;
+        private string m_selectedFilePath = null;
+
+        private List<string> m_playList;
 
         private readonly DispatcherTimer m_activityTimer;
 
@@ -167,14 +171,16 @@ namespace EZPlayer
             if (m_vlcControl.Media == null)
             {
                 this.ButtonOpenClick(sender, e);
+                return;
             }
             if (m_vlcControl.Media != null)
             {
                 this.IsPlaying = true;
                 m_vlcControl.Play();
-                this.Title = m_vlcControl.Media.Metadatas.Title;
+                UpdateTitle();
             }
         }
+
 
         /// <summary>
         /// Called if the Pause button is clicked; pauses the VLC playback. 
@@ -245,11 +251,15 @@ namespace EZPlayer
                 m_vlcControl.Media.ParsedChanged -= MediaOnParsedChanged;
             }
 
-            m_playingFilePath = openFileDialog.FileName;
+            m_selectedFilePath = openFileDialog.FileName;
             PrepareSubtitle();
-            m_vlcControl.Media = new PathMedia(m_playingFilePath);
-            m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
+            m_playList = GetPlayList();
 
+            m_vlcControl.Media = new PathMedia(m_playList[0]);
+            m_playList.RemoveAt(0);
+            m_playList.ForEach(f => m_vlcControl.Medias.Add(new PathMedia(f)));
+
+            m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
             ButtonPlayClick(sender, e);
         }
 
@@ -361,11 +371,18 @@ namespace EZPlayer
         private void ButtonPreviousClick(object sender, RoutedEventArgs e)
         {
             m_vlcControl.Previous();
+            UpdateTitle();
         }
 
         private void ButtonNextClick(object sender, RoutedEventArgs e)
         {
             m_vlcControl.Next();
+            UpdateTitle();
+        }
+
+        private void UpdateTitle()
+        {
+            this.Title = m_vlcControl.Media.Metadatas.Title;
         }
         #endregion
 
@@ -497,11 +514,25 @@ namespace EZPlayer
 
         private string[] FindAllSubtitleFiles()
         {
-            var dir = Path.GetDirectoryName(m_playingFilePath);
-            var fileName = Path.GetFileNameWithoutExtension(m_playingFilePath);
+            var dir = Path.GetDirectoryName(m_selectedFilePath);
+            var fileName = Path.GetFileNameWithoutExtension(m_selectedFilePath);
             var pattern = string.Format("*{0}*.srt", fileName);
             var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
             return files;
+        }
+
+        private List<string> GetPlayList()
+        {
+            var dir = Path.GetDirectoryName(m_selectedFilePath);
+            var ext = Path.GetExtension(m_selectedFilePath);
+            var files = Directory.GetFiles(dir, "*" + ext, SearchOption.TopDirectoryOnly);
+            return files.Where(f => IsSimilarFile(f) && f.CompareTo(m_selectedFilePath) >= 0).ToList();
+        }
+
+        private bool IsSimilarFile(string f)
+        {
+            var similarity = LevenshteinDistance.CalculateSimilarity(f, m_selectedFilePath);
+            return similarity >= 90.0 / 100.0;
         }
     }
 }
