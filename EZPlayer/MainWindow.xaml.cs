@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -19,6 +19,8 @@ namespace EZPlayer
         /// Used to indicate that the user is currently changing the position (and the position bar shall not be updated). 
         /// </summary>
         private bool m_positionChanging;
+
+        private string m_playingFilePath = null;
 
         private readonly DispatcherTimer m_activityTimer;
 
@@ -92,6 +94,9 @@ namespace EZPlayer
 
             // Disable showing the movie file name as an overlay
             VlcContext.StartupOptions.AddOption("--no-video-title-show");
+
+            // The only supporting Chinese font
+            VlcContext.StartupOptions.AddOption("--freetype-font=DFKai-SB");
 
             // Pauses the playback of a movie on the last frame
             //VlcContext.StartupOptions.AddOption("--play-and-pause");
@@ -219,10 +224,45 @@ namespace EZPlayer
                 m_vlcControl.Media.ParsedChanged -= MediaOnParsedChanged;
             }
 
-            m_vlcControl.Media = new PathMedia(openFileDialog.FileName);
+            m_playingFilePath = openFileDialog.FileName;
+            PrepareSubtitle();
+            m_vlcControl.Media = new PathMedia(m_playingFilePath);
             m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
 
             ButtonPlayClick(sender, e);
+        }
+
+        private void PrepareSubtitle()
+        {
+            var files = FindAllSubtitleFiles();
+            foreach (var f in files)
+            {
+                string subtitleNeedConvertToUTF8 = null;
+                using (var s = new FileStream(f, FileMode.Open))
+                {
+                    using (var r = new StreamReader(s, true))
+                    {
+                        if (r.CurrentEncoding != Encoding.UTF8)
+                        {
+                            subtitleNeedConvertToUTF8 = r.ReadToEnd();
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(subtitleNeedConvertToUTF8))
+                {
+                    File.Copy(f, f + ".bak", true);
+                    File.WriteAllText(f, subtitleNeedConvertToUTF8, Encoding.UTF8);
+                }
+            }
+        }
+
+        private string[] FindAllSubtitleFiles()
+        {
+            var dir = Path.GetDirectoryName(m_playingFilePath);
+            var fileName = Path.GetFileNameWithoutExtension(m_playingFilePath);
+            var pattern = string.Format("*{0}*.srt", fileName);
+            var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
+            return files;
         }
 
         /// <summary>
