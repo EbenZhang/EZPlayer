@@ -489,5 +489,13 @@ namespace EZPlayer
                                 this.WindowStyle == WindowStyle.None;
         }
         #endregion
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (Mouse.OverrideCursor == Cursors.None)
+            {
+                Mouse.OverrideCursor = null;
+            }
+        }
     }
 }
