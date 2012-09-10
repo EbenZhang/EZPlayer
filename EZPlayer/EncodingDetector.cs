@@ -1,10 +1,11 @@
 ﻿using Ude;
+using System.Text;
 
 namespace EZPlayer
 {
     public class EncodingDetector
     {
-        public static string Detect(byte[] fileContent)
+        public static Encoding Detect(byte[] fileContent)
         {
             var detector = new CharsetDetector();
             detector.Feed(fileContent, 0, fileContent.Length);
@@ -15,7 +16,7 @@ namespace EZPlayer
             {
                 charset = charset.Replace("-", "");
             }
-            return charset;
+            return Encoding.GetEncoding(charset);
         }
     }
 }

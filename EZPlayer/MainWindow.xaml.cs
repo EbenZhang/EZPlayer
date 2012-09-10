@@ -498,12 +498,11 @@ namespace EZPlayer
             foreach (var f in files)
             {
                 var fileContent = File.ReadAllBytes(f);
-                var detectedEncoding = EncodingDetector.Detect(fileContent);
-                var encoding = Encoding.GetEncoding(detectedEncoding);
+                var encoding = EncodingDetector.Detect(fileContent);
 
                 if (encoding != Encoding.UTF8)
                 {
-                    File.Copy(f, f + "." + detectedEncoding, true);
+                    File.Copy(f, f + "." + encoding, true);
                     var utf8Bytes = Encoding.Convert(encoding,
                         Encoding.UTF8,
                         fileContent);
