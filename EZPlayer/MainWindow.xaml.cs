@@ -524,8 +524,20 @@ namespace EZPlayer
         {
             var dir = Path.GetDirectoryName(m_selectedFilePath);
             var ext = Path.GetExtension(m_selectedFilePath);
-            var files = Directory.GetFiles(dir, "*" + ext, SearchOption.TopDirectoryOnly);
-            return files.Where(f => IsSimilarFile(f) && f.CompareTo(m_selectedFilePath) >= 0).ToList();
+            var files = Directory.GetFiles(dir,
+                "*" + ext,
+                SearchOption.TopDirectoryOnly)
+                .Where(f => f.CompareTo(m_selectedFilePath) >= 0).ToList();
+
+            var similarFiles = files.Where(f => IsSimilarFile(f)).ToList();
+            if (similarFiles.Count == 1)
+            {// only find itself.
+                return files;
+            }
+            else
+            {
+                return similarFiles;
+            }
         }
 
         private bool IsSimilarFile(string f)
