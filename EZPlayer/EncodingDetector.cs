@@ -10,7 +10,12 @@ namespace EZPlayer
             detector.Feed(fileContent, 0, fileContent.Length);
             detector.DataEnd();
 
-            return detector.Charset;
+            var charset = detector.Charset;
+            if(charset.ToLower() == "big-5")
+            {
+                charset = charset.Replace("-", "");
+            }
+            return charset;
         }
     }
 }
