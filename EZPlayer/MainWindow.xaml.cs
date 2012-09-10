@@ -181,7 +181,6 @@ namespace EZPlayer
             }
         }
 
-
         /// <summary>
         /// Called if the Pause button is clicked; pauses the VLC playback. 
         /// </summary>
@@ -499,12 +498,12 @@ namespace EZPlayer
             foreach (var f in files)
             {
                 var fileContent = File.ReadAllBytes(f);
-                var detectedEncoding = EncodingDetector.Detect(fileContent);
+                var encoding = EncodingDetector.Detect(fileContent);
 
-                if (detectedEncoding != Encoding.UTF8.EncodingName)
+                if (encoding != Encoding.UTF8)
                 {
-                    File.Copy(f, f + "." + detectedEncoding, true);
-                    var utf8Bytes = Encoding.Convert(Encoding.GetEncoding(detectedEncoding),
+                    File.Copy(f, f + "." + encoding.WebName, true);
+                    var utf8Bytes = Encoding.Convert(encoding,
                         Encoding.UTF8,
                         fileContent);
                     File.WriteAllBytes(f, utf8Bytes);
@@ -516,7 +515,7 @@ namespace EZPlayer
         {
             var dir = Path.GetDirectoryName(m_selectedFilePath);
             var fileName = Path.GetFileNameWithoutExtension(m_selectedFilePath);
-            var pattern = string.Format("*{0}*.srt", fileName);
+            var pattern = string.Format("*.srt", fileName);
             var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
             return files;
         }
