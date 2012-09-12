@@ -934,13 +934,13 @@
         "Entry"
         {
         "MsmKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
+        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1840,13 +1840,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
+        "OwnerKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1858,7 +1852,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
+        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1925,10 +1925,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v3.5,Profile=Client"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Client.3.5"
                     {
-                    "Name" = "8:Microsoft .NET Framework 3.5 Client Profile (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v3.5,Profile=Client"
+                    "Name" = "8:.NET Framework 3.5 SP1 Client Profile"
+                    "ProductCode" = "8:Microsoft.Net.Client.3.5"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -4993,11 +4993,6 @@
             "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core.Interops, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7A56656AFC970AA894B3BEE667D8BD71"
-                    {
-                    "Name" = "8:Vlc.DotNet.Core.Interops.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Vlc.DotNet.Core.Interops.dll"
             "TargetName" = "8:"
@@ -6364,11 +6359,6 @@
             "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BAA2756616537CE4E84EC30D442EA3CB"
-                    {
-                    "Name" = "8:Vlc.DotNet.Core.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Vlc.DotNet.Core.dll"
             "TargetName" = "8:"
@@ -7395,11 +7385,6 @@
             "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_EBDC72D12A0A37D43E3D18D40B43A60F"
-                    {
-                    "Name" = "8:Vlc.DotNet.Wpf.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Vlc.DotNet.Wpf.dll"
             "TargetName" = "8:"
@@ -7826,11 +7811,6 @@
             "AssemblyAsmDisplayName" = "8:Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F7A8D7FFBD2C7D338A616534D350D5D7"
-                    {
-                    "Name" = "8:Ude.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Ude.dll"
             "TargetName" = "8:"
