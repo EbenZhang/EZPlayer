@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_00ED578F2D3AEE07E811B9F642A5E39E"
+        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_01B43331013E431BA746D11B5B16F4BC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -687,6 +693,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_55537E246B4227112A15F19CE18E0F28"
+        "OwnerKey" = "8:_EB6E8210CD61355331D9F5AAAC3012B3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_55537E246B4227112A15F19CE18E0F28"
+        "OwnerKey" = "8:_00ED578F2D3AEE07E811B9F642A5E39E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_55537E246B4227112A15F19CE18E0F28"
+        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_57DB29FFE1D34D55AD9377879E5010F7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -923,24 +947,6 @@
         {
         "MsmKey" = "8:_79BD71E76C1240E791A5E99F05856819"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "OwnerKey" = "8:_BAA2756616537CE4E84EC30D442EA3CB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1347,18 +1353,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BAA2756616537CE4E84EC30D442EA3CB"
-        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BAA2756616537CE4E84EC30D442EA3CB"
-        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_BB498D15D8064D2BAA95C3F2E3C69D9F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1659,8 +1653,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
+        "MsmKey" = "8:_EB6E8210CD61355331D9F5AAAC3012B3"
         "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EB6E8210CD61355331D9F5AAAC3012B3"
+        "OwnerKey" = "8:_00ED578F2D3AEE07E811B9F642A5E39E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1834,31 +1834,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F7A8D7FFBD2C7D338A616534D350D5D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A56656AFC970AA894B3BEE667D8BD71"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BAA2756616537CE4E84EC30D442EA3CB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EBDC72D12A0A37D43E3D18D40B43A60F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_00ED578F2D3AEE07E811B9F642A5E39E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EB6E8210CD61355331D9F5AAAC3012B3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_55537E246B4227112A15F19CE18E0F28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F7A8D7FFBD2C7D338A616534D350D5D7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1925,10 +1925,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Client.3.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
                     {
-                    "Name" = "8:.NET Framework 3.5 SP1 Client Profile"
-                    "ProductCode" = "8:Microsoft.Net.Client.3.5"
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -2004,6 +2004,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_00ED578F2D3AEE07E811B9F642A5E39E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_00ED578F2D3AEE07E811B9F642A5E39E"
+                    {
+                    "Name" = "8:Vlc.DotNet.Wpf.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Vlc.DotNet.Wpf.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_01B43331013E431BA746D11B5B16F4BC"
@@ -4186,6 +4217,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55537E246B4227112A15F19CE18E0F28"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core.Interops, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_55537E246B4227112A15F19CE18E0F28"
+                    {
+                    "Name" = "8:Vlc.DotNet.Core.Interops.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Vlc.DotNet.Core.Interops.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_57DB29FFE1D34D55AD9377879E5010F7"
             {
             "SourcePath" = "8:..\\VLC\\plugins\\audio_filter\\libheadphone_channel_mixer_plugin.dll"
@@ -4984,32 +5046,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A56656AFC970AA894B3BEE667D8BD71"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core.Interops, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:Vlc.DotNet.Core.Interops.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A85B4058540420DBE32A53017C3FF78"
@@ -6352,32 +6388,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BAA2756616537CE4E84EC30D442EA3CB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:Vlc.DotNet.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB498D15D8064D2BAA95C3F2E3C69D9F"
             {
             "SourcePath" = "8:..\\VLC\\plugins\\demux\\liblive555_plugin.dll"
@@ -7378,15 +7388,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EBDC72D12A0A37D43E3D18D40B43A60F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB6E8210CD61355331D9F5AAAC3012B3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Vlc.DotNet.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_EB6E8210CD61355331D9F5AAAC3012B3"
+                    {
+                    "Name" = "8:Vlc.DotNet.Core.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
-            "SourcePath" = "8:Vlc.DotNet.Wpf.dll"
+            "SourcePath" = "8:Vlc.DotNet.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
@@ -7811,6 +7826,11 @@
             "AssemblyAsmDisplayName" = "8:Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_F7A8D7FFBD2C7D338A616534D350D5D7"
+                    {
+                    "Name" = "8:Ude.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Ude.dll"
             "TargetName" = "8:"
@@ -8346,7 +8366,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EZPlayer"
         "ProductCode" = "8:{8D77C4F1-BCC5-4F7E-AA19-58CCCAAF4497}"
-        "PackageCode" = "8:{D7072DEC-D649-4AB9-87E5-84CC0691C5C3}"
+        "PackageCode" = "8:{AB518CA0-BA42-4C39-B067-0CBF841DD2A3}"
         "UpgradeCode" = "8:{F83D4F8F-E3BE-4737-A423-A916B348DB5A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
