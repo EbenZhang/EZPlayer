@@ -4,73 +4,230 @@
         <name>Vlc.DotNet.Core.Interops</name>
     </assembly>
     <members>
-        <member name="T:Vlc.DotNet.Core.Interops.Win32Interop">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo">
             <summary>
-            Win32 Interops
+            Information of Media Track
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.GetProcAddress(System.IntPtr,System.String)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.CodecFourcc">
             <summary>
-            Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).
+            Codec Int32 Value
             </summary>
-            <param name="hModule">A handle to the DLL module that contains the function or variable.</param>
-            <param name="lpProcName">he function or variable name, or the function's ordinal value. If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero.</param>
-            <returns>If the function succeeds, the return value is the address of the exported function or variable. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.FreeLibrary(System.IntPtr)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Id">
             <summary>
-            Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid.
+            Codec Id
             </summary>
-            <param name="hModule">A handle to the loaded library module.</param>
-            <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call the GetLastError function.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.LoadLibrary(System.String)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Type">
             <summary>
-            Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.
+            Type of Track
             </summary>
-            <param name="lpFileName">The name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition (.def) file. If the string specifies a full path, the function searches only that path for the module. If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module; for more information, see the Remarks. If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/). For more information about paths, see Naming a File or Directory. If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name string.</param>
-            <returns>If the function succeeds, the return value is a handle to the module. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CreateFileMapping(System.IntPtr,System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.PageAccess,System.Int32,System.Int32,System.String)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Profile">
             <summary>
-            Creates or opens a named or unnamed file mapping object for a specified file.
+            Codec Profile
             </summary>
-            <param name="hFile">A handle to the file from which to create a file mapping object.</param>
-            <param name="lpAttributes">A pointer to a SECURITY_ATTRIBUTES structure that determines whether a returned handle can be inherited by child processes. The lpSecurityDescriptor member of the SECURITY_ATTRIBUTES structure specifies a security descriptor for a new file mapping object.</param>
-            <param name="flProtect">Specifies the page protection of the file mapping object. All mapped views of the object must be compatible with this protection.</param>
-            <param name="dwMaximumSizeLow">The high-order DWORD of the maximum size of the file mapping object.</param>
-            <param name="dwMaximumSizeHigh">The low-order DWORD of the maximum size of the file mapping object.</param>
-            <param name="lpName">The name of the file mapping object.</param>
-            <returns>The value is a handle to the newly created file mapping object.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.MapViewOfFile(System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.FileMapAccess,System.UInt32,System.UInt32,System.UInt32)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Level">
             <summary>
-            Maps a view of a file mapping into the address space of a calling process.
+            Codec Level
             </summary>
-            <param name="hFileMappingObject">A handle to a file mapping object. The CreateFileMapping and OpenFileMapping functions return this handle.</param>
-            <param name="dwDesiredAccess">The type of access to a file mapping object, which determines the protection of the pages. This parameter can be one of the following values.</param>
-            <param name="dwFileOffsetHigh">A high-order DWORD of the file offset where the view begins.</param>
-            <param name="dwFileOffsetLow">A low-order DWORD of the file offset where the view is to begin. The combination of the high and low offsets must specify an offset within the file mapping.</param>
-            <param name="dwNumberOfBytesToMap">The number of bytes of a file mapping to map to the view. All bytes must be within the maximum size specified by CreateFileMapping. If this parameter is 0 (zero), the mapping extends from the specified offset to the end of the file mapping.</param>
-            <returns>The value is the starting address of the mapped view.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.UnmapViewOfFile(System.IntPtr)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Audio">
             <summary>
-            Unmaps a mapped view of a file from the calling process's address space.
+            Audio Track Info
             </summary>
-            <param name="lpBaseAddress">A pointer to the base address of the mapped view of a file that is to be unmapped. This value must be identical to the value returned by a previous call to the MapViewOfFile or MapViewOfFileEx function.</param>
-            <returns>If the function succeeds, the return value is nonzero.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CloseHandle(System.IntPtr)">
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Video">
             <summary>
-            Closes an open object handle.
+            Video Track Info
             </summary>
-            <param name="handle">A valid handle to an open object.</param>
-            <returns>If the function succeeds, the return value is nonzero.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcErrorHandling">
+        <member name="P:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.CodecName">
             <summary>
-            LibVlcErrorHandling class
+            Codec Abbreviation
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct">
+            <summary>
+            Audio information of Media Track
+            </summary>
+        </member>
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct.Channels">
+            <summary>
+            Number of Channels
+            </summary>
+        </member>
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct.Rate">
+            <summary>
+            Audio Sampling Rate
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct">
+            <summary>
+            Video information of Media Track
+            </summary>
+        </member>
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct.Height">
+            <summary>
+            Height of Video
+            </summary>
+        </member>
+        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct.Width">
+            <summary>
+            Width of Video
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AddOption">
+            <summary>
+            Add an option to the media.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="options">The options.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetMrl">
+            <summary>
+            Get the media resource locator (mrl) from a media descriptor object.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>String with mrl of media descriptor object.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Duplicate">
+            <summary>
+            Duplicate a media descriptor object.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>The duplicated media descriptor object.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetMetadata">
+            <summary>
+            Read the meta of the media.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="metadata">The meta to read.</param>
+            <returns>The media's meta value.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SetMetadata">
+            <summary>
+            Set the meta of the media (this function will not save the meta, call SaveMetadatas in order to save the meta)
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="metadata">The meta to write.</param>
+            <param name="value">The media's meta value.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SaveMetadatas">
+            <summary>
+            Save the meta previously set.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetState">
+            <summary>
+            Get current state of media descriptor object.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>State of media descriptor object.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetStats">
+            <summary>
+            Get the current statistics about the media.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="stats">Structure that contain the statistics about the media.</param>
+            <returns>True if the statistics are available, false otherwise.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetSubItems">
+            <summary>
+            Get subitems of media descriptor object. This will increment the reference count of supplied media descriptor object. Use MediaList.Release() to decrement the reference counting.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>List of media descriptor subitems or NULL.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.EventManager">
+            <summary>
+            Get event manager from media descriptor object.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>The event manager associated with mediaInstance.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetDuration">
+            <summary>
+            Get duration (in ms) of media descriptor object item.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>Duration of media item or -1 on error.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Parse">
+            <summary>
+            Parse a media.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.ParseAsync">
+            <summary>
+            Parse a media.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.IsParsed">
+            <summary>
+            Get Parsed status for media descriptor object.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>True if media object has been parsed otherwise it returns false.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SetUserData">
+            <summary>
+            Sets media descriptor's user data.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="userData">Pointer to user data.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetUserData">
+            <summary>
+            Get media descriptor's user data.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>Pointer to user data.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetTrackInfo">
+            <summary>
+            Get media descriptor's elementary streams description.
+            </summary>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="trackInfo">Tracks address to store an allocated array of Elementary Streams descriptions (must be freed by the caller).</param>
+            <returns>Number of Elementary Streams.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerVideo">
+            <summary>
+            LibVlcMediaPlayerVideo class
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcFunction`1">
+            <summary>
+            LibVlcFunction class
+            </summary>
+            <typeparam name="T">Function signature type</typeparam>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.VlcFunctionName">
+            <summary>
+            The function name in libvlc.
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.Invoke">
+            <summary>
+            Invoke the method.
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.IsAvailable">
+            <summary>
+            Check if this method is available with this version of libvlc.
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaList">
+            <summary>
+            LibVlcMediaList class
             </summary>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.NewInstance">
@@ -359,120 +516,21 @@
             <param name="buffer">Log buffer.</param>
             <returns>Log message object or NULL if none left.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.NewInstance">
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerAudio">
             <summary>
-            Create new media list player.
+            LibVlcMediaPlayerAudio class
             </summary>
-            <param name="vlcInstance">Libvlc instance.</param>
-            <returns>Media list player instance or NULL on error.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.ReleaseInstance">
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcInteropsManager">
             <summary>
-            Release media list player created with NewInstance().
+            LibVlcInteropsManager class
             </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.RetainInstance">
+        <member name="M:Vlc.DotNet.Core.Interops.LibVlcInteropsManager.#ctor(System.String)">
             <summary>
-            Retain reference to a media list player.
+            Initializes a new instance of the LibVlcInteropsManager class.
             </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.EventManager">
-            <summary>
-            Get libvlc event manager from this media list player instance.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <returns>The event manager associated with mediaListInstance.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetMediaPlayer">
-            <summary>
-            Replace media player in media_list_player with this instance.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <param name="mediaPlayerInstance">The media player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetMediaList">
-            <summary>
-            Set the media list associated with the player.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <param name="mediaListInstance">The media list instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Play">
-            <summary>
-            Play media list.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Pause">
-            <summary>
-            Pause media list.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.IsPlaying">
-            <summary>
-            Is media list playing?
-            </summary>
-            
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.GetState">
-            <summary>
-            Get current state of media list player.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <returns>The current state of the media player (playing, paused, ...)</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.PlayItemAtIndex">
-            <summary>
-            Play media list item at position index.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <param name="index">Index in media list to play.</param>
-            <returns>0 upon success -1 if the item wasn't found.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.PlayItem">
-            <summary>
-            Play the given media item.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <param name="mediaInstance">Media instance to play.</param>
-            <returns>0 upon success, -1 if the media is not part of the media list.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Stop">
-            <summary>
-            Stop media list.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Next">
-            <summary>
-            Play next item from media list.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <returns>0 upon success -1 if there is no next item.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Previous">
-            <summary>
-            Play previous item from media list.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <returns>0 upon success -1 if there is no previous item.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetPlaybackMode">
-            <summary>
-            Sets the playback mode for the playlist.
-            </summary>
-            <param name="mediaListPlayerInstance">The media list player instance.</param>
-            <param name="mode">The playback mode specification.</param>
-            <returns>0 upon success -1 if there is no previous item.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerVideo">
-            <summary>
-            LibVlcMediaPlayerVideo class
-            </summary>
+            <param name="libVlcDllsDirectory">The path to libvlc.dll and libvlccore.dll</param>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaPlayer.NewInstance">
             <summary>
@@ -1130,247 +1188,189 @@
             <param name="delay">The audio delay (microseconds)</param>
             <returns>0 on success, -1 on error</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo">
+        <member name="T:Vlc.DotNet.Core.Interops.Win32Interop">
             <summary>
-            Information of Media Track
+            Win32 Interops
             </summary>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.CodecFourcc">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.GetProcAddress(System.IntPtr,System.String)">
             <summary>
-            Codec Int32 Value
+            Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).
             </summary>
+            <param name="hModule">A handle to the DLL module that contains the function or variable.</param>
+            <param name="lpProcName">he function or variable name, or the function's ordinal value. If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero.</param>
+            <returns>If the function succeeds, the return value is the address of the exported function or variable. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Id">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.FreeLibrary(System.IntPtr)">
             <summary>
-            Codec Id
+            Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid.
             </summary>
+            <param name="hModule">A handle to the loaded library module.</param>
+            <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call the GetLastError function.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Type">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.LoadLibrary(System.String)">
             <summary>
-            Type of Track
+            Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.
             </summary>
+            <param name="lpFileName">The name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition (.def) file. If the string specifies a full path, the function searches only that path for the module. If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module; for more information, see the Remarks. If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/). For more information about paths, see Naming a File or Directory. If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name string.</param>
+            <returns>If the function succeeds, the return value is a handle to the module. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Profile">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CreateFileMapping(System.IntPtr,System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.PageAccess,System.Int32,System.Int32,System.String)">
             <summary>
-            Codec Profile
+            Creates or opens a named or unnamed file mapping object for a specified file.
             </summary>
+            <param name="hFile">A handle to the file from which to create a file mapping object.</param>
+            <param name="lpAttributes">A pointer to a SECURITY_ATTRIBUTES structure that determines whether a returned handle can be inherited by child processes. The lpSecurityDescriptor member of the SECURITY_ATTRIBUTES structure specifies a security descriptor for a new file mapping object.</param>
+            <param name="flProtect">Specifies the page protection of the file mapping object. All mapped views of the object must be compatible with this protection.</param>
+            <param name="dwMaximumSizeLow">The high-order DWORD of the maximum size of the file mapping object.</param>
+            <param name="dwMaximumSizeHigh">The low-order DWORD of the maximum size of the file mapping object.</param>
+            <param name="lpName">The name of the file mapping object.</param>
+            <returns>The value is a handle to the newly created file mapping object.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Level">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.MapViewOfFile(System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.FileMapAccess,System.UInt32,System.UInt32,System.UInt32)">
             <summary>
-            Codec Level
+            Maps a view of a file mapping into the address space of a calling process.
             </summary>
+            <param name="hFileMappingObject">A handle to a file mapping object. The CreateFileMapping and OpenFileMapping functions return this handle.</param>
+            <param name="dwDesiredAccess">The type of access to a file mapping object, which determines the protection of the pages. This parameter can be one of the following values.</param>
+            <param name="dwFileOffsetHigh">A high-order DWORD of the file offset where the view begins.</param>
+            <param name="dwFileOffsetLow">A low-order DWORD of the file offset where the view is to begin. The combination of the high and low offsets must specify an offset within the file mapping.</param>
+            <param name="dwNumberOfBytesToMap">The number of bytes of a file mapping to map to the view. All bytes must be within the maximum size specified by CreateFileMapping. If this parameter is 0 (zero), the mapping extends from the specified offset to the end of the file mapping.</param>
+            <returns>The value is the starting address of the mapped view.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Audio">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.UnmapViewOfFile(System.IntPtr)">
             <summary>
-            Audio Track Info
+            Unmaps a mapped view of a file from the calling process's address space.
             </summary>
+            <param name="lpBaseAddress">A pointer to the base address of the mapped view of a file that is to be unmapped. This value must be identical to the value returned by a previous call to the MapViewOfFile or MapViewOfFileEx function.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
         </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.Video">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CloseHandle(System.IntPtr)">
             <summary>
-            Video Track Info
+            Closes an open object handle.
             </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo.CodecName">
-            <summary>
-            Codec Abbreviation
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct">
-            <summary>
-            Audio information of Media Track
-            </summary>
-        </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct.Channels">
-            <summary>
-            Number of Channels
-            </summary>
-        </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AudioStruct.Rate">
-            <summary>
-            Audio Sampling Rate
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct">
-            <summary>
-            Video information of Media Track
-            </summary>
-        </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct.Height">
-            <summary>
-            Height of Video
-            </summary>
-        </member>
-        <member name="F:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.VideoStruct.Width">
-            <summary>
-            Width of Video
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.AddOption">
-            <summary>
-            Add an option to the media.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="options">The options.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetMrl">
-            <summary>
-            Get the media resource locator (mrl) from a media descriptor object.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>String with mrl of media descriptor object.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Duplicate">
-            <summary>
-            Duplicate a media descriptor object.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>The duplicated media descriptor object.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetMetadata">
-            <summary>
-            Read the meta of the media.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="metadata">The meta to read.</param>
-            <returns>The media's meta value.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SetMetadata">
-            <summary>
-            Set the meta of the media (this function will not save the meta, call SaveMetadatas in order to save the meta)
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="metadata">The meta to write.</param>
-            <param name="value">The media's meta value.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SaveMetadatas">
-            <summary>
-            Save the meta previously set.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetState">
-            <summary>
-            Get current state of media descriptor object.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>State of media descriptor object.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetStats">
-            <summary>
-            Get the current statistics about the media.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="stats">Structure that contain the statistics about the media.</param>
-            <returns>True if the statistics are available, false otherwise.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetSubItems">
-            <summary>
-            Get subitems of media descriptor object. This will increment the reference count of supplied media descriptor object. Use MediaList.Release() to decrement the reference counting.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>List of media descriptor subitems or NULL.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.EventManager">
-            <summary>
-            Get event manager from media descriptor object.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>The event manager associated with mediaInstance.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetDuration">
-            <summary>
-            Get duration (in ms) of media descriptor object item.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>Duration of media item or -1 on error.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Parse">
-            <summary>
-            Parse a media.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.ParseAsync">
-            <summary>
-            Parse a media.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.IsParsed">
-            <summary>
-            Get Parsed status for media descriptor object.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>True if media object has been parsed otherwise it returns false.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.SetUserData">
-            <summary>
-            Sets media descriptor's user data.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="userData">Pointer to user data.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetUserData">
-            <summary>
-            Get media descriptor's user data.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>Pointer to user data.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.GetTrackInfo">
-            <summary>
-            Get media descriptor's elementary streams description.
-            </summary>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="trackInfo">Tracks address to store an allocated array of Elementary Streams descriptions (must be freed by the caller).</param>
-            <returns>Number of Elementary Streams.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcInteropsManager">
-            <summary>
-            LibVlcInteropsManager class
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.Interops.LibVlcInteropsManager.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the LibVlcInteropsManager class.
-            </summary>
-            <param name="libVlcDllsDirectory">The path to libvlc.dll and libvlccore.dll</param>
+            <param name="handle">A valid handle to an open object.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.LibVlcAsynchronousEvents">
             <summary>
             LibVlcAsynchronousEvents class
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaList">
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcErrorHandling">
             <summary>
-            LibVlcMediaList class
+            LibVlcErrorHandling class
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcFunction`1">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.NewInstance">
             <summary>
-            LibVlcFunction class
+            Create new media list player.
             </summary>
-            <typeparam name="T">Function signature type</typeparam>
+            <param name="vlcInstance">Libvlc instance.</param>
+            <returns>Media list player instance or NULL on error.</returns>
         </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.VlcFunctionName">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.ReleaseInstance">
             <summary>
-            The function name in libvlc.
+            Release media list player created with NewInstance().
             </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
         </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.Invoke">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.RetainInstance">
             <summary>
-            Invoke the method.
+            Retain reference to a media list player.
             </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
         </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.IsAvailable">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.EventManager">
             <summary>
-            Check if this method is available with this version of libvlc.
+            Get libvlc event manager from this media list player instance.
             </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <returns>The event manager associated with mediaListInstance.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerAudio">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetMediaPlayer">
             <summary>
-            LibVlcMediaPlayerAudio class
+            Replace media player in media_list_player with this instance.
             </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <param name="mediaPlayerInstance">The media player instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetMediaList">
+            <summary>
+            Set the media list associated with the player.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <param name="mediaListInstance">The media list instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Play">
+            <summary>
+            Play media list.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Pause">
+            <summary>
+            Pause media list.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.IsPlaying">
+            <summary>
+            Is media list playing?
+            </summary>
+            
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.GetState">
+            <summary>
+            Get current state of media list player.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <returns>The current state of the media player (playing, paused, ...)</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.PlayItemAtIndex">
+            <summary>
+            Play media list item at position index.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <param name="index">Index in media list to play.</param>
+            <returns>0 upon success -1 if the item wasn't found.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.PlayItem">
+            <summary>
+            Play the given media item.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <param name="mediaInstance">Media instance to play.</param>
+            <returns>0 upon success, -1 if the media is not part of the media list.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Stop">
+            <summary>
+            Stop media list.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Next">
+            <summary>
+            Play next item from media list.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <returns>0 upon success -1 if there is no next item.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.Previous">
+            <summary>
+            Play previous item from media list.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <returns>0 upon success -1 if there is no previous item.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.SetPlaybackMode">
+            <summary>
+            Sets the playback mode for the playlist.
+            </summary>
+            <param name="mediaListPlayerInstance">The media list player instance.</param>
+            <param name="mode">The playback mode specification.</param>
+            <returns>0 upon success -1 if there is no previous item.</returns>
         </member>
     </members>
 </doc>
