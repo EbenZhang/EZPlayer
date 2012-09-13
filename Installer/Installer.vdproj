@@ -1671,6 +1671,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EC85955229C3B4C04A836D3133EFD6DD"
+        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_ECF22829538643D389B8A834EF467953"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1785,12 +1791,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F7A8D7FFBD2C7D338A616534D350D5D7"
-        "OwnerKey" = "8:_511AE36F2CFB49C2B5F3A47A541A85DB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F84C0705B1AC4D4FA453F7FEAEDF4E5F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1840,6 +1840,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EC85955229C3B4C04A836D3133EFD6DD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_00ED578F2D3AEE07E811B9F642A5E39E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1853,12 +1859,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_55537E246B4227112A15F19CE18E0F28"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F7A8D7FFBD2C7D338A616534D350D5D7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1888,10 +1888,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v3.5,Profile=Client"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
                     {
-                    "Name" = "8:Microsoft .NET Framework 3.5 Client Profile (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v3.5,Profile=Client"
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -7439,6 +7439,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EC85955229C3B4C04A836D3133EFD6DD"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EC85955229C3B4C04A836D3133EFD6DD"
+                    {
+                    "Name" = "8:Ude.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Ude.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECF22829538643D389B8A834EF467953"
             {
             "SourcePath" = "8:..\\VLC\\plugins\\video_filter\\libball_plugin.dll"
@@ -7817,37 +7848,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F7A8D7FFBD2C7D338A616534D350D5D7"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Ude, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F7A8D7FFBD2C7D338A616534D350D5D7"
-                    {
-                    "Name" = "8:Ude.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Ude.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_920EE2F2A87E46C29D7B99DF520C3C48"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F84C0705B1AC4D4FA453F7FEAEDF4E5F"
@@ -8366,7 +8366,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EZPlayer"
         "ProductCode" = "8:{8D77C4F1-BCC5-4F7E-AA19-58CCCAAF4497}"
-        "PackageCode" = "8:{AB518CA0-BA42-4C39-B067-0CBF841DD2A3}"
+        "PackageCode" = "8:{034B36C6-46C0-4136-86F6-D1BAA697E842}"
         "UpgradeCode" = "8:{F83D4F8F-E3BE-4737-A423-A916B348DB5A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
