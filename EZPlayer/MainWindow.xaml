@@ -51,6 +51,7 @@
                     >
                     <Image Source="Image/play.png" />
                 </Button>
+                <TextBlock Foreground="White" x:Name="m_timeIndicator" Margin="742,350,5,133" RenderTransformOrigin="0.51,0.179" />
             </Grid>
             <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
                 <Grid>
@@ -65,7 +66,6 @@
                                 Margin="0,378.769,10,104.76"
                                 Background="#00FCFCFC"
                                 Width="906.186" />
-                        <TextBlock Foreground="White" x:Name="m_timeIndicator" Width="110.936" Margin="805.25,360.593,0,104.76" RenderTransformOrigin="0.51,0.179"/>
                     </Grid>
                     <Grid>
                         <StackPanel Orientation="Horizontal" Margin="97.407,20,0,0">
@@ -115,7 +115,7 @@
                                     >
                                 <Image Source="Image/stop.png" />
                             </Button>
-                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
+                            <TextBlock Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
                             <Slider x:Name="m_sliderVolume" Maximum="100" SmallChange="1" LargeChange="5" Value="{Binding Path=Volume, ElementName=ThisWindow}" ValueChanged="SliderVolumeValueChanged" VerticalAlignment="Center" Margin="10,0,0,0" Width="72"/>
                         </StackPanel>
                     </Grid>
