@@ -24,8 +24,6 @@ namespace EZPlayer
 
         private string m_selectedFilePath = null;
 
-        private List<string> m_playList;
-
         private readonly DispatcherTimer m_activityTimer;
 
         public static DependencyProperty IsPlayingProperty =
@@ -173,12 +171,7 @@ namespace EZPlayer
                 this.ButtonOpenClick(sender, e);
                 return;
             }
-            if (m_vlcControl.Media != null)
-            {
-                this.IsPlaying = true;
-                m_vlcControl.Play();
-                UpdateTitle();
-            }
+            Play(GetPlayList());
         }
 
         /// <summary>
@@ -251,15 +244,23 @@ namespace EZPlayer
             }
 
             m_selectedFilePath = openFileDialog.FileName;
-            PrepareSubtitle();
-            m_playList = GetPlayList();
+            var playList = GetPlayList();
+            Play(playList);
+        }
 
-            m_vlcControl.Media = new PathMedia(m_playList[0]);
-            m_playList.RemoveAt(0);
-            m_playList.ForEach(f => m_vlcControl.Medias.Add(new PathMedia(f)));
+        private void Play(List<string> playList)
+        {
+            PrepareSubtitle();
+
+            m_vlcControl.Media = new PathMedia(playList[0]);
+            playList.RemoveAt(0);
+            playList.ForEach(f => m_vlcControl.Medias.Add(new PathMedia(f)));
 
             m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
-            ButtonPlayClick(sender, e);
+
+            this.IsPlaying = true;
+            m_vlcControl.Play();
+            UpdateTitle();
         }
 
         /// <summary>
@@ -545,6 +546,25 @@ namespace EZPlayer
         {
             var similarity = LevenshteinDistance.CalculateSimilarity(f, m_selectedFilePath);
             return similarity >= 90.0 / 100.0;
+        }
+
+        private void OnDropFile(object sender, DragEventArgs e)
+        {
+            if (e.Data is DataObject && ((DataObject)e.Data).ContainsFileDropList())
+            {
+                var fileList = (e.Data as DataObject).GetFileDropList();
+                if (fileList.Count == 1)
+                {
+                    m_selectedFilePath = fileList[0];
+                    Play(GetPlayList());
+                }
+                else if (fileList.Count > 1)
+                {
+                    var sortedFileList = fileList.Cast<string>().OrderBy(s => s).ToList();
+                    m_selectedFilePath = sortedFileList[0];
+                    Play(sortedFileList);
+                }
+            }
         }
     }
 }
