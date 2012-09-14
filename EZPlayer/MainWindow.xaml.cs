@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using EZPlayer.PlayList;
 using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
@@ -171,7 +172,10 @@ namespace EZPlayer
                 this.ButtonOpenClick(sender, e);
                 return;
             }
-            Play(GetPlayList());
+            else
+            {
+                DoPlay();
+            }
         }
 
         /// <summary>
@@ -218,7 +222,7 @@ namespace EZPlayer
             if (m_vlcControl.Media != null)
             {
                 m_vlcControl.Pause();
-                m_vlcControl.Media.ParsedChanged -= MediaOnParsedChanged;
+                m_vlcControl.Media.ParsedChanged -= OnMediaParsed;
             }
 
             var openFileDialog = new OpenFileDialog
@@ -240,27 +244,34 @@ namespace EZPlayer
 
             if (m_vlcControl.Media != null)
             {
-                m_vlcControl.Media.ParsedChanged -= MediaOnParsedChanged;
+                m_vlcControl.Media.ParsedChanged -= OnMediaParsed;
             }
 
             m_selectedFilePath = openFileDialog.FileName;
-            var playList = GetPlayList();
+            var playList = PlayListUtil.GetPlayList(m_selectedFilePath);
             Play(playList);
         }
 
         private void Play(List<string> playList)
         {
             PrepareSubtitle();
+            PrepareVLCMediaList(playList);
+            m_vlcControl.Media.ParsedChanged += OnMediaParsed;
+            DoPlay();
+        }
 
-            m_vlcControl.Media = new PathMedia(playList[0]);
-            playList.RemoveAt(0);
-            playList.ForEach(f => m_vlcControl.Medias.Add(new PathMedia(f)));
-
-            m_vlcControl.Media.ParsedChanged += MediaOnParsedChanged;
-
+        private void DoPlay()
+        {
             this.IsPlaying = true;
             m_vlcControl.Play();
             UpdateTitle();
+        }
+
+        private void PrepareVLCMediaList(List<string> playList)
+        {
+            m_vlcControl.Media = new PathMedia(playList[0]);
+            playList.RemoveAt(0);
+            playList.ForEach(f => m_vlcControl.Medias.Add(new PathMedia(f)));
         }
 
         /// <summary>
@@ -278,7 +289,7 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sending media. </param>
         /// <param name="e">VLC event arguments. </param>
-        private void MediaOnParsedChanged(MediaBase sender, VlcEventArgs<int> e)
+        private void OnMediaParsed(MediaBase sender, VlcEventArgs<int> e)
         {
             m_timeIndicator.Text = string.Format(
                 "Duration: {0:00}:{1:00}:{2:00}",
@@ -522,32 +533,6 @@ namespace EZPlayer
             return files;
         }
 
-        private List<string> GetPlayList()
-        {
-            var dir = Path.GetDirectoryName(m_selectedFilePath);
-            var ext = Path.GetExtension(m_selectedFilePath);
-            var files = Directory.GetFiles(dir,
-                "*" + ext,
-                SearchOption.TopDirectoryOnly)
-                .Where(f => f.CompareTo(m_selectedFilePath) >= 0).ToList();
-
-            var similarFiles = files.Where(f => IsSimilarFile(f)).ToList();
-            if (similarFiles.Count == 1)
-            {// only find itself.
-                return files;
-            }
-            else
-            {
-                return similarFiles;
-            }
-        }
-
-        private bool IsSimilarFile(string f)
-        {
-            var similarity = LevenshteinDistance.CalculateSimilarity(f, m_selectedFilePath);
-            return similarity >= 90.0 / 100.0;
-        }
-
         private void OnDropFile(object sender, DragEventArgs e)
         {
             if (e.Data is DataObject && ((DataObject)e.Data).ContainsFileDropList())
@@ -556,7 +541,7 @@ namespace EZPlayer
                 if (fileList.Count == 1)
                 {
                     m_selectedFilePath = fileList[0];
-                    Play(GetPlayList());
+                    Play(PlayListUtil.GetPlayList(m_selectedFilePath));
                 }
                 else if (fileList.Count > 1)
                 {
