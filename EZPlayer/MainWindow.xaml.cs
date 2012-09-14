@@ -349,9 +349,14 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            m_vlcControl.Position = (float)m_sliderPosition.Value;
-            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
+            var mousePos = e.GetPosition(m_sliderPosition).X;
+            var sliderRange = m_sliderPosition.Maximum - m_sliderPosition.Minimum;
 
+            float value = ((float)mousePos / (float)m_sliderPosition.Width) * (float)sliderRange;
+
+            m_vlcControl.Position = value;
+            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
+            m_sliderPosition.Value = value;
             m_positionChanging = false;
         }
 
