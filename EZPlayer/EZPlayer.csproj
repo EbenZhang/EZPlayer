@@ -80,6 +80,7 @@
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
     <Compile Include="EncodingDetector.cs" />
     <Compile Include="LevenshteinDistance.cs" />
+    <Compile Include="PlayList\PlayListUtil.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
