@@ -381,7 +381,8 @@ namespace EZPlayer
 
         private void UpdateTitle()
         {
-            this.Title = m_vlcControl.Media.Metadatas.Title;
+            Uri uri = new Uri(m_vlcControl.Media.MRL);
+            this.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);
         }
         #endregion
 
