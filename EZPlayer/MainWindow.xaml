@@ -55,7 +55,16 @@
             <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid Margin="0,-393.392,0,0">
-                        <Slider x:Name="m_sliderPosition" Maximum="1" LargeChange="0.05" ValueChanged="SliderValueChanged" PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown" PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp" SmallChange="0.001" Margin="0,378.769,10,104.76" Background="#00FCFCFC" Width="906.186" />
+                        <Slider x:Name="m_sliderPosition"
+                                Maximum="1"
+                                LargeChange="0.05"
+                                SmallChange="0.001"
+                                ValueChanged="SliderValueChanged"
+                                PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown"
+                                PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp"
+                                Margin="0,378.769,10,104.76"
+                                Background="#00FCFCFC"
+                                Width="906.186" />
                         <TextBlock Foreground="White" x:Name="m_timeIndicator" Width="110.936" Margin="805.25,360.593,0,104.76" RenderTransformOrigin="0.51,0.179"/>
                     </Grid>
                     <Grid>
