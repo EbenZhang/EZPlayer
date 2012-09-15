@@ -13,7 +13,6 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
-using System.Windows.Controls;
 
 namespace EZPlayer
 {
@@ -338,6 +337,11 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            PreparePositionChanging();
+        }
+
+        private void PreparePositionChanging()
+        {
             m_positionChanging = true;
             m_vlcControl.PositionChanged -= VlcControlOnPositionChanged;
         }
@@ -353,11 +357,23 @@ namespace EZPlayer
             var sliderRange = m_sliderPosition.Maximum - m_sliderPosition.Minimum;
 
             float value = ((float)mousePos / (float)m_sliderPosition.Width) * (float)sliderRange;
+
+            UpdatePosition(value);
+
+            FinishPositionChanging();
+        }
+
+        private void FinishPositionChanging()
+        {
+            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
+            m_positionChanging = false;
+        }
+
+        private void UpdatePosition(float value)
+        {
             value = MathUtil.Clamp(value, 0.0f, 1.0f);
             m_vlcControl.Position = value;
-            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
             m_sliderPosition.Value = value;
-            m_positionChanging = false;
         }
 
         /// <summary>
@@ -579,12 +595,18 @@ namespace EZPlayer
 
         private void OnBtnForwardClick(object sender, RoutedEventArgs e)
         {
-
+            PreparePositionChanging();
+            var newValue = m_vlcControl.Position + 0.001f;
+            UpdatePosition(newValue);
+            FinishPositionChanging();
         }
 
         private void OnBtnBackwardClick(object sender, RoutedEventArgs e)
         {
-
+            PreparePositionChanging();
+            var newValue = m_vlcControl.Position - 0.001f;
+            UpdatePosition(newValue);
+            FinishPositionChanging();
         }
     }
 }
