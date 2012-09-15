@@ -75,6 +75,7 @@
                                 PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp"
                                 Margin="0,378.769,10,104.76"
                                 Width="906.186"
+                                IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
                                 >
                         </Slider>
                     </Grid>
