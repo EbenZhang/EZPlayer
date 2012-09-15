@@ -106,6 +106,14 @@
                                     >
                                 <Image Source="Image/play.png" />
                             </Button>
+                            <Button Height="80" Width="80"
+                                    x:Name="m_btnFullscreen"
+                                    Click="OnBtnFullScreenClick"
+                                    Margin="10,0,0,0"
+                                    Style="{StaticResource TransparentButton}"
+                                    >
+                                <Image Source="Image/fullscreen.png" />
+                            </Button>
                             <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnForward"
                                     Click="OnBtnForwardClick"

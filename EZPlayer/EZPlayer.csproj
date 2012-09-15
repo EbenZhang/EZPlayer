@@ -144,6 +144,9 @@
     <Content Include="image\forward.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="image\fullscreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="image\open.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
