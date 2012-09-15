@@ -79,6 +79,7 @@
     <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
     <Compile Include="EncodingDetector.cs" />
+    <Compile Include="HistoryItem.cs" />
     <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MathUtil.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
