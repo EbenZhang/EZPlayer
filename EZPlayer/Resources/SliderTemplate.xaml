@@ -16,7 +16,7 @@
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
                     <Border Height="12" Margin="0,0,-12,0">
                         <Border.Background>
-                            <SolidColorBrush Color="{StaticResource ControlColor}" Opacity="0.2"/>
+                            <SolidColorBrush Color="{StaticResource ControlColor}" Opacity="0.4"/>
                         </Border.Background>
                     </Border>
                 </ControlTemplate>
@@ -81,7 +81,7 @@
   CornerRadius="6" 
   Height="12"
   Grid.Row="1"
-  Background="#0a0a0a" 
+  Background="Gray"
   BorderBrush="#121212"
   BorderThickness="1" />
             <Track Grid.Row="1" Name="PART_Track">
