@@ -622,5 +622,17 @@ namespace EZPlayer
         {
             ToggleFullScreenMode();
         }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                OnBtnBackwardClick(null, null);
+            }
+            if (e.Key == Key.Right)
+            {
+                OnBtnForwardClick(null, null);
+            }
+        }
     }
 }
