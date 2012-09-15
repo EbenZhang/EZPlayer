@@ -29,7 +29,9 @@ namespace EZPlayer
 
         private readonly DispatcherTimer m_activityTimer;
 
-        private static readonly string LAST_PLAY_INFO_FILE = "lastplay.xml";
+        private readonly static string USER_APP_DATA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        private readonly static string EZPLAYER_DATA_DIR = Path.Combine(USER_APP_DATA_DIR, "EZPlayer");
+        private static readonly string LAST_PLAY_INFO_FILE =Path.Combine(EZPLAYER_DATA_DIR, "lastplay.xml");
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -83,6 +85,10 @@ namespace EZPlayer
         /// </summary>
         public MainWindow()
         {
+            if (!Directory.Exists(EZPLAYER_DATA_DIR))
+            {
+                Directory.CreateDirectory(EZPLAYER_DATA_DIR);
+            }
             // Set libvlc.dll and libvlccore.dll directory path
             VlcContext.LibVlcDllsPath = Path.Combine(Directory.GetCurrentDirectory(), "VLC");
 
