@@ -20,26 +20,21 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/SliderTemplate.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-        <BindingUtils:CompositeConverter x:Key="FalseToVisible">
-            <BindingUtils:InverseBooleanConverter/>
-            <BooleanToVisibilityConverter/>
-        </BindingUtils:CompositeConverter>
-        <Style TargetType="Button" x:Key="TransparentButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="Transparent" Opacity="0.8">
-                            <ContentPresenter/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <SolidColorBrush x:Key="ControlColor">
-            <SolidColorBrush.Color>
-                <Color A="255" R ="79" G="124" B="230"/>
-            </SolidColorBrush.Color>
-        </SolidColorBrush>
+            <BindingUtils:CompositeConverter x:Key="FalseToVisible">
+                <BindingUtils:InverseBooleanConverter/>
+                <BooleanToVisibilityConverter/>
+            </BindingUtils:CompositeConverter>
+            <Style TargetType="ButtonBase" x:Key="TransparentButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ButtonBase">
+                            <Border Background="Transparent" Opacity="0.8">
+                                <ContentPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -65,7 +60,7 @@
             <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid Margin="0,-393.392,0,0">
-                        <TextBlock Foreground="{StaticResource ControlColor}" x:Name="m_timeIndicator" Margin="742,350,5,133" RenderTransformOrigin="0.51,0.179" />
+                        <TextBlock Foreground="{StaticResource ControlBrush}" x:Name="m_timeIndicator" Margin="742,350,5,133" RenderTransformOrigin="0.51,0.179" />
                         <Slider x:Name="m_sliderPosition"
                                 Maximum="1"
                                 LargeChange="0.05"
@@ -96,13 +91,13 @@
                                     Margin="10,0,0,0">
                                 <Image Source="Image/previous.png" />
                             </Button>
-                            <Button Height="50" Width="50"
+                            <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnBackward"
                                     Click="OnBtnBackwardClick"
                                     Style="{StaticResource TransparentButton}"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/reward.png" />
-                            </Button>
+                            </RepeatButton>
                             <Button Height="90" Width="90"
                                     x:Name="buttonPlay"
                                     Click="ButtonPlayClick"
@@ -111,13 +106,13 @@
                                     >
                                 <Image Source="Image/play.png" />
                             </Button>
-                            <Button Height="50" Width="50"
+                            <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnForward"
                                     Click="OnBtnForwardClick"
                                     Style="{StaticResource TransparentButton}"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/forward.png" />
-                            </Button>
+                            </RepeatButton>
                             <Button Height="50" Width="50"
                                     x:Name="buttonNext"
                                     Click="ButtonNextClick"
@@ -140,7 +135,7 @@
                                     >
                                 <Image Source="Image/stop.png" />
                             </Button>
-                            <TextBlock Foreground="{StaticResource ControlColor}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
+                            <TextBlock Foreground="{StaticResource ControlBrush}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
                             <Slider x:Name="m_sliderVolume" 
                                     Maximum="100"
                                     SmallChange="1"
