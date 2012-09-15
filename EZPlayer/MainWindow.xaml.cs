@@ -633,6 +633,17 @@ namespace EZPlayer
             {
                 OnBtnForwardClick(null, null);
             }
+
+            if (e.Key == Key.Down)
+            {
+                var volume = Volume - 12;
+                Volume = MathUtil.Clamp(volume, 0d, 100d);
+            }
+            if (e.Key == Key.Up)
+            {
+                var volume = Volume + 12;
+                Volume = MathUtil.Clamp(volume, 0d, 100d);
+            }
         }
     }
 }
