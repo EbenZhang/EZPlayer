@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 using EZPlayer.PlayList;
 using Microsoft.Win32;
 using Vlc.DotNet.Core;
@@ -26,6 +28,8 @@ namespace EZPlayer
         private string m_selectedFilePath = null;
 
         private readonly DispatcherTimer m_activityTimer;
+
+        private static readonly string LAST_PLAY_INFO_FILE = "lastplay.xml";
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -151,8 +155,25 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void MainWindowOnClosing(object sender, CancelEventArgs e)
         {
+            SaveLastPlayInfo();
             // Close the context. 
             VlcContext.CloseAll();
+        }
+
+        private void SaveLastPlayInfo()
+        {
+            if (m_vlcControl.Media != null)
+            {
+                var item = new HistoryItem()
+                {
+                    Position = m_vlcControl.Position,
+                    FilePath = new Uri(m_vlcControl.Media.MRL).LocalPath
+                };
+                using (var stream = File.Open(LAST_PLAY_INFO_FILE, FileMode.Create))
+                {
+                    new XmlSerializer(typeof(HistoryItem)).Serialize(stream, item);
+                }
+            }
         }
 
         #endregion
@@ -168,6 +189,10 @@ namespace EZPlayer
         {
             if (m_vlcControl.Media == null)
             {
+                if (TryLoadLastPlayedFile())
+                {
+                    return;
+                }
                 this.OnBtnOpenClick(sender, e);
                 return;
             }
@@ -175,6 +200,36 @@ namespace EZPlayer
             {
                 DoPlay();
             }
+        }
+
+        private bool TryLoadLastPlayedFile()
+        {
+            if (File.Exists(LAST_PLAY_INFO_FILE))
+            {
+                try
+                {
+                    using (var s = File.Open(LAST_PLAY_INFO_FILE, FileMode.Open))
+                    {
+                        var lastItem = new XmlSerializer(typeof(HistoryItem)).Deserialize(s) as HistoryItem;
+                        if (lastItem != null)
+                        {
+                            m_selectedFilePath = lastItem.FilePath;
+                            Play(PlayListUtil.GetPlayList(m_selectedFilePath));
+                            PreparePositionChanging();
+                            UpdatePosition(lastItem.Position);
+                            FinishPositionChanging();
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceError("Error: {0} \r\n {1}",
+                        ex.Message,
+                        ex.StackTrace);
+                }
+            }
+            return false;
         }
 
         /// <summary>
