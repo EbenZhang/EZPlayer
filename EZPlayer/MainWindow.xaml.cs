@@ -556,5 +556,15 @@ namespace EZPlayer
                 }
             }
         }
+
+        private void OnBtnForwardClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnBtnBackwardClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
