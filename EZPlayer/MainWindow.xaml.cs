@@ -182,7 +182,7 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sender. </param>
         /// <param name="e">Event arguments. </param>
-        private void ButtonPauseClick(object sender, RoutedEventArgs e)
+        private void OnBtnPauseClick(object sender, RoutedEventArgs e)
         {
             if (m_vlcControl.Media == null)
             {
@@ -501,6 +501,10 @@ namespace EZPlayer
             {
                 ToggleFullScreenMode();
             }
+            else if (e.ClickCount == 1)
+            {
+                OnBtnPauseClick(sender, e);
+            }
         }
 
         private void ToggleFullScreenMode()
@@ -513,6 +517,7 @@ namespace EZPlayer
             {
                 SwitchToFullScreenMode();
             }
+            OnBtnPauseClick(null, null);
         }
 
         private void SwitchToFullScreenMode()
