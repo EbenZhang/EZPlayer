@@ -472,7 +472,7 @@ namespace EZPlayer
             else
             {
                 Mouse.OverrideCursor = null;
-                bool isMouseConsoleWnd = IsMouseInControl(m_gridConsole);
+                bool isMouseConsoleWnd = IsMouseInControl(this);
                 if (isMouseConsoleWnd && m_gridConsole.Visibility != Visibility.Visible)
                 {
                     m_gridConsole.Visibility = Visibility.Visible;
@@ -545,9 +545,13 @@ namespace EZPlayer
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (Mouse.OverrideCursor == Cursors.None)
+            if (this.IsMouseInControl(this))
             {
-                Mouse.OverrideCursor = null;
+                if (Mouse.OverrideCursor == Cursors.None)
+                {
+                    Mouse.OverrideCursor = null;
+                }
+                m_gridConsole.Visibility = Visibility.Visible;
             }
         }
 
