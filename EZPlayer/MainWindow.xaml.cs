@@ -141,8 +141,7 @@ namespace EZPlayer
         void OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var volume = Volume + e.Delta / 10;
-            volume = Math.Min(volume, 100);
-            Volume = Math.Max(volume, 0);
+            Volume = MathUtil.Clamp(volume, 0d, 100d);
         }
 
         /// <summary>
@@ -353,7 +352,7 @@ namespace EZPlayer
             var sliderRange = m_sliderPosition.Maximum - m_sliderPosition.Minimum;
 
             float value = ((float)mousePos / (float)m_sliderPosition.Width) * (float)sliderRange;
-
+            value = MathUtil.Clamp(value, 0.0f, 1.0f);
             m_vlcControl.Position = value;
             m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
             m_sliderPosition.Value = value;
