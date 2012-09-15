@@ -617,5 +617,10 @@ namespace EZPlayer
             UpdatePosition(newValue);
             FinishPositionChanging();
         }
+
+        private void OnBtnFullScreenClick(object sender, RoutedEventArgs e)
+        {
+            ToggleFullScreenMode();
+        }
     }
 }
