@@ -28,7 +28,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ButtonBase">
-                            <Border Background="Transparent" Opacity="0.8">
+                            <Border Background="Transparent">
                                 <ContentPresenter/>
                             </Border>
                         </ControlTemplate>
