@@ -164,11 +164,11 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sender. </param>
         /// <param name="e">Event arguments. </param>
-        private void ButtonPlayClick(object sender, RoutedEventArgs e)
+        private void OnBtnPlayClick(object sender, RoutedEventArgs e)
         {
             if (m_vlcControl.Media == null)
             {
-                this.ButtonOpenClick(sender, e);
+                this.OnBtnOpenClick(sender, e);
                 return;
             }
             else
@@ -204,7 +204,7 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sender. </param>
         /// <param name="e">Event arguments. </param>
-        private void ButtonStopClick(object sender, RoutedEventArgs e)
+        private void OnBtnStopClick(object sender, RoutedEventArgs e)
         {
             IsPlaying = false;
             m_vlcControl.Stop();
@@ -216,7 +216,7 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sender. </param>
         /// <param name="e">Event arguments. </param>
-        private void ButtonOpenClick(object sender, RoutedEventArgs e)
+        private void OnBtnOpenClick(object sender, RoutedEventArgs e)
         {
             if (m_vlcControl.Media != null)
             {
@@ -400,12 +400,12 @@ namespace EZPlayer
                 duration.Seconds);
         }
 
-        private void ButtonPreviousClick(object sender, RoutedEventArgs e)
+        private void OnBtnPreviousClick(object sender, RoutedEventArgs e)
         {
             var cur = m_vlcControl.Media;
             if (cur == null)
             {
-                ButtonOpenClick(sender, e);
+                OnBtnOpenClick(sender, e);
                 return;
             }
             int index = m_vlcControl.Medias.IndexOf(cur);
@@ -416,12 +416,12 @@ namespace EZPlayer
             }
         }
 
-        private void ButtonNextClick(object sender, RoutedEventArgs e)
+        private void OnBtnNextClick(object sender, RoutedEventArgs e)
         {
             var cur = m_vlcControl.Media;
             if (cur == null)
             {
-                ButtonOpenClick(sender, e);
+                OnBtnOpenClick(sender, e);
                 return;
             }
             int index = m_vlcControl.Medias.IndexOf(cur);

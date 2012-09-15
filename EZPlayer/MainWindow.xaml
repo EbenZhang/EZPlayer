@@ -51,7 +51,7 @@
 
                 <Button 
                     Visibility="{Binding IsPlaying, ElementName=ThisWindow, Converter={StaticResource FalseToVisible}}"
-                    Height="100" Width="100" x:Name="buttonPlayShortCut" Click="ButtonPlayClick"
+                    Height="100" Width="100" x:Name="m_btnPlayShortCut" Click="OnBtnPlayClick"
                     Style="{StaticResource TransparentButton}"
                     >
                     <Image Source="Image/play.png" />
@@ -77,16 +77,16 @@
                     <Grid>
                         <StackPanel Orientation="Horizontal" Margin="97.407,20,0,0">
                             <Button Height="50" Width="50"
-                                    x:Name="buttonOpen"
-                                    Click="ButtonOpenClick"
+                                    x:Name="m_btnOpen"
+                                    Click="OnBtnOpenClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     >
                                 <Image Source="Image/open.png" />
                             </Button>
                             <Button Height="50" Width="50"
-                                    x:Name="buttonPrevious"
-                                    Click="ButtonPreviousClick"
+                                    x:Name="m_btnPrevious"
+                                    Click="OnBtnPreviousClick"
                                     Style="{StaticResource TransparentButton}"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/previous.png" />
@@ -99,8 +99,8 @@
                                 <Image Source="Image/reward.png" />
                             </RepeatButton>
                             <Button Height="90" Width="90"
-                                    x:Name="buttonPlay"
-                                    Click="ButtonPlayClick"
+                                    x:Name="m_btnPlay"
+                                    Click="OnBtnPlayClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     >
@@ -114,22 +114,22 @@
                                 <Image Source="Image/forward.png" />
                             </RepeatButton>
                             <Button Height="50" Width="50"
-                                    x:Name="buttonNext"
-                                    Click="ButtonNextClick"
+                                    x:Name="m_btnNext"
+                                    Click="OnBtnNextClick"
                                     Style="{StaticResource TransparentButton}"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/next.png" />
                             </Button>
                             <Button Height="50" Width="50"
-                                    x:Name="buttonPause"
+                                    x:Name="m_btnPause"
                                     Style="{StaticResource TransparentButton}"
                                     Click="OnBtnPauseClick" Margin="10,0,0,0">
                                 <Image Source="Image/pause.png" />
                             </Button>
                             <Button Height="50" Width="50"
-                                    x:Name="buttonStop"
+                                    x:Name="m_btnStop"
                                     IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
-                                    Click="ButtonStopClick"
+                                    Click="OnBtnStopClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     >
