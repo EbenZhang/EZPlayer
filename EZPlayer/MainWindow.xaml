@@ -10,6 +10,7 @@
     MouseMove="OnMouseMove"
     AllowDrop="True"
     Drop="OnDropFile"
+    KeyDown="OnKeyDown"
     >
     <Window.Background>
         <SolidColorBrush Color ="Black" />
