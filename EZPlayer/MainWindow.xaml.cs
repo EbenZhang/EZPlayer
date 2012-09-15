@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using System.Windows.Controls;
 
 namespace EZPlayer
 {
@@ -385,14 +386,34 @@ namespace EZPlayer
 
         private void ButtonPreviousClick(object sender, RoutedEventArgs e)
         {
-            m_vlcControl.Previous();
-            UpdateTitle();
+            var cur = m_vlcControl.Media;
+            if (cur == null)
+            {
+                ButtonOpenClick(sender, e);
+                return;
+            }
+            int index = m_vlcControl.Medias.IndexOf(cur);
+            if (index > 0)
+            {
+                m_vlcControl.Previous();
+                UpdateTitle();
+            }
         }
 
         private void ButtonNextClick(object sender, RoutedEventArgs e)
         {
-            m_vlcControl.Next();
-            UpdateTitle();
+            var cur = m_vlcControl.Media;
+            if (cur == null)
+            {
+                ButtonOpenClick(sender, e);
+                return;
+            }
+            int index = m_vlcControl.Medias.IndexOf(cur);
+            if (index < m_vlcControl.Medias.Count - 1)
+            {
+                m_vlcControl.Next();
+                UpdateTitle();
+            }
         }
 
         private void UpdateTitle()
