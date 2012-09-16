@@ -29,6 +29,8 @@ namespace EZPlayer
 
         private readonly DispatcherTimer m_activityTimer;
 
+        private readonly DispatcherTimer m_delaySingleClickTimer;
+
         private readonly static string USER_APP_DATA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private readonly static string EZPLAYER_DATA_DIR = Path.Combine(USER_APP_DATA_DIR, "EZPlayer");
         private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(EZPLAYER_DATA_DIR, "lastplay.xml");
@@ -146,6 +148,19 @@ namespace EZPlayer
             };
             m_activityTimer.Tick += OnCheckInputStatus;
             m_activityTimer.Start();
+
+            m_delaySingleClickTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMilliseconds(500),
+                IsEnabled = true
+            };
+            m_delaySingleClickTimer.Tick += new EventHandler(OnDelayedSingleClickTimer);
+        }
+
+        void OnDelayedSingleClickTimer(object sender, EventArgs e)
+        {
+            m_delaySingleClickTimer.Stop();
+            OnBtnPauseClick(null, null);
         }
 
         void OnMouseWheel(object sender, MouseWheelEventArgs e)
@@ -533,12 +548,12 @@ namespace EZPlayer
         {
             if (e.ClickCount == 2)
             {
+                m_delaySingleClickTimer.Stop();
                 ToggleFullScreenMode();
-                OnBtnPauseClick(null, null);
             }
             else if (e.ClickCount == 1)
             {
-                OnBtnPauseClick(sender, e);
+                m_delaySingleClickTimer.Start();
             }
         }
 
