@@ -23,7 +23,7 @@ namespace EZPlayer
         /// <summary>
         /// Used to indicate that the user is currently changing the position (and the position bar shall not be updated). 
         /// </summary>
-        private bool m_positionChanging;
+        private bool m_posUpdateFromVlc;
 
         private string m_selectedFilePath = null;
 
@@ -31,7 +31,7 @@ namespace EZPlayer
 
         private readonly static string USER_APP_DATA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private readonly static string EZPLAYER_DATA_DIR = Path.Combine(USER_APP_DATA_DIR, "EZPlayer");
-        private static readonly string LAST_PLAY_INFO_FILE =Path.Combine(EZPLAYER_DATA_DIR, "lastplay.xml");
+        private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(EZPLAYER_DATA_DIR, "lastplay.xml");
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -221,9 +221,7 @@ namespace EZPlayer
                         {
                             m_selectedFilePath = lastItem.FilePath;
                             Play(PlayListUtil.GetPlayList(m_selectedFilePath));
-                            PreparePositionChanging();
                             UpdatePosition(lastItem.Position);
-                            FinishPositionChanging();
                             return true;
                         }
                     }
@@ -367,12 +365,7 @@ namespace EZPlayer
         /// <param name="e">VLC event arguments. </param>
         private void VlcControlOnPositionChanged(VlcControl sender, VlcEventArgs<float> e)
         {
-            if (m_positionChanging)
-            {
-                // User is currently changing the position using the slider, so do not update. 
-                return;
-            }
-
+            m_posUpdateFromVlc = true;
             m_sliderPosition.Value = e.Data;
         }
 
@@ -392,22 +385,6 @@ namespace EZPlayer
         }
 
         /// <summary>
-        /// Start position changing, prevents updates for the slider by the player. 
-        /// </summary>
-        /// <param name="sender">Event sender. </param>
-        /// <param name="e">Event arguments. </param>
-        private void SliderMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            PreparePositionChanging();
-        }
-
-        private void PreparePositionChanging()
-        {
-            m_positionChanging = true;
-            m_vlcControl.PositionChanged -= VlcControlOnPositionChanged;
-        }
-
-        /// <summary>
         /// Stop position changing, re-enables updates for the slider by the player. 
         /// </summary>
         /// <param name="sender">Event sender. </param>
@@ -420,20 +397,11 @@ namespace EZPlayer
             float value = ((float)mousePos / (float)m_sliderPosition.Width) * (float)sliderRange;
 
             UpdatePosition(value);
-
-            FinishPositionChanging();
-        }
-
-        private void FinishPositionChanging()
-        {
-            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
-            m_positionChanging = false;
         }
 
         private void UpdatePosition(float value)
         {
             value = MathUtil.Clamp(value, 0.0f, 1.0f);
-            m_vlcControl.Position = value;
             m_sliderPosition.Value = value;
         }
 
@@ -444,21 +412,26 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (m_positionChanging)
+            if (m_posUpdateFromVlc)
+            {
+                m_posUpdateFromVlc = false;
+                //Update the current position text when it is in pause
+                var duration = m_vlcControl.Media == null ? TimeSpan.Zero : m_vlcControl.Media.Duration;
+                var time = TimeSpan.FromMilliseconds(duration.TotalMilliseconds * m_vlcControl.Position);
+                m_timeIndicator.Text = string.Format(
+                    "{0:00}:{1:00}:{2:00} / {3:00}:{4:00}:{5:00}",
+                    time.Hours,
+                    time.Minutes,
+                    time.Seconds,
+                    duration.Hours,
+                    duration.Minutes,
+                    duration.Seconds);
+                return;
+            }
+            else
             {
                 m_vlcControl.Position = (float)e.NewValue;
             }
-            //Update the current position text when it is in pause
-            var duration = m_vlcControl.Media == null ? TimeSpan.Zero : m_vlcControl.Media.Duration;
-            var time = TimeSpan.FromMilliseconds(duration.TotalMilliseconds * m_vlcControl.Position);
-            m_timeIndicator.Text = string.Format(
-                "{0:00}:{1:00}:{2:00} / {3:00}:{4:00}:{5:00}",
-                time.Hours,
-                time.Minutes,
-                time.Seconds,
-                duration.Hours,
-                duration.Minutes,
-                duration.Seconds);
         }
 
         private void OnBtnPreviousClick(object sender, RoutedEventArgs e)
@@ -665,18 +638,14 @@ namespace EZPlayer
 
         private void OnBtnForwardClick(object sender, RoutedEventArgs e)
         {
-            PreparePositionChanging();
             var newValue = m_vlcControl.Position + 0.001f;
             UpdatePosition(newValue);
-            FinishPositionChanging();
         }
 
         private void OnBtnBackwardClick(object sender, RoutedEventArgs e)
         {
-            PreparePositionChanging();
             var newValue = m_vlcControl.Position - 0.001f;
             UpdatePosition(newValue);
-            FinishPositionChanging();
         }
 
         private void OnBtnFullScreenClick(object sender, RoutedEventArgs e)
@@ -686,25 +655,49 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left)
+            if (IsBackwardShortcut(e))
             {
                 OnBtnBackwardClick(null, null);
             }
-            if (e.Key == Key.Right)
+            if (IsForwardShortcut(e))
             {
                 OnBtnForwardClick(null, null);
             }
 
-            if (e.Key == Key.Down)
+            if (IsDecreaseVolumeShortcut(e))
             {
                 var volume = Volume - 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
-            if (e.Key == Key.Up)
+            if (IsIncreaseVolumeShortcut(e))
             {
                 var volume = Volume + 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
+        }
+
+        private static bool IsIncreaseVolumeShortcut(KeyEventArgs e)
+        {
+            return e.Key == Key.Up
+                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+        }
+
+        private static bool IsDecreaseVolumeShortcut(KeyEventArgs e)
+        {
+            return e.Key == Key.Down
+                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+        }
+
+        private static bool IsForwardShortcut(KeyEventArgs e)
+        {
+            return e.Key == Key.Right
+                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+        }
+
+        private static bool IsBackwardShortcut(KeyEventArgs e)
+        {
+            return e.Key == Key.Left
+                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
     }
 }
