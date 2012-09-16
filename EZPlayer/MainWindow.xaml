@@ -67,7 +67,6 @@
                                 LargeChange="0.05"
                                 SmallChange="0.001"
                                 ValueChanged="SliderValueChanged"
-                                PreviewMouseLeftButtonDown="SliderMouseLeftButtonDown"
                                 PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp"
                                 Margin="0,378.769,10,104.76"
                                 Width="906.186"
