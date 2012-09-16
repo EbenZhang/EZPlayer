@@ -67,8 +67,6 @@
                         <TextBlock Foreground="{StaticResource ControlBrush}" x:Name="m_timeIndicator" Margin="742,350,5,133" RenderTransformOrigin="0.51,0.179" />
                         <Slider x:Name="m_sliderPosition"
                                 Maximum="1"
-                                LargeChange="0.05"
-                                SmallChange="0.001"
                                 ValueChanged="SliderValueChanged"
                                 PreviewMouseLeftButtonUp="SliderMouseLeftButtonUp"
                                 Margin="0,378.769,10,104.76"
