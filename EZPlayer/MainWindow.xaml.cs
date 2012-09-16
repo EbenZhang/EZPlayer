@@ -509,8 +509,8 @@ namespace EZPlayer
                 return;
             }
             TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
-
-            if (idleFor > TimeSpan.FromSeconds(1.5))
+            bool isMouseConsoleWnd = IsMouseInControl(this);
+            if (!isMouseConsoleWnd || idleFor > TimeSpan.FromSeconds(1.5))
             {
                 if (m_vlcControl.IsPlaying)
                 {
@@ -521,7 +521,6 @@ namespace EZPlayer
             else
             {
                 Mouse.OverrideCursor = null;
-                bool isMouseConsoleWnd = IsMouseInControl(this);
                 if (isMouseConsoleWnd && m_gridConsole.Visibility != Visibility.Visible)
                 {
                     m_gridConsole.Visibility = Visibility.Visible;
