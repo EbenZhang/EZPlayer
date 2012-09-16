@@ -670,60 +670,69 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (IsBackwardShortcut(e))
+            if (IsBackwardShortKey(e))
             {
                 OnBtnBackwardClick(null, null);
             }
-            if (IsForwardShortcut(e))
+            if (IsForwardShortKey(e))
             {
                 OnBtnForwardClick(null, null);
             }
 
-            if (IsDecreaseVolumeShortcut(e))
+            if (IsDecreaseVolumeShortKey(e))
             {
                 var volume = Volume - 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
-            if (IsIncreaseVolumeShortcut(e))
+            if (IsIncreaseVolumeShortKey(e))
             {
                 var volume = Volume + 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
 
-            if (IsFullScreenShortcut(e))
+            if (IsFullScreenShortKey(e))
             {
                 ToggleFullScreenMode();
             }
+
+            if (IsPauseShortKey(e))
+            {
+                OnBtnPauseClick(null, null);
+            }
         }
 
-        private static bool IsIncreaseVolumeShortcut(KeyEventArgs e)
+        private bool IsPauseShortKey(KeyEventArgs e)
+        {
+            return e.Key == Key.Space;
+        }
+
+        private static bool IsIncreaseVolumeShortKey(KeyEventArgs e)
         {
             return e.Key == Key.Up
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
 
-        private static bool IsDecreaseVolumeShortcut(KeyEventArgs e)
+        private static bool IsDecreaseVolumeShortKey(KeyEventArgs e)
         {
             return e.Key == Key.Down
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
 
-        private static bool IsForwardShortcut(KeyEventArgs e)
+        private static bool IsForwardShortKey(KeyEventArgs e)
         {
             return e.Key == Key.Right
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
 
-        private static bool IsBackwardShortcut(KeyEventArgs e)
+        private static bool IsBackwardShortKey(KeyEventArgs e)
         {
             return e.Key == Key.Left
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
-        private bool IsFullScreenShortcut(KeyEventArgs e)
+        private bool IsFullScreenShortKey(KeyEventArgs e)
         {
             bool controlPressed = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-            bool altPressed = (Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt;
-            return e.Key == Key.Enter && (controlPressed || altPressed);
+            return e.Key == Key.Enter && controlPressed;
         }
     }
 }
