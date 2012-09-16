@@ -534,6 +534,7 @@ namespace EZPlayer
             if (e.ClickCount == 2)
             {
                 ToggleFullScreenMode();
+                OnBtnPauseClick(null, null);
             }
             else if (e.ClickCount == 1)
             {
@@ -551,7 +552,6 @@ namespace EZPlayer
             {
                 SwitchToFullScreenMode();
             }
-            OnBtnPauseClick(null, null);
         }
 
         private void SwitchToFullScreenMode()
@@ -674,6 +674,11 @@ namespace EZPlayer
                 var volume = Volume + 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
+
+            if (IsFullScreenShortcut(e))
+            {
+                ToggleFullScreenMode();
+            }
         }
 
         private static bool IsIncreaseVolumeShortcut(KeyEventArgs e)
@@ -698,6 +703,12 @@ namespace EZPlayer
         {
             return e.Key == Key.Left
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+        }
+        private bool IsFullScreenShortcut(KeyEventArgs e)
+        {
+            bool controlPressed = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+            bool altPressed = (Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt;
+            return e.Key == Key.Enter && (controlPressed || altPressed);
         }
     }
 }
