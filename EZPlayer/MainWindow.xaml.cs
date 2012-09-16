@@ -365,7 +365,7 @@ namespace EZPlayer
         private void OnMediaParsed(MediaBase sender, VlcEventArgs<int> e)
         {
             m_timeIndicator.Text = string.Format(
-                "Duration: {0:00}:{1:00}:{2:00}",
+                "{0:00}:{1:00}:{2:00}",
                 m_vlcControl.Media.Duration.Hours,
                 m_vlcControl.Media.Duration.Minutes,
                 m_vlcControl.Media.Duration.Seconds);
