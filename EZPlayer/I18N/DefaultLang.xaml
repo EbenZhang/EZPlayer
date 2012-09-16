@@ -1,4 +1,34 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="ToolTip_Play">
+        Play
+    </sys:String>
+    <sys:String x:Key="ToolTip_Rewind">
+        Rewind
+    </sys:String>
+    <sys:String x:Key="ToolTip_FullScreen">
+        Full Screen
+    </sys:String>
+    <sys:String x:Key="ToolTip_Previous">
+        Click to navigate to the begining, click again to play previous media
+    </sys:String>
+    <sys:String x:Key="ToolTip_Next">
+        Next media
+    </sys:String>
+    <sys:String x:Key="ToolTip_Forward">
+        Fast forward
+    </sys:String>
+    <sys:String x:Key="ToolTip_Pause">
+        Pause/Play
+    </sys:String>
+    <sys:String x:Key="ToolTip_Stop">
+        Stop
+    </sys:String>
+    <sys:String x:Key="ToolTip_Open">
+        Open
+    </sys:String>
+    <sys:String x:Key="ToolTip_Volume">
+        Volume
+    </sys:String>
 </ResourceDictionary>
