@@ -20,6 +20,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/SliderTemplate.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/TooltipTemplate.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <BindingUtils:CompositeConverter x:Key="FalseToVisible">
                 <BindingUtils:InverseBooleanConverter/>
@@ -54,6 +55,8 @@
                     Visibility="{Binding IsPlaying, ElementName=ThisWindow, Converter={StaticResource FalseToVisible}}"
                     Height="100" Width="100" x:Name="m_btnPlayShortCut" Click="OnBtnPlayClick"
                     Style="{StaticResource TransparentButton}"
+                    ToolTip="{StaticResource ToolTip_Play}"
+                    ToolTipService.ShowOnDisabled="True"
                     >
                     <Image Source="Image/play.png" />
                 </Button>
@@ -79,6 +82,8 @@
                             <Button Height="50" Width="50"
                                     x:Name="m_btnOpen"
                                     Click="OnBtnOpenClick"
+                                    ToolTip="{StaticResource ToolTip_Open}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     >
@@ -88,21 +93,27 @@
                                     x:Name="m_btnPrevious"
                                     Click="OnBtnPreviousClick"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Previous}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/previous.png" />
                             </Button>
                             <RepeatButton Height="50" Width="50"
-                                    x:Name="m_btnBackward"
-                                    Click="OnBtnBackwardClick"
+                                    x:Name="m_btnRewind"
+                                    Click="OnBtnRewindClick"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Rewind}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0">
-                                <Image Source="Image/reward.png" />
+                                <Image Source="Image/rewind.png" />
                             </RepeatButton>
                             <Button Height="90" Width="90"
                                     x:Name="m_btnPlay"
                                     Click="OnBtnPlayClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Play}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     >
                                 <Image Source="Image/play.png" />
                             </Button>
@@ -111,6 +122,8 @@
                                     Click="OnBtnFullScreenClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_FullScreen}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     >
                                 <Image Source="Image/fullscreen.png" />
                             </Button>
@@ -118,6 +131,8 @@
                                     x:Name="m_btnForward"
                                     Click="OnBtnForwardClick"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Forward}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/forward.png" />
                             </RepeatButton>
@@ -125,12 +140,16 @@
                                     x:Name="m_btnNext"
                                     Click="OnBtnNextClick"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Next}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/next.png" />
                             </Button>
                             <Button Height="50" Width="50"
                                     x:Name="m_btnPause"
                                     Style="{StaticResource TransparentButton}"
+                                    ToolTip="{StaticResource ToolTip_Pause}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Click="OnBtnPauseClick" Margin="10,0,0,0">
                                 <Image Source="Image/pause.png" />
                             </Button>
@@ -139,6 +158,8 @@
                                     IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
                                     Click="OnBtnStopClick"
                                     Margin="10,0,0,0"
+                                    ToolTip="{StaticResource ToolTip_Stop}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Style="{StaticResource TransparentButton}"
                                     >
                                 <Image Source="Image/stop.png" />
@@ -148,6 +169,8 @@
                                     Maximum="100"
                                     SmallChange="1"
                                     LargeChange="5"
+                                    ToolTip="{StaticResource ToolTip_Volume}"
+                                    ToolTipService.ShowOnDisabled="True"
                                     Value="{Binding Path=Volume, ElementName=ThisWindow}"
                                     ValueChanged="SliderVolumeValueChanged"
                                     VerticalAlignment="Center"

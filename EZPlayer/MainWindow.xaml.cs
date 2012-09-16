@@ -657,7 +657,7 @@ namespace EZPlayer
             UpdatePosition(newValue);
         }
 
-        private void OnBtnBackwardClick(object sender, RoutedEventArgs e)
+        private void OnBtnRewindClick(object sender, RoutedEventArgs e)
         {
             var newValue = m_vlcControl.Position - 0.001f;
             UpdatePosition(newValue);
@@ -670,9 +670,9 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (IsBackwardShortKey(e))
+            if (IsRewindShortKey(e))
             {
-                OnBtnBackwardClick(null, null);
+                OnBtnRewindClick(null, null);
             }
             if (IsForwardShortKey(e))
             {
@@ -724,7 +724,7 @@ namespace EZPlayer
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
         }
 
-        private static bool IsBackwardShortKey(KeyEventArgs e)
+        private static bool IsRewindShortKey(KeyEventArgs e)
         {
             return e.Key == Key.Left
                 && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
