@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using EZPlayer.Power;
 
 namespace EZPlayer
 {
@@ -30,6 +31,8 @@ namespace EZPlayer
         private readonly DispatcherTimer m_activityTimer;
 
         private readonly DispatcherTimer m_delaySingleClickTimer;
+
+        private SleepBarricade m_sleepBarricade;
 
         private readonly static string USER_APP_DATA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private readonly static string EZPLAYER_DATA_DIR = Path.Combine(USER_APP_DATA_DIR, "EZPlayer");
@@ -155,6 +158,8 @@ namespace EZPlayer
                 IsEnabled = true
             };
             m_delaySingleClickTimer.Tick += new EventHandler(OnDelayedSingleClickTimer);
+
+            m_sleepBarricade = new SleepBarricade(() => IsPlaying);
         }
 
         void OnDelayedSingleClickTimer(object sender, EventArgs e)
