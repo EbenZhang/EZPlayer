@@ -83,6 +83,7 @@
     <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MathUtil.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
+    <Compile Include="Power\SleepBarricade.cs" />
     <Compile Include="Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
