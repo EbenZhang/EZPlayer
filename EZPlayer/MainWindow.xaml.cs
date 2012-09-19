@@ -5,17 +5,17 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using EZPlayer.PlayList;
+using EZPlayer.Power;
+using EZPlayer.Subtitle;
 using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
-using EZPlayer.Power;
 
 namespace EZPlayer
 {
@@ -28,9 +28,9 @@ namespace EZPlayer
 
         private string m_selectedFilePath = null;
 
-        private readonly DispatcherTimer m_activityTimer;
+        private DispatcherTimer m_activityTimer;
 
-        private readonly DispatcherTimer m_delaySingleClickTimer;
+        private DispatcherTimer m_delaySingleClickTimer;
 
         private SleepBarricade m_sleepBarricade;
 
@@ -83,17 +83,80 @@ namespace EZPlayer
             }
         }
 
-        #region Constructor / destructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VlcPlayer"/> class.
         /// </summary>
         public MainWindow()
         {
+            InitVlcContext();
+
+            InitializeComponent();
+
+            SetupUserDataDir();
+
+            HookSpaceKeyInput();
+
+            Volume = 100;
+
+            this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
+
+            IsPlaying = false;
+
+            InitVlcControl();
+
+            this.Closing += MainWindowOnClosing;
+            this.MouseLeftButtonDown += OnMouseClick;
+
+            InitAutoHideConsoleTimer();
+
+            InitDelaySingleClickTimer();
+
+            m_sleepBarricade = new SleepBarricade(() => IsPlaying);
+        }
+
+        private void InitDelaySingleClickTimer()
+        {
+            m_delaySingleClickTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMilliseconds(500),
+                IsEnabled = true
+            };
+            m_delaySingleClickTimer.Tick += new EventHandler(OnDelayedSingleClickTimer);
+        }
+
+        private void InitAutoHideConsoleTimer()
+        {
+            m_activityTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(1.5),
+                IsEnabled = true
+            };
+            m_activityTimer.Tick += OnCheckInputStatus;
+            m_activityTimer.Start();
+        }
+
+        private void InitVlcControl()
+        {
+            m_vlcControl.VideoProperties.Scale = 2;
+            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
+            m_vlcControl.TimeChanged += VlcControlOnTimeChanged;
+        }
+
+        private void HookSpaceKeyInput()
+        {
+            InputManager.Current.PreNotifyInput += new NotifyInputEventHandler(PreNotifyInput);
+        }
+
+        private static void SetupUserDataDir()
+        {
             if (!Directory.Exists(EZPLAYER_DATA_DIR))
             {
                 Directory.CreateDirectory(EZPLAYER_DATA_DIR);
             }
+        }
+
+        private static void InitVlcContext()
+        {
             // Set libvlc.dll and libvlccore.dll directory path
             VlcContext.LibVlcDllsPath = Path.Combine(Directory.GetCurrentDirectory(), "VLC");
 
@@ -130,38 +193,6 @@ namespace EZPlayer
 
             // Initialize the VlcContext
             VlcContext.Initialize();
-
-            InitializeComponent();
-
-            InputManager.Current.PreNotifyInput += new NotifyInputEventHandler(PreNotifyInput);
-
-            Volume = 100;
-
-            this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
-
-            IsPlaying = false;
-
-            m_vlcControl.VideoProperties.Scale = 2;
-            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
-            m_vlcControl.TimeChanged += VlcControlOnTimeChanged;
-            this.Closing += MainWindowOnClosing;
-            this.MouseLeftButtonDown += OnMouseClick;
-            m_activityTimer = new DispatcherTimer()
-            {
-                Interval = TimeSpan.FromSeconds(1.5),
-                IsEnabled = true
-            };
-            m_activityTimer.Tick += OnCheckInputStatus;
-            m_activityTimer.Start();
-
-            m_delaySingleClickTimer = new DispatcherTimer()
-            {
-                Interval = TimeSpan.FromMilliseconds(500),
-                IsEnabled = true
-            };
-            m_delaySingleClickTimer.Tick += new EventHandler(OnDelayedSingleClickTimer);
-
-            m_sleepBarricade = new SleepBarricade(() => IsPlaying);
         }
 
         void PreNotifyInput(object sender, NotifyInputEventArgs e)
@@ -217,10 +248,6 @@ namespace EZPlayer
                 }
             }
         }
-
-        #endregion
-
-        #region EventHandler
 
         /// <summary>
         /// Called if the Play button is clicked; starts the VLC playback. 
@@ -348,7 +375,7 @@ namespace EZPlayer
 
         private void Play(List<string> playList)
         {
-            PrepareSubtitle();
+            SubtitleUtil.PrepareSubtitle(m_selectedFilePath);
             PrepareVLCMediaList(playList);
             m_vlcControl.Media.ParsedChanged += OnMediaParsed;
             DoPlay();
@@ -512,7 +539,6 @@ namespace EZPlayer
             Uri uri = new Uri(m_vlcControl.Media.MRL);
             this.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);
         }
-        #endregion
 
         #region Auto Hide
 
@@ -566,6 +592,18 @@ namespace EZPlayer
             m_activityTimer.Stop();
             m_activityTimer.Start();
         }
+        
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.IsMouseInControl(this))
+            {
+                if (Mouse.OverrideCursor == Cursors.None)
+                {
+                    Mouse.OverrideCursor = null;
+                }
+                m_gridConsole.Visibility = Visibility.Visible;
+            }
+        }
         #endregion
 
         #region FullScreen
@@ -617,46 +655,6 @@ namespace EZPlayer
         }
         #endregion
 
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            if (this.IsMouseInControl(this))
-            {
-                if (Mouse.OverrideCursor == Cursors.None)
-                {
-                    Mouse.OverrideCursor = null;
-                }
-                m_gridConsole.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void PrepareSubtitle()
-        {
-            var files = FindAllSubtitleFiles();
-            foreach (var f in files)
-            {
-                var fileContent = File.ReadAllBytes(f);
-                var encoding = EncodingDetector.Detect(fileContent);
-
-                if (encoding != Encoding.UTF8)
-                {
-                    File.Copy(f, f + "." + encoding.WebName, true);
-                    var utf8Bytes = Encoding.Convert(encoding,
-                        Encoding.UTF8,
-                        fileContent);
-                    File.WriteAllBytes(f, utf8Bytes);
-                }
-            }
-        }
-
-        private string[] FindAllSubtitleFiles()
-        {
-            var dir = Path.GetDirectoryName(m_selectedFilePath);
-            var fileName = Path.GetFileNameWithoutExtension(m_selectedFilePath);
-            var pattern = string.Format("*.srt", fileName);
-            var files = Directory.GetFiles(dir, pattern, SearchOption.TopDirectoryOnly);
-            return files;
-        }
-
         private void OnDropFile(object sender, DragEventArgs e)
         {
             if (e.Data is DataObject && ((DataObject)e.Data).ContainsFileDropList())
@@ -695,69 +693,35 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (IsRewindShortKey(e))
+            if (ShortKeys.IsRewindShortKey(e))
             {
                 OnBtnRewindClick(null, null);
             }
-            if (IsForwardShortKey(e))
+            if (ShortKeys.IsForwardShortKey(e))
             {
                 OnBtnForwardClick(null, null);
             }
 
-            if (IsDecreaseVolumeShortKey(e))
+            if (ShortKeys.IsDecreaseVolumeShortKey(e))
             {
                 var volume = Volume - 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
-            if (IsIncreaseVolumeShortKey(e))
+            if (ShortKeys.IsIncreaseVolumeShortKey(e))
             {
                 var volume = Volume + 12;
                 Volume = MathUtil.Clamp(volume, 0d, 100d);
             }
 
-            if (IsFullScreenShortKey(e))
+            if (ShortKeys.IsFullScreenShortKey(e))
             {
                 ToggleFullScreenMode();
             }
 
-            if (IsPauseShortKey(e))
+            if (ShortKeys.IsPauseShortKey(e))
             {
                 OnBtnPauseClick(null, null);
             }
-        }
-
-        private bool IsPauseShortKey(KeyEventArgs e)
-        {
-            return e.Key == Key.Space;
-        }
-
-        private static bool IsIncreaseVolumeShortKey(KeyEventArgs e)
-        {
-            return e.Key == Key.Up
-                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-        }
-
-        private static bool IsDecreaseVolumeShortKey(KeyEventArgs e)
-        {
-            return e.Key == Key.Down
-                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-        }
-
-        private static bool IsForwardShortKey(KeyEventArgs e)
-        {
-            return e.Key == Key.Right
-                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-        }
-
-        private static bool IsRewindShortKey(KeyEventArgs e)
-        {
-            return e.Key == Key.Left
-                && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-        }
-        private bool IsFullScreenShortKey(KeyEventArgs e)
-        {
-            bool controlPressed = (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
-            return e.Key == Key.Enter && controlPressed;
         }
     }
 }
