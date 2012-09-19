@@ -340,8 +340,8 @@ namespace EZPlayer
 
         private void DoPlay()
         {
-            this.IsPlaying = true;
             m_vlcControl.Play();
+            this.IsPlaying = true;
             UpdateTitle();
         }
 
@@ -402,6 +402,11 @@ namespace EZPlayer
                 duration.Hours,
                 duration.Minutes,
                 duration.Seconds);
+
+            if (IsPlaying != m_vlcControl.IsPlaying)
+            {
+                IsPlaying = m_vlcControl.IsPlaying;
+            }
         }
 
         /// <summary>
