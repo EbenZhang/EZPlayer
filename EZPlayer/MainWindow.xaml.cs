@@ -133,6 +133,8 @@ namespace EZPlayer
 
             InitializeComponent();
 
+            InputManager.Current.PreNotifyInput += new NotifyInputEventHandler(PreNotifyInput);
+
             Volume = 100;
 
             this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
@@ -160,6 +162,20 @@ namespace EZPlayer
             m_delaySingleClickTimer.Tick += new EventHandler(OnDelayedSingleClickTimer);
 
             m_sleepBarricade = new SleepBarricade(() => IsPlaying);
+        }
+
+        void PreNotifyInput(object sender, NotifyInputEventArgs e)
+        {
+            if (e.StagingItem.Input.RoutedEvent != Keyboard.KeyDownEvent)
+                return;
+
+            var args = e.StagingItem.Input as KeyEventArgs;
+            if (args == null || args.Key != Key.Space)
+            {
+                return;
+            }
+            args.Handled = true;
+            OnBtnPauseClick(null, null);
         }
 
         void OnDelayedSingleClickTimer(object sender, EventArgs e)
