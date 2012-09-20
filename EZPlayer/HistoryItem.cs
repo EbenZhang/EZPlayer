@@ -5,7 +5,8 @@ namespace EZPlayer
     [Serializable]
     public class HistoryItem
     {
-        public float Position { get; set; }
-        public string FilePath { get; set; }
+        public float Position;
+        public string FilePath;
+        public double Volume;
     }
 }
