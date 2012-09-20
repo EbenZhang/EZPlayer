@@ -104,7 +104,7 @@ namespace EZPlayer
 
             InitVlcControl();
 
-            this.Closing += MainWindowOnClosing;
+            this.Closing += OnClosing;
             this.MouseLeftButtonDown += OnMouseClick;
 
             InitAutoHideConsoleTimer();
@@ -226,9 +226,10 @@ namespace EZPlayer
         /// </summary>
         /// <param name="sender">Event sender. </param>
         /// <param name="e">Event arguments. </param>
-        private void MainWindowOnClosing(object sender, CancelEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             SaveLastPlayInfo();
+
             // Close the context. 
             VlcContext.CloseAll();
         }
@@ -240,7 +241,8 @@ namespace EZPlayer
                 var item = new HistoryItem()
                 {
                     Position = m_vlcControl.Position,
-                    FilePath = new Uri(m_vlcControl.Media.MRL).LocalPath
+                    FilePath = new Uri(m_vlcControl.Media.MRL).LocalPath,
+                    Volume = m_sliderVolume.Value
                 };
                 using (var stream = File.Open(LAST_PLAY_INFO_FILE, FileMode.Create))
                 {
@@ -283,6 +285,7 @@ namespace EZPlayer
                         if (lastItem != null)
                         {
                             m_selectedFilePath = lastItem.FilePath;
+                            m_sliderVolume.Value = lastItem.Volume;
                             Play(PlayListUtil.GetPlayList(m_selectedFilePath));
                             UpdatePosition(lastItem.Position);
                             return true;
