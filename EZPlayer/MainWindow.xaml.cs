@@ -167,7 +167,7 @@ namespace EZPlayer
                 Interval = TimeSpan.FromSeconds(1.5),
                 IsEnabled = true
             };
-            m_activityTimer.Tick += OnCheckInputStatus;
+            m_activityTimer.Tick += OnNoInputs;
             m_activityTimer.Start();
         }
 
@@ -588,51 +588,13 @@ namespace EZPlayer
             this.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);
         }
 
-        #region Auto Hide
-
-        private struct LASTINPUTINFO
+        private void OnNoInputs(object sender, EventArgs e)
         {
-            public int cbSize;
-            public uint dwTime;
-        }
-
-        [DllImport("User32.dll")]
-        private extern static bool GetLastInputInfo(out LASTINPUTINFO plii);
-
-        private void OnCheckInputStatus(object sender, EventArgs e)
-        {
-            LASTINPUTINFO lastInputInfo = new LASTINPUTINFO();
-            lastInputInfo.cbSize = Marshal.SizeOf(typeof(LASTINPUTINFO));
-            bool succeed = GetLastInputInfo(out lastInputInfo);
-            if (!succeed)
+            if (m_vlcControl.IsPlaying)
             {
-                return;
+                this.m_gridConsole.Visibility = Visibility.Hidden;
+                Mouse.OverrideCursor = Cursors.None;
             }
-            TimeSpan idleFor = TimeSpan.FromMilliseconds((long)unchecked((uint)Environment.TickCount - lastInputInfo.dwTime));
-            bool isMouseConsoleWnd = IsMouseInControl(this);
-            if (!isMouseConsoleWnd || idleFor > TimeSpan.FromSeconds(1.5))
-            {
-                if (m_vlcControl.IsPlaying)
-                {
-                    this.m_gridConsole.Visibility = Visibility.Hidden;
-                    Mouse.OverrideCursor = Cursors.None;
-                }
-            }
-            else
-            {
-                Mouse.OverrideCursor = null;
-                if (isMouseConsoleWnd && m_gridConsole.Visibility != Visibility.Visible)
-                {
-                    m_gridConsole.Visibility = Visibility.Visible;
-                }
-            }
-            RestartInputMonitorTimer();
-        }
-
-        private bool IsMouseInControl(IInputElement control)
-        {
-            var point = Mouse.GetPosition(control);
-            return point.X >= 0 && point.Y >= 0;
         }
 
         private void RestartInputMonitorTimer()
@@ -643,16 +605,13 @@ namespace EZPlayer
         
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (this.IsMouseInControl(this))
+            RestartInputMonitorTimer();
+            if (Mouse.OverrideCursor == Cursors.None)
             {
-                if (Mouse.OverrideCursor == Cursors.None)
-                {
-                    Mouse.OverrideCursor = null;
-                }
-                m_gridConsole.Visibility = Visibility.Visible;
+                Mouse.OverrideCursor = null;
             }
+            m_gridConsole.Visibility = Visibility.Visible;
         }
-        #endregion
 
         #region FullScreen
         void OnMouseClick(object sender, MouseButtonEventArgs e)
@@ -746,6 +705,7 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            RestartInputMonitorTimer();
             if (ShortKeys.IsRewindShortKey(e))
             {
                 OnBtnRewindClick(null, null);
