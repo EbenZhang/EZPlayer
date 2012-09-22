@@ -39,6 +39,7 @@ namespace EZPlayer
         private readonly static string APP_START_PATH = Process.GetCurrentProcess().MainModule.FileName;
         private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
         private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
+        private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -98,7 +99,7 @@ namespace EZPlayer
 
             HookSpaceKeyInput();
 
-            Volume = 100;
+            LoadLastVolume();
 
             this.MouseWheel += new MouseWheelEventHandler(OnMouseWheel);
 
@@ -122,6 +123,21 @@ namespace EZPlayer
                 new DelayTask(TimeSpan.FromMilliseconds(500),
                     () => { GenFileListAndPlay(args.Skip(1).ToList()); }
                     );
+            }
+        }
+
+        private void LoadLastVolume()
+        {
+            if (File.Exists(VOLUME_INFO_FILE))
+            {
+                using (var stream = File.Open(VOLUME_INFO_FILE, FileMode.Open))
+                {
+                    Volume = (double)new XmlSerializer(typeof(double)).Deserialize(stream);
+                }
+            }
+            else
+            {
+                Volume = 100;
             }
         }
 
@@ -249,9 +265,18 @@ namespace EZPlayer
         private void OnClosing(object sender, CancelEventArgs e)
         {
             SaveLastPlayInfo();
+            SaveVolumeInfo();
 
             // Close the context. 
             VlcContext.CloseAll();
+        }
+
+        private void SaveVolumeInfo()
+        {
+            using (var stream = File.Open(VOLUME_INFO_FILE, FileMode.Create))
+            {
+                new XmlSerializer(typeof(double)).Serialize(stream, m_sliderVolume.Value);
+            }
         }
 
         private void SaveLastPlayInfo()
