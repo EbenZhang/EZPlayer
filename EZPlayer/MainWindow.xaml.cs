@@ -16,6 +16,8 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using EZPlayer.Common;
+using EZPlayer.FileAssociator;
 
 namespace EZPlayer
 {
@@ -34,9 +36,9 @@ namespace EZPlayer
 
         private SleepBarricade m_sleepBarricade;
 
-        private readonly static string USER_APP_DATA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        private readonly static string EZPLAYER_DATA_DIR = Path.Combine(USER_APP_DATA_DIR, "EZPlayer");
-        private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(EZPLAYER_DATA_DIR, "lastplay.xml");
+        private readonly static string APP_START_PATH = Process.GetCurrentProcess().MainModule.FileName;
+        private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
+        private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -112,6 +114,24 @@ namespace EZPlayer
             InitDelaySingleClickTimer();
 
             m_sleepBarricade = new SleepBarricade(() => IsPlaying);
+
+            var args = Environment.GetCommandLineArgs();
+            if (args.Count() >= 2)
+            {
+                /// it seems vlc requires some time to init.
+                new DelayTask(TimeSpan.FromMilliseconds(500),
+                    () => { GenFileListAndPlay(args.Skip(1).ToList()); }
+                    );
+            }
+        }
+
+        private void UpdateFileAssociation(string ext)
+        {
+            var curProcess = Process.GetCurrentProcess();
+            var path = curProcess.MainModule.FileName;
+            var name = Path.GetFileNameWithoutExtension(path);
+
+            new AssociationUtil(name, path, new string[]{ext});
         }
 
         private void InitDelaySingleClickTimer()
@@ -149,16 +169,16 @@ namespace EZPlayer
 
         private static void SetupUserDataDir()
         {
-            if (!Directory.Exists(EZPLAYER_DATA_DIR))
+            if (!Directory.Exists(AppDataDir.EZPLAYER_DATA_DIR))
             {
-                Directory.CreateDirectory(EZPLAYER_DATA_DIR);
+                Directory.CreateDirectory(AppDataDir.EZPLAYER_DATA_DIR);
             }
         }
 
         private static void InitVlcContext()
         {
             // Set libvlc.dll and libvlccore.dll directory path
-            VlcContext.LibVlcDllsPath = Path.Combine(Directory.GetCurrentDirectory(), "VLC");
+            VlcContext.LibVlcDllsPath = Path.Combine(APP_START_DIR, "VLC");
 
             // Set the vlc plugins directory path
             VlcContext.LibVlcPluginsPath = Path.Combine(VlcContext.LibVlcDllsPath, "plugins");
@@ -294,9 +314,8 @@ namespace EZPlayer
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError("Error: {0} \r\n {1}",
-                        ex.Message,
-                        ex.StackTrace);
+                    MessageBox.Show(string.Format("Error: {0}",
+                        ex.AllMessages()));
                 }
             }
             return false;
@@ -380,6 +399,7 @@ namespace EZPlayer
         {
             SubtitleUtil.PrepareSubtitle(m_selectedFilePath);
             PrepareVLCMediaList(playList);
+            UpdateFileAssociation(Path.GetExtension(m_selectedFilePath));
             m_vlcControl.Media.ParsedChanged += OnMediaParsed;
             DoPlay();
         }
@@ -663,17 +683,22 @@ namespace EZPlayer
             if (e.Data is DataObject && ((DataObject)e.Data).ContainsFileDropList())
             {
                 var fileList = (e.Data as DataObject).GetFileDropList();
-                if (fileList.Count == 1)
-                {
-                    m_selectedFilePath = fileList[0];
-                    Play(PlayListUtil.GetPlayList(m_selectedFilePath));
-                }
-                else if (fileList.Count > 1)
-                {
-                    var sortedFileList = fileList.Cast<string>().OrderBy(s => s).ToList();
-                    m_selectedFilePath = sortedFileList[0];
-                    Play(sortedFileList);
-                }
+                GenFileListAndPlay(fileList.Cast<string>().ToList());
+            }
+        }
+
+        private void GenFileListAndPlay(List<string> fileList)
+        {
+            if (fileList.Count == 1)
+            {
+                m_selectedFilePath = fileList[0];
+                Play(PlayListUtil.GetPlayList(m_selectedFilePath));
+            }
+            else if (fileList.Count > 1)
+            {
+                var sortedFileList = fileList.Cast<string>().OrderBy(s => s).ToList();
+                m_selectedFilePath = sortedFileList[0];
+                Play(sortedFileList);
             }
         }
 
