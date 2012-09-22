@@ -167,7 +167,7 @@ namespace EZPlayer
                 Interval = TimeSpan.FromSeconds(1.5),
                 IsEnabled = true
             };
-            m_activityTimer.Tick += OnCheckInputStatus;
+            m_activityTimer.Tick += OnNoInputs;
             m_activityTimer.Start();
         }
 
@@ -588,7 +588,7 @@ namespace EZPlayer
             this.Title = Path.GetFileNameWithoutExtension(uri.LocalPath);
         }
 
-        private void OnCheckInputStatus(object sender, EventArgs e)
+        private void OnNoInputs(object sender, EventArgs e)
         {
             if (m_vlcControl.IsPlaying)
             {
@@ -605,13 +605,12 @@ namespace EZPlayer
         
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            m_activityTimer.Stop();
+            RestartInputMonitorTimer();
             if (Mouse.OverrideCursor == Cursors.None)
             {
                 Mouse.OverrideCursor = null;
             }
             m_gridConsole.Visibility = Visibility.Visible;
-            m_activityTimer.Start();
         }
 
         #region FullScreen
@@ -706,8 +705,7 @@ namespace EZPlayer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            m_activityTimer.Stop();
-            m_activityTimer.Start();
+            RestartInputMonitorTimer();
             if (ShortKeys.IsRewindShortKey(e))
             {
                 OnBtnRewindClick(null, null);
