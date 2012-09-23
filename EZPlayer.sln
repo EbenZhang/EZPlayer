@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZPlayer", "EZPlayer\EZPlayer.csproj", "{EBEEAA78-CDE5-403B-A157-559656B1C063}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{70A270CC-D782-4191-8342-2D56849705D2}"
 EndProject
 Global
@@ -27,12 +25,6 @@ Global
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EBEEAA78-CDE5-403B-A157-559656B1C063}.Release|x86.ActiveCfg = Release|Any CPU
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Debug|Any CPU.ActiveCfg = Debug
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Debug|x86.ActiveCfg = Debug
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Release|Any CPU.ActiveCfg = Release
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Release|Mixed Platforms.ActiveCfg = Release
-		{B7961210-6D24-41CD-BEB6-5DDAFE7134DB}.Release|x86.ActiveCfg = Release
 		{70A270CC-D782-4191-8342-2D56849705D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{70A270CC-D782-4191-8342-2D56849705D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70A270CC-D782-4191-8342-2D56849705D2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
