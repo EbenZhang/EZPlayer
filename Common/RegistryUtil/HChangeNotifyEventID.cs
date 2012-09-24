@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EZPlayer.Commmon
+namespace EZPlayer.Common
 {
         #region enum HChangeNotifyEventID
         /// <summary>

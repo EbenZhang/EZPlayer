@@ -1,5 +1,5 @@
 ﻿using System;
-using EZPlayer.Commmon;
+using EZPlayer.Common;
 using Microsoft.Win32;
 
 namespace EZPlayer.FileAssociator

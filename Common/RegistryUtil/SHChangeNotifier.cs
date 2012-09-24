@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace EZPlayer.Commmon
+namespace EZPlayer.Common
 {
     public class SHChangeNotifier
     {

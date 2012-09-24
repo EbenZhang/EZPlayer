@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EZPlayer.Commmon
+namespace EZPlayer.Common
 {
     #region public enum HChangeNotifyFlags
     /// <summary>

@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using System.Windows;
-using System;
-using System.Linq;
+﻿using System;
 using System.Deployment.Application;
+using System.Globalization;
+using System.Linq;
 using System.Reflection;
+using System.Windows;
 
 namespace EZPlayer
 {
@@ -15,8 +15,16 @@ namespace EZPlayer
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            var logger = log4net.LogManager.GetLogger(typeof(App));
+            logger.Info("Application started...\n");
             CheckForShortcut();
             LoadLanguage();
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            var logger = log4net.LogManager.GetLogger(typeof(App));
+            logger.Info("Application exited...\n");
+            base.OnExit(e);
         }
 
         private void LoadLanguage()
