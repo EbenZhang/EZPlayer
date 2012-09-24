@@ -4,20 +4,20 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Serialization;
+using EZPlayer.Common;
+using EZPlayer.FileAssociator;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
+using log4net;
 using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
-using EZPlayer.Common;
-using EZPlayer.FileAssociator;
 
 namespace EZPlayer
 {
@@ -339,8 +339,7 @@ namespace EZPlayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Error: {0}",
-                        ex.AllMessages()));
+                    LogManager.GetLogger(typeof(MainWindow)).Error(ex.AllMessages());
                 }
             }
             return false;
