@@ -121,6 +121,7 @@
     <Compile Include="HistoryItem.cs" />
     <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MathUtil.cs" />
+    <Compile Include="DirectorySearcher.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
     <Compile Include="Power\SleepBarricade.cs" />
     <Compile Include="Resource.Designer.cs">

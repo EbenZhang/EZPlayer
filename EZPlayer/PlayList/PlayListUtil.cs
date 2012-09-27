@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,11 +14,11 @@ namespace EZPlayer.PlayList
         /// The first file in the play list will be the base file.
         /// All files that less than the base file will be excluded.
         /// </summary>
-        public static List<string> GetPlayList(string baseFilePath)
+        public static List<string> GetPlayList(string baseFilePath, IDirectorySearcher dirSearch)
         {
             var dir = Path.GetDirectoryName(baseFilePath);
             var ext = Path.GetExtension(baseFilePath);
-            var files = Directory.GetFiles(dir,
+            var files = dirSearch.SearchFiles(dir,
                 "*" + ext,
                 SearchOption.TopDirectoryOnly)
                 .Where(f => f.CompareTo(baseFilePath) >= 0).ToList();
