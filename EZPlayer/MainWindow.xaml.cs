@@ -331,7 +331,7 @@ namespace EZPlayer
                         {
                             m_selectedFilePath = lastItem.FilePath;
                             m_sliderVolume.Value = lastItem.Volume;
-                            Play(PlayListUtil.GetPlayList(m_selectedFilePath));
+                            Play(PlayListUtil.GetPlayList(m_selectedFilePath, DirectorySearcher.Instance));
                             UpdatePosition(lastItem.Position);
                             return true;
                         }
@@ -415,7 +415,7 @@ namespace EZPlayer
             }
 
             m_selectedFilePath = openFileDialog.FileName;
-            var playList = PlayListUtil.GetPlayList(m_selectedFilePath);
+            var playList = PlayListUtil.GetPlayList(m_selectedFilePath, DirectorySearcher.Instance);
             Play(playList);
         }
 
@@ -675,7 +675,7 @@ namespace EZPlayer
             if (fileList.Count == 1)
             {
                 m_selectedFilePath = fileList[0];
-                Play(PlayListUtil.GetPlayList(m_selectedFilePath));
+                Play(PlayListUtil.GetPlayList(m_selectedFilePath, DirectorySearcher.Instance));
             }
             else if (fileList.Count > 1)
             {
