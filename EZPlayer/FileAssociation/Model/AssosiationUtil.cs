@@ -1,28 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
 using EZPlayer.Common;
 using Microsoft.Win32;
 
-namespace EZPlayer.FileAssociator
+namespace EZPlayer.FileAssociation.Model
 {
     public class AssociationUtil
     {
         private string m_appName;
         private string m_appPath;
 
-        public AssociationUtil(string applicationName, string applicationPath, string[] extList)
+        public AssociationUtil(string applicationName, string applicationPath, List<ExtensionItem> extList)
         {
             m_appName = applicationName;
             m_appPath = applicationPath;
             CreateAppInfo();
-            foreach (string ext in extList)
+            foreach (var ext in extList)
             {
-                AssociateExtWithApp(ext);
-                DeleteUserChoice(ext);
+                if (ext.IsAssociated)
+                {
+                    AssociateExtWithApp(ext.Ext);
+                    DeleteUserChoice(ext.Ext);
+                }
+                else
+                {
+                    Unassociate(ext.Ext);
+                }
             }
 
             SHChangeNotifier.SHChangeNotify(HChangeNotifyEventID.SHCNE_ASSOCCHANGED,
                 HChangeNotifyFlags.SHCNF_IDLIST,
                 IntPtr.Zero, IntPtr.Zero);
+        }
+
+        private void Unassociate(string ext)
+        {
+            var userChoicePath = GetUserChoicePath(ext);
+            var key = Registry.CurrentUser.OpenSubKey(userChoicePath, false);
+            if ((string)key.GetValue("Default") == m_appName)
+            {
+                DeleteUserChoice(ext);
+            }
+        }
+
+        private static string GetUserChoicePath(string ext)
+        {
+            var userChoicePath = @"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" + ext + @"\UserChoice";
+            return userChoicePath;
         }
 
         private void CreateAppInfo()
@@ -41,12 +65,13 @@ namespace EZPlayer.FileAssociator
 
         private void AssociateExtWithApp(string ext)
         {
-            var extKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Classes\" + ext, true);
+            var keyPath = @"SOFTWARE\Classes\" + ext;
+            var extKey = Registry.CurrentUser.OpenSubKey(keyPath, true);
             if (extKey == null)
             {
-                throw new ApplicationException(ext);
+                extKey = Registry.CurrentUser.CreateSubKey(keyPath);
             }
-            extKey.SetValue("", m_appName, RegistryValueKind.String);            
+            extKey.SetValue("", m_appName, RegistryValueKind.String);
         }
 
         private static void DeleteUserChoice(string ext)

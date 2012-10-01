@@ -31,4 +31,15 @@
     <sys:String x:Key="ToolTip_Volume">
         音量调节
     </sys:String>
+    <sys:String x:Key="ToolTip_Settings">
+        设置
+    </sys:String>
+
+    <sys:String x:Key="FileAssociationView">
+        文件关联
+    </sys:String>
+
+    <sys:String x:Key="Save">
+        保存
+    </sys:String>
 </ResourceDictionary>

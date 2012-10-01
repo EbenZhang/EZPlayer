@@ -31,4 +31,15 @@
     <sys:String x:Key="ToolTip_Volume">
         Volume
     </sys:String>
+    <sys:String x:Key="ToolTip_Settings">
+        Settings
+    </sys:String>
+    
+    <sys:String x:Key="FileAssociationView">
+        File Association
+    </sys:String>
+
+    <sys:String x:Key="Save">
+        Save
+    </sys:String>
 </ResourceDictionary>

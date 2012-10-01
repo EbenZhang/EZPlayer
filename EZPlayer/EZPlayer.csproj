@@ -113,11 +113,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AssociationUtil.cs" />
+    <Compile Include="FileAssociation\Model\AssociationUtil.cs" />
     <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
     <Compile Include="DelayTask.cs" />
+    <Compile Include="DesingerHelper.cs" />
     <Compile Include="EncodingDetector.cs" />
+    <Compile Include="FileAssociation\Model\ExtensionItem.cs" />
+    <Compile Include="FileAssociation\Model\FileAssocModel.cs" />
     <Compile Include="HistoryItem.cs" />
     <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MathUtil.cs" />
@@ -131,6 +134,19 @@
     </Compile>
     <Compile Include="ShortKeys.cs" />
     <Compile Include="Subtitle\SubtitleUtil.cs" />
+    <Compile Include="FileAssociation\ViewModel\FileAssocViewModel.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="FileAssociation\View\FileAssocView.xaml.cs">
+      <DependentUpon>FileAssocView.xaml</DependentUpon>
+    </Compile>
+    <Content Include="DefaultConfig\DefaultExtensionList.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="image\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="VLC\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -164,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\SliderTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileAssociation\View\FileAssocView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
