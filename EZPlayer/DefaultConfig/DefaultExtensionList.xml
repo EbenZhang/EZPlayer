@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfExtensionItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ExtensionItem>
+    <Ext>.avi</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+  <ExtensionItem>
+    <Ext>.mp4</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+  <ExtensionItem>
+    <Ext>.mkv</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+  <ExtensionItem>
+    <Ext>.wmv</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+  <ExtensionItem>
+    <Ext>.rm</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+  <ExtensionItem>
+    <Ext>.rmvb</Ext>
+    <IsAssociated>true</IsAssociated>
+  </ExtensionItem>
+</ArrayOfExtensionItem>
