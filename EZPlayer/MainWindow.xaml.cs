@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using EZPlayer.Common;
-using EZPlayer.FileAssociator;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
@@ -18,6 +17,8 @@ using Microsoft.Win32;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using EZPlayer.View;
+using EZPlayer.FileAssociation.Model;
 
 namespace EZPlayer
 {
@@ -62,6 +63,7 @@ namespace EZPlayer
                 else
                 {
                     this.m_gridConsole.Opacity = 1;
+                    Mouse.OverrideCursor = null;
                 }
 
                 SetValue(IsPlayingProperty, value);
@@ -124,6 +126,9 @@ namespace EZPlayer
                     () => { GenFileListAndPlay(args.Skip(1).ToList()); }
                     );
             }
+
+            FileAssocModel.Instance.Load();
+            FileAssocModel.Instance.Save();
         }
 
         private void LoadLastVolume()
@@ -139,15 +144,6 @@ namespace EZPlayer
             {
                 Volume = 100;
             }
-        }
-
-        private void UpdateFileAssociation(string ext)
-        {
-            var curProcess = Process.GetCurrentProcess();
-            var path = curProcess.MainModule.FileName;
-            var name = Path.GetFileNameWithoutExtension(path);
-
-            new AssociationUtil(name, path, new string[]{ext});
         }
 
         private void InitDelaySingleClickTimer()
@@ -423,7 +419,6 @@ namespace EZPlayer
         {
             SubtitleUtil.PrepareSubtitle(m_selectedFilePath);
             PrepareVLCMediaList(playList);
-            UpdateFileAssociation(Path.GetExtension(m_selectedFilePath));
             m_vlcControl.Media.ParsedChanged += OnMediaParsed;
             DoPlay();
         }
@@ -733,6 +728,24 @@ namespace EZPlayer
             if (ShortKeys.IsPauseShortKey(e))
             {
                 OnBtnPauseClick(null, null);
+            }
+        }
+
+        private void OnBtnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            var v = new FileAssociationView();
+            var isPlaying = IsPlaying;
+            if (IsPlaying)
+            {
+                m_vlcControl.Pause();
+                IsPlaying = false;
+            }
+            v.Owner = this;
+            v.ShowDialog();
+            if (isPlaying)
+            {
+                m_vlcControl.Play();
+                IsPlaying = true;
             }
         }
     }
