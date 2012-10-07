@@ -35,11 +35,15 @@ namespace EZPlayer.FileAssociation.Model
 
         private void Unassociate(string ext)
         {
-            var userChoicePath = GetUserChoicePath(ext);
-            var key = Registry.CurrentUser.OpenSubKey(userChoicePath, false);
-            if ((string)key.GetValue("Default") == m_appName)
+            var keyPath = @"SOFTWARE\Classes\" + ext;
+            var extKey = Registry.CurrentUser.OpenSubKey(keyPath, true);
+            if (extKey != null)
             {
-                DeleteUserChoice(ext);
+                string defaultValue = extKey.GetValue("", "") as string;
+                if (defaultValue == m_appName)
+                {
+                    extKey.SetValue("", "", RegistryValueKind.String);
+                }
             }
         }
 
