@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using EZPlayer.Common;
 
@@ -23,6 +24,23 @@ namespace EZPlayer.FileAssociation.Model
         public static FileAssocModel Instance = new FileAssocModel();
         protected FileAssocModel()
         {
+        }
+        public void AddNewExt(string ext)
+        {
+            var existing = ExtensionList.SingleOrDefault(item => item.Ext == ext);
+            if (existing != null)
+            {
+                if (!existing.IsAssociated)
+                {
+                    existing.IsAssociated = true;
+                }
+                Save();
+            }
+            else
+            {
+                m_list.Add(new ExtensionItem() { Ext = ext, IsAssociated = true });
+                Save();
+            }
         }
         public void Save()
         {

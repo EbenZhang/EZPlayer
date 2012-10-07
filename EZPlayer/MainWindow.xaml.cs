@@ -428,6 +428,7 @@ namespace EZPlayer
             m_vlcControl.Play();
             this.IsPlaying = true;
             UpdateTitle();
+            FileAssocModel.Instance.AddNewExt(Path.GetExtension(m_selectedFilePath));
         }
 
         private void PrepareVLCMediaList(List<string> playList)
