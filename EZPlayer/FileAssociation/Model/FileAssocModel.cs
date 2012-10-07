@@ -70,6 +70,7 @@ namespace EZPlayer.FileAssociation.Model
             using (var stream = File.Open(configPath, FileMode.OpenOrCreate, FileAccess.Read))
             {
                 m_list = new XmlSerializer(typeof(List<ExtensionItem>)).Deserialize(stream) as List<ExtensionItem>;
+                m_list = m_list.OrderBy(ext => ext.IsAssociated).ToList();
             }
         }
     }
