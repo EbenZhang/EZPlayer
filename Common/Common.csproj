@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AppDataDir.cs" />
     <Compile Include="ExceptionExtension.cs" />
+    <Compile Include="LevenshteinDistance.cs" />
+    <Compile Include="MathUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryUtil\HChangeNotifyEventID.cs" />
     <Compile Include="RegistryUtil\HChangeNotifyFlags.cs" />
