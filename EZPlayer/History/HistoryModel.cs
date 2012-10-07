@@ -8,26 +8,28 @@ using HistoryItemContainer = System.Collections.Generic.List<EZPlayer.History.Hi
 
 namespace EZPlayer.History
 {
-    class HistoryModel
+    public class HistoryModel
     {
-        private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
-        private static readonly string HISTORY_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "history.xml");
+        private string m_lastPlayInfoFilePath = null;
+        private string m_historyInfoFilePath = null;
         public HistoryItemContainer m_historyItems = new HistoryItemContainer();
-        public HistoryModel()
+        public HistoryModel(string lastPlayInfoFilePath, string historyInfoPath)
         {
+            m_lastPlayInfoFilePath = lastPlayInfoFilePath;
+            m_historyInfoFilePath = historyInfoPath;
             Load();
         }
         public HistoryItem LastPlayedFile
         {
             get
             {
-                if (!File.Exists(LAST_PLAY_INFO_FILE))
+                if (!File.Exists(m_lastPlayInfoFilePath))
                 {
                     return null;
                 }
                 try
                 {
-                    using (var s = File.Open(LAST_PLAY_INFO_FILE, FileMode.Open))
+                    using (var s = File.Open(m_lastPlayInfoFilePath, FileMode.Open))
                     {
                         var lastItem = new XmlSerializer(typeof(HistoryItem)).Deserialize(s) as HistoryItem;
                         return lastItem;
@@ -41,7 +43,7 @@ namespace EZPlayer.History
             }
             set
             {
-                using (var stream = File.Open(LAST_PLAY_INFO_FILE, FileMode.Create))
+                using (var stream = File.Open(m_lastPlayInfoFilePath, FileMode.Create))
                 {
                     new XmlSerializer(typeof(HistoryItem)).Serialize(stream, value);
                 }
@@ -65,7 +67,7 @@ namespace EZPlayer.History
 
         public void Save()
         {
-            using (var stream = File.Open(HISTORY_INFO_FILE, FileMode.Create))
+            using (var stream = File.Open(m_historyInfoFilePath, FileMode.Create))
             {
                 new XmlSerializer(typeof(HistoryItemContainer))
                     .Serialize(stream, m_historyItems);
@@ -74,13 +76,13 @@ namespace EZPlayer.History
 
         private void Load()
         {
-            if (!File.Exists(HISTORY_INFO_FILE))
+            if (!File.Exists(m_historyInfoFilePath))
             {
                 return;
             }
             try
             {
-                using (var s = File.Open(HISTORY_INFO_FILE, FileMode.Open))
+                using (var s = File.Open(m_historyInfoFilePath, FileMode.Open))
                 {
                     m_historyItems = new XmlSerializer(typeof(HistoryItemContainer))
                         .Deserialize(s) as HistoryItemContainer;
