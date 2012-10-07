@@ -486,21 +486,6 @@ namespace EZPlayer
             }
         }
 
-        /// <summary>
-        /// Stop position changing, re-enables updates for the slider by the player. 
-        /// </summary>
-        /// <param name="sender">Event sender. </param>
-        /// <param name="e">Event arguments. </param>
-        private void SliderMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var mousePos = e.GetPosition(m_sliderPosition).X;
-            var sliderRange = m_sliderPosition.Maximum - m_sliderPosition.Minimum;
-
-            float value = ((float)mousePos / (float)m_sliderPosition.Width) * (float)sliderRange;
-
-            UpdatePosition(value);
-        }
-
         private void UpdatePosition(float value)
         {
             value = MathUtil.Clamp(value, 0.0f, 1.0f);
