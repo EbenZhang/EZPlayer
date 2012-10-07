@@ -42,7 +42,9 @@ namespace EZPlayer
         private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
 
-        private HistoryModel m_historyModel = new HistoryModel();
+        private static readonly string LAST_PLAY_INFO_FILE_PATH = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
+        private static readonly string HISTORY_INFO_FILE_PATH = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "history.xml");
+        private HistoryModel m_historyModel = new HistoryModel(LAST_PLAY_INFO_FILE_PATH, HISTORY_INFO_FILE_PATH);
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
