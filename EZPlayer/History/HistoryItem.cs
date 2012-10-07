@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EZPlayer
+namespace EZPlayer.History
 {
     [Serializable]
     public class HistoryItem
@@ -8,5 +8,6 @@ namespace EZPlayer
         public float Position;
         public string FilePath;
         public double Volume;
+        public DateTime PlayedDate;
     }
 }

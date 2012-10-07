@@ -19,6 +19,7 @@ using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
 using EZPlayer.View;
 using EZPlayer.FileAssociation.Model;
+using EZPlayer.History;
 
 namespace EZPlayer
 {
@@ -39,8 +40,9 @@ namespace EZPlayer
 
         private readonly static string APP_START_PATH = Process.GetCurrentProcess().MainModule.FileName;
         private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
-        private static readonly string LAST_PLAY_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
+
+        private HistoryModel m_historyModel = new HistoryModel();
 
         public static DependencyProperty IsPlayingProperty =
             DependencyProperty.Register("IsPlaying", typeof(bool),
@@ -283,12 +285,11 @@ namespace EZPlayer
                 {
                     Position = m_vlcControl.Position,
                     FilePath = new Uri(m_vlcControl.Media.MRL).LocalPath,
-                    Volume = m_sliderVolume.Value
+                    Volume = m_sliderVolume.Value,
+                    PlayedDate = DateTime.Now
                 };
-                using (var stream = File.Open(LAST_PLAY_INFO_FILE, FileMode.Create))
-                {
-                    new XmlSerializer(typeof(HistoryItem)).Serialize(stream, item);
-                }
+                m_historyModel.LastPlayedFile = item;
+                m_historyModel.Save();
             }
         }
 
@@ -316,27 +317,12 @@ namespace EZPlayer
 
         private bool TryLoadLastPlayedFile()
         {
-            if (File.Exists(LAST_PLAY_INFO_FILE))
+            if (m_historyModel.LastPlayedFile != null)
             {
-                try
-                {
-                    using (var s = File.Open(LAST_PLAY_INFO_FILE, FileMode.Open))
-                    {
-                        var lastItem = new XmlSerializer(typeof(HistoryItem)).Deserialize(s) as HistoryItem;
-                        if (lastItem != null)
-                        {
-                            m_selectedFilePath = lastItem.FilePath;
-                            m_sliderVolume.Value = lastItem.Volume;
-                            Play(PlayListUtil.GetPlayList(m_selectedFilePath, DirectorySearcher.Instance));
-                            UpdatePosition(lastItem.Position);
-                            return true;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogManager.GetLogger(typeof(MainWindow)).Error(ex.AllMessages());
-                }
+                m_selectedFilePath = m_historyModel.LastPlayedFile.FilePath;
+                m_sliderVolume.Value = m_historyModel.LastPlayedFile.Volume;
+                Play(PlayListUtil.GetPlayList(m_selectedFilePath, DirectorySearcher.Instance));
+                return true;
             }
             return false;
         }
@@ -426,6 +412,11 @@ namespace EZPlayer
         private void DoPlay()
         {
             m_vlcControl.Play();
+            var history = m_historyModel.GetHistoryInfo(m_selectedFilePath);
+            if (history != null)
+            {
+                UpdatePosition(history.Position);
+            }
             this.IsPlaying = true;
             UpdateTitle();
             FileAssocModel.Instance.AddNewExt(Path.GetExtension(m_selectedFilePath));
