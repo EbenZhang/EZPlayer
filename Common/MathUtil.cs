@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EZPlayer
+namespace EZPlayer.Common
 {
     public static class MathUtil
     {

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace EZPlayer
+namespace EZPlayer.Common
 {
-    class LevenshteinDistance
+    public class LevenshteinDistance
     {
         /// <summary>
         /// 编辑距离（Levenshtein Distance）

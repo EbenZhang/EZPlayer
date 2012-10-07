@@ -15,7 +15,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -121,8 +121,6 @@
     <Compile Include="FileAssociation\Model\ExtensionItem.cs" />
     <Compile Include="FileAssociation\Model\FileAssocModel.cs" />
     <Compile Include="HistoryItem.cs" />
-    <Compile Include="LevenshteinDistance.cs" />
-    <Compile Include="MathUtil.cs" />
     <Compile Include="DirectorySearcher.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
     <Compile Include="Power\SleepBarricade.cs" />
@@ -133,10 +131,10 @@
     </Compile>
     <Compile Include="ShortKeys.cs" />
     <Compile Include="Subtitle\SubtitleUtil.cs" />
-    <Compile Include="FileAssociation\ViewModel\FileAssocViewModel.cs" />
+    <Compile Include="FileAssociation\FileAssocViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModelBase.cs" />
-    <Compile Include="FileAssociation\View\FileAssocView.xaml.cs">
+    <Compile Include="FileAssociation\FileAssocView.xaml.cs">
       <DependentUpon>FileAssocView.xaml</DependentUpon>
     </Compile>
     <Content Include="DefaultConfig\DefaultExtensionList.xml">
@@ -158,7 +156,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Mainwnd\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -166,7 +164,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Mainwnd\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -182,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FileAssociation\View\FileAssocView.xaml">
+    <Page Include="FileAssociation\FileAssocView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
