@@ -242,13 +242,13 @@ namespace EZPlayer
                 return;
             }
             args.Handled = true;
-            OnBtnPauseClick(null, null);
+            TogglePauseOrPlay();
         }
 
         void OnDelayedSingleClickTimer(object sender, EventArgs e)
         {
             m_delaySingleClickTimer.Stop();
-            OnBtnPauseClick(null, null);
+            TogglePauseOrPlay();
         }
 
         void OnMouseWheel(object sender, MouseWheelEventArgs e)
@@ -311,10 +311,7 @@ namespace EZPlayer
                 this.OnBtnOpenClick(sender, e);
                 return;
             }
-            else
-            {
-                DoPlay();
-            }
+            TogglePauseOrPlay();
         }
 
         private bool TryLoadLastPlayedFile()
@@ -329,12 +326,7 @@ namespace EZPlayer
             return false;
         }
 
-        /// <summary>
-        /// Called if the Pause button is clicked; pauses the VLC playback. 
-        /// </summary>
-        /// <param name="sender">Event sender. </param>
-        /// <param name="e">Event arguments. </param>
-        private void OnBtnPauseClick(object sender, RoutedEventArgs e)
+        private void TogglePauseOrPlay()
         {
             if (m_vlcControl.Media == null)
             {
@@ -706,7 +698,7 @@ namespace EZPlayer
 
             if (ShortKeys.IsPauseShortKey(e))
             {
-                OnBtnPauseClick(null, null);
+                TogglePauseOrPlay();
             }
         }
 
