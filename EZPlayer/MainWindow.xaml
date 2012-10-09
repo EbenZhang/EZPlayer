@@ -112,7 +112,20 @@
                                     ToolTip="{StaticResource ToolTip_Play}"
                                     ToolTipService.ShowOnDisabled="True"
                                     >
-                                <Image Source="Image/play.png" />
+                                <Image>
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPlaying, ElementName=ThisWindow}" Value="False">
+                                                    <Setter Property="Source" Value="Image/play.png"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsPlaying, ElementName=ThisWindow}" Value="True">
+                                                    <Setter Property="Source" Value="Image/pause.png"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                             </Button>
                             <Button Height="80" Width="80"
                                     x:Name="m_btnFullscreen"
@@ -141,25 +154,6 @@
                                     ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0">
                                 <Image Source="Image/next.png" />
-                            </Button>
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnPause"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Pause}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Click="OnBtnPauseClick" Margin="10,0,0,0">
-                                <Image Source="Image/pause.png" />
-                            </Button>
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnStop"
-                                    IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
-                                    Click="OnBtnStopClick"
-                                    Margin="10,0,0,0"
-                                    ToolTip="{StaticResource ToolTip_Stop}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Style="{StaticResource TransparentButton}"
-                                    >
-                                <Image Source="Image/stop.png" />
                             </Button>
                             <TextBlock Foreground="{StaticResource ControlBrush}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
                             <Slider x:Name="m_sliderVolume" 
