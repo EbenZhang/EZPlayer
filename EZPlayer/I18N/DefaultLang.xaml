@@ -4,6 +4,9 @@
     <sys:String x:Key="ToolTip_Play">
         Play
     </sys:String>
+    <sys:String x:Key="ToolTip_PlayPause">
+        Play/Pause
+    </sys:String>
     <sys:String x:Key="ToolTip_Rewind">
         Rewind
     </sys:String>
@@ -11,7 +14,7 @@
         Full Screen
     </sys:String>
     <sys:String x:Key="ToolTip_Previous">
-        Click to navigate to the begining, click again to play previous media
+        Previous media
     </sys:String>
     <sys:String x:Key="ToolTip_Next">
         Next media

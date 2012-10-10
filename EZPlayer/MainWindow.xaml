@@ -109,7 +109,7 @@
                                     Click="OnBtnPlayClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Play}"
+                                    ToolTip="{StaticResource ToolTip_PlayPause}"
                                     ToolTipService.ShowOnDisabled="True"
                                     >
                                 <Image>
