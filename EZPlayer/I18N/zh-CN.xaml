@@ -4,6 +4,9 @@
     <sys:String x:Key="ToolTip_Play">
         播放
     </sys:String>
+    <sys:String x:Key="ToolTip_PlayPause">
+        播放/暂停
+    </sys:String>
     <sys:String x:Key="ToolTip_Rewind">
         后退
     </sys:String>
@@ -11,7 +14,7 @@
         切换全屏
     </sys:String>
     <sys:String x:Key="ToolTip_Previous">
-        单击回到片首, 再次点击切换到上一个
+        上一个
     </sys:String>
     <sys:String x:Key="ToolTip_Next">
         下一个
