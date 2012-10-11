@@ -4,7 +4,8 @@
         xmlns:vm="clr-namespace:EZPlayer.ViewModel"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="{StaticResource FileAssociationView}" Height="212" Width="199">
+        Title="{StaticResource FileAssociationView}" Height="212" Width="199"
+        WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <vm:FileAssocViewModel></vm:FileAssocViewModel>
     </Window.DataContext>
@@ -22,6 +23,6 @@
                 Margin="12,147,0,0"
                 Name="button1"
                 VerticalAlignment="Top"
-                Width="75" Command="{Binding SaveCommand}" />
+                Width="75" Command="{Binding SaveCommand}"/>
     </Grid>
 </Window>
