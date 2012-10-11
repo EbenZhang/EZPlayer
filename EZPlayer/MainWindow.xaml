@@ -11,6 +11,7 @@
     AllowDrop="True"
     Drop="OnDropFile"
     KeyDown="OnKeyDown"
+    WindowStartupLocation="CenterOwner"
     >
     <Window.Background>
         <SolidColorBrush Color ="Black" />
