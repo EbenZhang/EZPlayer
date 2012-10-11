@@ -362,7 +362,8 @@ namespace EZPlayer
         /// <param name="e">Event arguments. </param>
         private void OnBtnOpenClick(object sender, RoutedEventArgs e)
         {
-            if (m_vlcControl.Media != null)
+            bool isPlaying = m_vlcControl.IsPlaying;
+            if (m_vlcControl.Media != null && isPlaying)
             {
                 m_vlcControl.Pause();
                 m_vlcControl.Media.ParsedChanged -= OnMediaParsed;
@@ -378,7 +379,7 @@ namespace EZPlayer
             // Process open file dialog box results
             if (openFileDialog.ShowDialog() != true)
             {
-                if (m_vlcControl.Media != null)
+                if (m_vlcControl.Media != null && isPlaying)
                 {
                     m_vlcControl.Play();
                 }
