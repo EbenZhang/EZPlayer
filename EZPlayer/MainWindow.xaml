@@ -47,7 +47,7 @@
                 <Button 
                     Visibility="{Binding IsPlaying, Converter={StaticResource FalseToVisible}}"
                     Height="100" Width="100" x:Name="m_btnPlayShortCut"
-                    Command="{Binding PlayCommand}"
+                    Command="{Binding PlayPauseCommand}"
                     Style="{StaticResource TransparentButton}"
                     ToolTip="{StaticResource ToolTip_Play}"
                     ToolTipService.ShowOnDisabled="True"
