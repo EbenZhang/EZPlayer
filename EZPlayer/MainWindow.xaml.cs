@@ -316,5 +316,21 @@ namespace EZPlayer
                 m_viewModel.PlayPauseCommand.Execute(null);
             }
         }
+
+        private void OnBtnRewindClick(object sender, RoutedEventArgs e)
+        {
+            if (m_viewModel.RewindCommand.CanExecute(null))
+            {
+                m_viewModel.RewindCommand.Execute(null);
+            }
+        }
+
+        private void OnBtnForwardClick(object sender, RoutedEventArgs e)
+        {
+            if (m_viewModel.ForwardCommand.CanExecute(null))
+            {
+                m_viewModel.ForwardCommand.Execute(null);
+            }
+        }
     }
 }
