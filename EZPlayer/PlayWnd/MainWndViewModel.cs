@@ -31,7 +31,7 @@ namespace EZPlayer.ViewModel
         public MainWndViewModel()
         {
             m_model.EvtTimeChanged += OnTimeChanged;
-            m_model.EvtPositionChanged += () => OnPropertyChanged("Position");
+            m_model.EvtPositionChanged += () => NotifyPropertyChange(() => Position);
         }
 
         public void Init()
@@ -120,7 +120,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_isPlaying = value;
-                OnPropertyChanged("IsPlaying");
+                NotifyPropertyChange(() => IsPlaying);
             }
         }
         public string SelectedPath
@@ -138,7 +138,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_model.Position = value;
-                OnPropertyChanged("Position");
+                NotifyPropertyChange(() => Position);
             }
         }
 
@@ -158,8 +158,8 @@ namespace EZPlayer.ViewModel
             }
             set
             {
-                m_model.Volume = value;        
-                OnPropertyChanged("Volume");
+                m_model.Volume = value;
+                NotifyPropertyChange(() => Volume);
             }
         }
 
@@ -391,7 +391,7 @@ namespace EZPlayer.ViewModel
 
         private void UpdateTitle()
         {
-            OnPropertyChanged("Title");
+            NotifyPropertyChange(() => Title);
         }
 
         private void LoadLastVolume()
@@ -418,7 +418,7 @@ namespace EZPlayer.ViewModel
 
         private void OnTimeChanged()
         {
-            OnPropertyChanged("TimeIndicator");
+            NotifyPropertyChange(() => TimeIndicator);
 
             SyncPlayStatusWithModel();
         }
