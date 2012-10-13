@@ -1,22 +1,23 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
     xmlns:local="clr-namespace:EZPlayer"
+    xmlns:vm="clr-namespace:EZPlayer.ViewModel"
     xmlns:BindingUtils="clr-namespace:EZPlayer.BindingUtils"
     x:Class="EZPlayer.MainWindow"
-    Title="EZPlayer" Height="260.1" Width="509.2"
+    Title="{Binding Title}" Height="260.1" Width="509.2"
     Name ="ThisWindow"
-    MouseMove="OnMouseMove"
     AllowDrop="True"
     Drop="OnDropFile"
     KeyDown="OnKeyDown"
-    WindowStartupLocation="CenterOwner"
-    >
-    <Window.Background>
-        <SolidColorBrush Color ="Black" />
-    </Window.Background>
-
+    WindowStartupLocation="CenterOwner" 
+    Background="Black" >
+    <Window.DataContext>
+        <vm:MainWndViewModel/>
+    </Window.DataContext>
+    <Window.Topmost>
+        <Binding Path="IsPlaying"/>
+    </Window.Topmost>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -42,19 +43,11 @@
     </Window.Resources>
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid>
-            <Grid Grid.Row="0">
-                <Grid.Background>
-                    <VisualBrush Stretch="Uniform">
-                        <VisualBrush.Visual>
-                            <Image Source="{Binding VideoSource, ElementName=m_vlcControl}" />
-                        </VisualBrush.Visual>
-                    </VisualBrush>
-                </Grid.Background>
-                <Wpf:VlcControl x:Name="m_vlcControl" />
-
+            <Grid Name ="m_gridPlayWnd" Grid.Row="0">
                 <Button 
-                    Visibility="{Binding IsPlaying, ElementName=ThisWindow, Converter={StaticResource FalseToVisible}}"
-                    Height="100" Width="100" x:Name="m_btnPlayShortCut" Click="OnBtnPlayClick"
+                    Visibility="{Binding IsPlaying, Converter={StaticResource FalseToVisible}}"
+                    Height="100" Width="100" x:Name="m_btnPlayShortCut"
+                    Command="{Binding PlayCommand}"
                     Style="{StaticResource TransparentButton}"
                     ToolTip="{StaticResource ToolTip_Play}"
                     ToolTipService.ShowOnDisabled="True"
@@ -62,24 +55,33 @@
                     <Image Source="Image/play.png" />
                 </Button>
             </Grid>
-            <DockPanel x:Name="m_gridConsole" Margin="0,400,0,11.2" Grid.ColumnSpan="2">
+            <DockPanel x:Name="m_gridConsole"
+                       Margin="0,400,0,11.2"
+                       Grid.ColumnSpan="2"
+                       Opacity="{BindingUtils:BoolToValueBinding IsPlaying, 0.4, 1}"
+                       >
                 <Grid>
                     <Grid Margin="0,-393.392,0,0">
-                        <TextBlock Foreground="{StaticResource ControlBrush}" x:Name="m_timeIndicator" Margin="742,350,5,133" RenderTransformOrigin="0.51,0.179" />
+                        <TextBlock
+                            Foreground="{StaticResource ControlBrush}"
+                            x:Name="m_timeIndicator"
+                            Margin="742,350,5,133"
+                            RenderTransformOrigin="0.51,0.179"
+                            Text="{Binding TimeIndicator}"
+                            />
                         <Slider x:Name="m_sliderPosition"
                                 Maximum="1"
-                                ValueChanged="SliderValueChanged"
+                                Value="{Binding Position}"
                                 Margin="0,378.769,10,104.76"
                                 Width="906.186"
-                                IsEnabled="{Binding IsPlaying, ElementName=ThisWindow}"
-                                >
-                        </Slider>
+                                IsEnabled="{Binding IsPlaying}"
+                                />
                     </Grid>
                     <Grid>
                         <StackPanel Orientation="Horizontal" Margin="97.407,20,0,0">
                             <Button Height="50" Width="50"
                                     x:Name="m_btnOpen"
-                                    Click="OnBtnOpenClick"
+                                    Command="{Binding OpenCommand}"
                                     ToolTip="{StaticResource ToolTip_Open}"
                                     ToolTipService.ShowOnDisabled="True"
                                     Margin="10,0,0,0"
@@ -89,7 +91,7 @@
                             </Button>
                             <Button Height="50" Width="50"
                                     x:Name="m_btnPrevious"
-                                    Click="OnBtnPreviousClick"
+                                    Command="{Binding PreviousCommand}"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Previous}"
                                     ToolTipService.ShowOnDisabled="True"
@@ -98,7 +100,7 @@
                             </Button>
                             <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnRewind"
-                                    Click="OnBtnRewindClick"
+                                    Command="{Binding RewindCommand}"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Rewind}"
                                     ToolTipService.ShowOnDisabled="True"
@@ -107,7 +109,7 @@
                             </RepeatButton>
                             <Button Height="90" Width="90"
                                     x:Name="m_btnPlay"
-                                    Click="OnBtnPlayClick"
+                                    Command="{Binding PlayPauseCommand}"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_PlayPause}"
@@ -117,10 +119,10 @@
                                     <Image.Style>
                                         <Style TargetType="{x:Type Image}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsPlaying, ElementName=ThisWindow}" Value="False">
+                                                <DataTrigger Binding="{Binding IsPlaying}" Value="False">
                                                     <Setter Property="Source" Value="Image/play.png"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPlaying, ElementName=ThisWindow}" Value="True">
+                                                <DataTrigger Binding="{Binding IsPlaying}" Value="True">
                                                     <Setter Property="Source" Value="Image/pause.png"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -140,7 +142,7 @@
                             </Button>
                             <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnForward"
-                                    Click="OnBtnForwardClick"
+                                    Command="{Binding ForwardCommand}"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Forward}"
                                     ToolTipService.ShowOnDisabled="True"
@@ -149,7 +151,7 @@
                             </RepeatButton>
                             <Button Height="50" Width="50"
                                     x:Name="m_btnNext"
-                                    Click="OnBtnNextClick"
+                                    Command="{Binding NextCommand}"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Next}"
                                     ToolTipService.ShowOnDisabled="True"
@@ -163,8 +165,7 @@
                                     LargeChange="5"
                                     ToolTip="{StaticResource ToolTip_Volume}"
                                     ToolTipService.ShowOnDisabled="True"
-                                    Value="{Binding Path=Volume, ElementName=ThisWindow}"
-                                    ValueChanged="SliderVolumeValueChanged"
+                                    Value="{Binding Path=Volume}"
                                     VerticalAlignment="Center"
                                     Margin="10,0,0,0"
                                     Width="72"/>

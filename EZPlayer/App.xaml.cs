@@ -4,6 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using Vlc.DotNet.Core;
+using System.IO;
+using System.Diagnostics;
 
 namespace EZPlayer
 {
@@ -12,6 +15,9 @@ namespace EZPlayer
     /// </summary>
     public partial class App : Application
     {
+        private readonly static string APP_START_PATH = Process.GetCurrentProcess().MainModule.FileName;
+        private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -19,7 +25,49 @@ namespace EZPlayer
             logger.Info("Application started...\n");
             CheckForShortcut();
             LoadLanguage();
+            InitVlcContext();
         }
+
+        private static void InitVlcContext()
+        {
+            // Set libvlc.dll and libvlccore.dll directory path
+            VlcContext.LibVlcDllsPath = Path.Combine(APP_START_DIR, "VLC");
+
+            // Set the vlc plugins directory path
+            VlcContext.LibVlcPluginsPath = Path.Combine(VlcContext.LibVlcDllsPath, "plugins");
+
+            /* Setting up the configuration of the VLC instance.
+             * You can use any available command-line option using the AddOption function (see last two options). 
+             * A list of options is available at 
+             *     http://wiki.videolan.org/VLC_command-line_help
+             * for example. */
+
+            // Ignore the VLC configuration file
+            VlcContext.StartupOptions.IgnoreConfig = true;
+
+            VlcContext.StartupOptions.LogOptions.LogInFile = true;
+#if DEBUG
+            VlcContext.StartupOptions.LogOptions.Verbosity = VlcLogVerbosities.Debug;
+            VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = true;
+#else
+            //Set the startup options
+            VlcContext.StartupOptions.LogOptions.ShowLoggerConsole = false;
+            VlcContext.StartupOptions.LogOptions.Verbosity = VlcLogVerbosities.None;
+#endif
+
+            // Disable showing the movie file name as an overlay
+            VlcContext.StartupOptions.AddOption("--no-video-title-show");
+
+            // The only supporting Chinese font
+            VlcContext.StartupOptions.AddOption("--freetype-font=DFKai-SB");
+
+            // Pauses the playback of a movie on the last frame
+            //VlcContext.StartupOptions.AddOption("--play-and-pause");
+
+            // Initialize the VlcContext
+            VlcContext.Initialize();
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             var logger = log4net.LogManager.GetLogger(typeof(App));
