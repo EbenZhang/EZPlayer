@@ -17,7 +17,7 @@ using Microsoft.Win32;
 
 namespace EZPlayer.ViewModel
 {
-    public class PlayWndViewModel : ViewModelBase
+    public class MainWndViewModel : ViewModelBase
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
         private static readonly string LAST_PLAY_INFO_FILE_PATH = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
@@ -26,9 +26,9 @@ namespace EZPlayer.ViewModel
         private HistoryModel m_historyModel = new HistoryModel(LAST_PLAY_INFO_FILE_PATH, HISTORY_INFO_FILE_PATH);
         private SleepBarricade m_sleepBarricade;
         private bool m_isPlaying = false;
-        private PlayWndModel m_model = new PlayWndModel();
+        private MainWndModel m_model = new MainWndModel();
         
-        public PlayWndViewModel()
+        public MainWndViewModel()
         {
             m_model.EvtTimeChanged += OnTimeChanged;
             m_model.EvtPositionChanged += () => OnPropertyChanged("Position");

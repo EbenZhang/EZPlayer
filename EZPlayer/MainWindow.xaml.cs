@@ -24,7 +24,7 @@ namespace EZPlayer
         /// </summary>
         private DispatcherTimer m_delaySingleClickTimer;
 
-        private PlayWndViewModel m_viewModel = null;
+        private MainWndViewModel m_viewModel = null;
 
         public MainWindow()
         {
@@ -73,7 +73,7 @@ namespace EZPlayer
 
         private void SetupViewModel()
         {
-            m_viewModel = this.DataContext as PlayWndViewModel;
+            m_viewModel = this.DataContext as MainWndViewModel;
 
             m_viewModel.Init();
         }

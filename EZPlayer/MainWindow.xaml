@@ -13,7 +13,7 @@
     WindowStartupLocation="CenterOwner" 
     Background="Black" >
     <Window.DataContext>
-        <vm:PlayWndViewModel/>
+        <vm:MainWndViewModel/>
     </Window.DataContext>
     <Window.Topmost>
         <Binding Path="IsPlaying"/>

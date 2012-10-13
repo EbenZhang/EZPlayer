@@ -7,7 +7,7 @@ using Vlc.DotNet.Wpf;
 
 namespace EZPlayer.Model
 {
-    public class PlayWndModel
+    public class MainWndModel
     {
         public VlcControl m_vlcControl = new VlcControl();
 
@@ -15,7 +15,7 @@ namespace EZPlayer.Model
         public event NotifyChange EvtPositionChanged;
         public event NotifyChange EvtTimeChanged;
         
-        public PlayWndModel()
+        public MainWndModel()
         {
         }
         
