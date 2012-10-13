@@ -100,7 +100,7 @@
                             </Button>
                             <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnRewind"
-                                    Command="{Binding RewindCommand}"
+                                    Click="OnBtnRewindClick"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Rewind}"
                                     ToolTipService.ShowOnDisabled="True"
@@ -142,7 +142,7 @@
                             </Button>
                             <RepeatButton Height="50" Width="50"
                                     x:Name="m_btnForward"
-                                    Command="{Binding ForwardCommand}"
+                                    Click="OnBtnForwardClick"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_Forward}"
                                     ToolTipService.ShowOnDisabled="True"
