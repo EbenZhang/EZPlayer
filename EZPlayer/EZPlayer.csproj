@@ -15,7 +15,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationRevision>40</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -112,6 +112,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
+    <Compile Include="BindingUtils\RelayCommand.cs" />
     <Compile Include="FileAssociation\Model\AssociationUtil.cs" />
     <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
@@ -123,6 +125,8 @@
     <Compile Include="History\HistoryItem.cs" />
     <Compile Include="DirectorySearcher.cs" />
     <Compile Include="History\HistoryModel.cs" />
+    <Compile Include="PlayWnd\MainWndModel.cs" />
+    <Compile Include="PlayWnd\MainWndViewModel.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
     <Compile Include="Power\SleepBarricade.cs" />
     <Compile Include="Resource.Designer.cs">
