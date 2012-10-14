@@ -59,7 +59,10 @@ namespace EZPlayer
             if (args.Count() >= 2)
             {
                 var playList = m_viewModel.GenerateFileList(args.Skip(1).ToList());
-                m_viewModel.PlayAListOfFiles(playList);
+                /// it seems vlc requires some time to init.
+                new DelayTask(TimeSpan.FromMilliseconds(500),
+                    () => { m_viewModel.PlayAListOfFiles(playList); }
+                    );
             }
         }
 
@@ -121,7 +124,8 @@ namespace EZPlayer
                 Interval = TimeSpan.FromMilliseconds(500),
                 IsEnabled = true
             };
-            m_delaySingleClickTimer.Tick += new EventHandler(PlayOrPause4DelayedLeftMouseClick);
+            m_delaySingleClickTimer.Stop();
+            m_delaySingleClickTimer.Tick += PlayOrPause4DelayedLeftMouseClick;
         }
 
         private void SetupAutoHideConsoleTimer()
