@@ -258,11 +258,6 @@ namespace EZPlayer.ViewModel
             return false;
         }
 
-        private void Open()
-        {
-            
-        }
-
         private void Pause()
         {
             if (m_model.IsPlaying)
