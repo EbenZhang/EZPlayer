@@ -10,7 +10,12 @@
         <vm:FileAssocViewModel></vm:FileAssocViewModel>
     </Window.DataContext>
     <Grid>
-        <ListBox ItemsSource="{Binding Extensions}" Height="141" VerticalAlignment="Top">
+        <ListBox 
+            ItemsSource="{Binding Extensions}" 
+            Height="141" 
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Stretch"
+            >
             <ListBox.ItemTemplate>
                 <HierarchicalDataTemplate>
                     <CheckBox Content="{Binding Ext}" IsChecked="{Binding IsAssociated}"/>

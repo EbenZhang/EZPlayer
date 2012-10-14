@@ -11,6 +11,8 @@ using EZPlayer.Common;
 using EZPlayer.View;
 using EZPlayer.ViewModel;
 using Vlc.DotNet.Core;
+using Microsoft.Win32;
+using EZPlayer.History;
 
 namespace EZPlayer
 {
@@ -335,6 +337,30 @@ namespace EZPlayer
             {
                 m_viewModel.ForwardCommand.Execute(null);
             }
+        }
+
+        private void OnBtnOpenClick(object sender, RoutedEventArgs e)
+        {
+            bool isPlaying = m_viewModel.IsPlaying;
+            if (isPlaying)
+            {
+                m_viewModel.PlayPauseCommand.Execute(null);
+            }
+
+            var history = new HistoryView();
+            history.Owner = this;
+            history.ShowDialog();
+
+            if (history.FileList.Count == 0)
+            {
+                if (isPlaying)
+                {
+                    m_viewModel.PlayPauseCommand.Execute(null);
+                }
+                return;
+            }
+            var playList = m_viewModel.GenerateFileList(history.FileList);
+            m_viewModel.PlayAListOfFiles(playList);
         }
     }
 }
