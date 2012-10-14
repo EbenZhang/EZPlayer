@@ -12,7 +12,6 @@ namespace EZPlayer.Model
         public VlcControl m_vlcControl = new VlcControl();
 
         public delegate void NotifyChange();
-        public event NotifyChange EvtPositionChanged;
         public event NotifyChange EvtTimeChanged;
         
         public MainWndModel()
@@ -23,7 +22,6 @@ namespace EZPlayer.Model
         {
             m_vlcControl.VideoProperties.Scale = 2;
             m_vlcControl.TimeChanged += VlcControlOnTimeChanged;
-            m_vlcControl.PositionChanged += VlcControlOnPositionChanged;
         }
 
         public bool IsPlaying
@@ -178,14 +176,6 @@ namespace EZPlayer.Model
         public void AddMedia(string mediaPath)
         {
             m_vlcControl.Medias.Add(new PathMedia(mediaPath));
-        }
-
-        private void VlcControlOnPositionChanged(VlcControl sender, VlcEventArgs<float> e)
-        {
-            if (EvtPositionChanged != null)
-            {
-                EvtPositionChanged();
-            }
         }
     }
 }
