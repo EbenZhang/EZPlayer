@@ -47,7 +47,7 @@
                 <Button 
                     Visibility="{Binding IsPlaying, Converter={StaticResource FalseToVisible}}"
                     Height="100" Width="100" x:Name="m_btnPlayShortCut"
-                    Command="{Binding PlayPauseCommand}"
+                    Click="OnBtnPlayClick"
                     Style="{StaticResource TransparentButton}"
                     ToolTip="{StaticResource ToolTip_Play}"
                     ToolTipService.ShowOnDisabled="True"
@@ -109,7 +109,7 @@
                             </RepeatButton>
                             <Button Height="90" Width="90"
                                     x:Name="m_btnPlay"
-                                    Command="{Binding PlayPauseCommand}"
+                                    Click="OnBtnPlayClick"
                                     Margin="10,0,0,0"
                                     Style="{StaticResource TransparentButton}"
                                     ToolTip="{StaticResource ToolTip_PlayPause}"

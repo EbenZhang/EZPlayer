@@ -49,7 +49,7 @@ namespace EZPlayer.ViewModel
             get
             {
                 return new RelayCommand(param => PlayOrPause(),
-                    param => true);
+                    param => CurrentFilePath != null);
             }
         }
 
@@ -61,21 +61,13 @@ namespace EZPlayer.ViewModel
                     param => IsPlaying);
             }
         }
-        public ICommand OpenCommand
-        {
-            get
-            {
-                return new RelayCommand(param => Open(),
-                    param => true);
-            }
-        }
 
         public ICommand PreviousCommand
         {
             get
             {
                 return new RelayCommand(param => Previous(),
-                    param => true);
+                    param => m_model.CurrentFilePath != null);
             }
         }
 
@@ -84,7 +76,7 @@ namespace EZPlayer.ViewModel
             get
             {
                 return new RelayCommand(param => Next(),
-                    param => true);
+                    param => m_model.CurrentFilePath != null);
             }
         }
 
@@ -109,6 +101,10 @@ namespace EZPlayer.ViewModel
         #endregion
 
         #region Properties
+        public string CurrentFilePath
+        {
+            get { return m_model.CurrentFilePath; }
+        }
         public bool IsPlaying
         {
             get
@@ -247,7 +243,7 @@ namespace EZPlayer.ViewModel
             FileAssocModel.Instance.Save();
         }
 
-        private bool TryLoadLastPlayedFile()
+        public bool TryLoadLastPlayedFile()
         {
             if (m_historyModel.LastPlayedFile != null)
             {
@@ -269,23 +265,12 @@ namespace EZPlayer.ViewModel
 
         private void Previous()
         {
-            if (m_model.CurrentFilePath == null)
-            {
-                Open();
-                return;
-            }
             m_model.Previous();
             UpdateTitle();
         }
 
         private void Next()
         {
-            if (m_model.CurrentFilePath == null)
-            {
-                Open();
-                return;
-            }
-            
             m_model.Next();
             UpdateTitle();
         }
@@ -330,16 +315,6 @@ namespace EZPlayer.ViewModel
 
         private void PlayOrPause()
         {
-            if (m_model.CurrentFilePath == null)
-            {
-                if (TryLoadLastPlayedFile())
-                {
-                    return;
-                }
-                Open();
-                return;
-            }
-
             if (m_model.IsPlaying)
             {
                 m_model.Pause();

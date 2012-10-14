@@ -158,13 +158,31 @@ namespace EZPlayer
                 return;
             }
             args.Handled = true;
-            m_viewModel.PlayPauseCommand.Execute(null);
+            PlayOrPauseOrOpen();
+        }
+
+        private void PlayOrPauseOrOpen()
+        {
+            if (m_viewModel.CurrentFilePath == null)
+            {
+                if (m_viewModel.TryLoadLastPlayedFile())
+                {
+                    return;
+                }
+                this.Open();
+                return;
+            }
+            else
+            {
+                m_viewModel.PlayPauseCommand.Execute(null);
+            }
         }
 
         private void PlayOrPause4DelayedLeftMouseClick(object sender, EventArgs e)
         {
             m_delaySingleClickTimer.Stop();
-            m_viewModel.PlayPauseCommand.Execute(null);
+            PlayOrPauseOrOpen();
+            m_gridConsole.IsEnabled = true;
         }
 
         private void AdjustVolume4MouseWheel(object sender, MouseWheelEventArgs e)
@@ -217,11 +235,13 @@ namespace EZPlayer
         {
             if (e.ClickCount == 2)
             {
+                m_gridConsole.IsEnabled = true;
                 m_delaySingleClickTimer.Stop();
                 ToggleFullScreenMode();
             }
             else if (e.ClickCount == 1)
             {
+                m_gridConsole.IsEnabled = false;
                 m_delaySingleClickTimer.Start();
             }
         }
@@ -303,7 +323,7 @@ namespace EZPlayer
 
             if (ShortKeys.IsPauseShortKey(e))
             {
-                m_viewModel.PlayPauseCommand.Execute(null);
+                PlayOrPauseOrOpen();
             }
         }
 
@@ -340,6 +360,16 @@ namespace EZPlayer
         }
 
         private void OnBtnOpenClick(object sender, RoutedEventArgs e)
+        {
+            Open();
+        }
+
+        private void OnBtnPlayClick(object sender, RoutedEventArgs e)
+        {
+            PlayOrPauseOrOpen();
+        }
+
+        private void Open()
         {
             bool isPlaying = m_viewModel.IsPlaying;
             if (isPlaying)
