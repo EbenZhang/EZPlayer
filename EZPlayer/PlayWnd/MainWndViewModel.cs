@@ -20,10 +20,8 @@ namespace EZPlayer.ViewModel
     public class MainWndViewModel : ViewModelBase
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
-        private static readonly string LAST_PLAY_INFO_FILE_PATH = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "lastplay.xml");
-        private static readonly string HISTORY_INFO_FILE_PATH = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "history.xml");
-        
-        private HistoryModel m_historyModel = new HistoryModel(LAST_PLAY_INFO_FILE_PATH, HISTORY_INFO_FILE_PATH);
+
+        private HistoryModel m_historyModel = HistoryModel.Instance;
         private SleepBarricade m_sleepBarricade;
         private bool m_isPlaying = false;
         private MainWndModel m_model = new MainWndModel();
@@ -262,32 +260,7 @@ namespace EZPlayer.ViewModel
 
         private void Open()
         {
-            bool isPlaying = m_model.IsPlaying;
-            if (m_model.CurrentFilePath != null && isPlaying)
-            {
-                m_model.Pause();
-            }
-
-            var openFileDialog = new OpenFileDialog
-            {
-                Title = "Open media file for playback",
-                FileName = "Media File",
-                Filter = "All files |*.*"
-            };
-
-            // Process open file dialog box results
-            if (openFileDialog.ShowDialog() != true)
-            {
-                if (m_model.CurrentFilePath != null && isPlaying)
-                {
-                    m_model.Play();
-                }
-                return;
-            }
-
-            SelectedPath = openFileDialog.FileName;
-            var playList = PlayListUtil.GetPlayList(SelectedPath, DirectorySearcher.Instance);
-            PlayAListOfFiles(playList);
+            
         }
 
         private void Pause()
