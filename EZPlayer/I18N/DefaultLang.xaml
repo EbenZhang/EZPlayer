@@ -45,4 +45,16 @@
     <sys:String x:Key="Save">
         Save
     </sys:String>
+
+    <sys:String x:Key="ClearHistory">
+        Clear
+    </sys:String>
+
+    <sys:String x:Key="Browse">
+        Browse...
+    </sys:String>
+
+    <sys:String x:Key="HistoryView">
+        History
+    </sys:String>
 </ResourceDictionary>

@@ -125,6 +125,10 @@
     <Compile Include="History\HistoryItem.cs" />
     <Compile Include="DirectorySearcher.cs" />
     <Compile Include="History\HistoryModel.cs" />
+    <Compile Include="History\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="History\HistoryViewModel.cs" />
     <Compile Include="PlayWnd\MainWndModel.cs" />
     <Compile Include="PlayWnd\MainWndViewModel.cs" />
     <Compile Include="PlayList\PlayListUtil.cs" />
@@ -152,6 +156,10 @@
     <Content Include="VLC\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="History\HistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="I18N\DefaultLang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

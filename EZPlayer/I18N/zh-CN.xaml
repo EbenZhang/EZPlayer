@@ -45,4 +45,16 @@
     <sys:String x:Key="Save">
         保存
     </sys:String>
+
+    <sys:String x:Key="ClearHistory">
+        清除
+    </sys:String>
+
+    <sys:String x:Key="Browse">
+        浏览...
+    </sys:String>
+
+    <sys:String x:Key="HistoryView">
+        播放记录
+    </sys:String>
 </ResourceDictionary>
