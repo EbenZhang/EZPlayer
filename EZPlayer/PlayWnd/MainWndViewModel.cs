@@ -31,7 +31,7 @@ namespace EZPlayer.ViewModel
         public MainWndViewModel()
         {
             m_model.EvtTimeChanged += OnTimeChanged;
-            m_model.EvtPositionChanged += () => NotifyPropertyChange(() => Position);
+            m_model.EvtTimeChanged += () => NotifyPropertyChange(() => Position);
         }
 
         public void Init()
