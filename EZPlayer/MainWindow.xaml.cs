@@ -154,6 +154,10 @@ namespace EZPlayer
 
         private void PlayOrPause4SpaceKey(object sender, NotifyInputEventArgs e)
         {
+            if (this.OwnedWindows.Count != 0)
+            {
+                return;
+            }
             if (e.StagingItem.Input.RoutedEvent != Keyboard.KeyDownEvent)
                 return;
 
