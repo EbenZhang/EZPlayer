@@ -13,6 +13,7 @@ using EZPlayer.ViewModel;
 using Vlc.DotNet.Core;
 using Microsoft.Win32;
 using EZPlayer.History;
+using System.Diagnostics;
 
 namespace EZPlayer
 {
@@ -61,6 +62,10 @@ namespace EZPlayer
             if (args.Count() >= 2)
             {
                 var playList = m_viewModel.GenerateFileList(args.Skip(1).ToList());
+                if (playList.Count == 0)
+                {
+                    return;
+                }
                 /// it seems vlc requires some time to init.
                 new DelayTask(TimeSpan.FromMilliseconds(500),
                     () => { m_viewModel.PlayAListOfFiles(playList); }
@@ -174,7 +179,7 @@ namespace EZPlayer
             }
             else
             {
-                m_viewModel.PlayPauseCommand.Execute(null);
+                ExecuteCommand.Execute(m_viewModel.PlayPauseCommand);
             }
         }
 
@@ -286,7 +291,10 @@ namespace EZPlayer
             {
                 var fileList = (e.Data as DataObject).GetFileDropList();
                 var playList = m_viewModel.GenerateFileList(fileList.Cast<string>().ToList());
-                m_viewModel.PlayAListOfFiles(playList);
+                if (playList.Count != 0)
+                {
+                    m_viewModel.PlayAListOfFiles(playList);
+                }
             }
         }
 
@@ -300,11 +308,11 @@ namespace EZPlayer
             RestartInputMonitorTimer();
             if (ShortKeys.IsRewindShortKey(e))
             {
-                m_viewModel.RewindCommand.Execute(null);
+                ExecuteCommand.Execute(m_viewModel.RewindCommand);
             }
             if (ShortKeys.IsForwardShortKey(e))
             {
-                m_viewModel.ForwardCommand.Execute(null);
+                ExecuteCommand.Execute(m_viewModel.ForwardCommand);
             }
 
             if (ShortKeys.IsDecreaseVolumeShortKey(e))
@@ -330,33 +338,19 @@ namespace EZPlayer
         private void OnBtnSettingsClick(object sender, RoutedEventArgs e)
         {
             var v = new FileAssociationView();
-            var isPlaying = m_viewModel.IsPlaying;
-            if (isPlaying)
-            {
-                m_viewModel.PlayPauseCommand.Execute(null);
-            }
             v.Owner = this;
+            ExecuteCommand.Execute(m_viewModel.PauseCommand);
             v.ShowDialog();
-            if (isPlaying)
-            {
-                m_viewModel.PlayPauseCommand.Execute(null);
-            }
         }
 
         private void OnBtnRewindClick(object sender, RoutedEventArgs e)
         {
-            if (m_viewModel.RewindCommand.CanExecute(null))
-            {
-                m_viewModel.RewindCommand.Execute(null);
-            }
+            ExecuteCommand.Execute(m_viewModel.RewindCommand);
         }
 
         private void OnBtnForwardClick(object sender, RoutedEventArgs e)
         {
-            if (m_viewModel.ForwardCommand.CanExecute(null))
-            {
-                m_viewModel.ForwardCommand.Execute(null);
-            }
+            ExecuteCommand.Execute(m_viewModel.ForwardCommand);
         }
 
         private void OnBtnOpenClick(object sender, RoutedEventArgs e)
@@ -371,26 +365,20 @@ namespace EZPlayer
 
         private void Open()
         {
-            bool isPlaying = m_viewModel.IsPlaying;
-            if (isPlaying)
-            {
-                m_viewModel.PlayPauseCommand.Execute(null);
-            }
-
             var history = new HistoryView();
             history.Owner = this;
+            ExecuteCommand.Execute(m_viewModel.PauseCommand);
             history.ShowDialog();
 
             if (history.FileList.Count == 0)
             {
-                if (isPlaying)
-                {
-                    m_viewModel.PlayPauseCommand.Execute(null);
-                }
                 return;
             }
             var playList = m_viewModel.GenerateFileList(history.FileList);
-            m_viewModel.PlayAListOfFiles(playList);
+            if (playList.Count != 0)
+            {
+                m_viewModel.PlayAListOfFiles(playList);
+            }
         }
     }
 }

@@ -114,6 +114,7 @@
     </ApplicationDefinition>
     <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
     <Compile Include="BindingUtils\RelayCommand.cs" />
+    <Compile Include="ExecuteCommand.cs" />
     <Compile Include="FileAssociation\Model\AssociationUtil.cs" />
     <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />

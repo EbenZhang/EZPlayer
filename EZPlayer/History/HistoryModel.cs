@@ -87,7 +87,7 @@ namespace EZPlayer.History
                         .Deserialize(s) as HistoryItemContainer;
 
                     m_historyItems = m_historyItems
-                        .Where(item => (DateTime.Now - item.PlayedDate) < TimeSpan.FromDays(90))
+                        .Where(item => File.Exists(item.FilePath) && (DateTime.Now - item.PlayedDate) < TimeSpan.FromDays(90))
                         .OrderByDescending(item => item.PlayedDate)
                         .ToList();
                 }

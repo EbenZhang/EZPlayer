@@ -98,6 +98,15 @@ namespace EZPlayer.ViewModel
             }
         }
 
+        public ICommand PauseCommand
+        {
+            get
+            {
+                return new RelayCommand(param => Pause(),
+                    param => IsPlaying);
+            }
+        }
+
         #endregion
 
         #region Properties
@@ -210,12 +219,22 @@ namespace EZPlayer.ViewModel
         {
             if (fileList.Count == 1)
             {
+                var file = fileList[0];
+                if (!File.Exists(file))
+                {
+                    return new List<string>();
+                }
                 SelectedPath = fileList[0];
                 return PlayListUtil.GetPlayList(SelectedPath, DirectorySearcher.Instance);
             }
             else if (fileList.Count > 1)
             {
-                var sortedFileList = fileList.Cast<string>().OrderBy(s => s).ToList();
+                var sortedFileList = fileList
+                    .Where(f => File.Exists(f)).OrderBy(s => s).ToList();
+                if (sortedFileList.Count == 0)
+                {
+                    return sortedFileList;
+                }
                 SelectedPath = sortedFileList[0];
                 return sortedFileList;
             }
@@ -227,6 +246,10 @@ namespace EZPlayer.ViewModel
 
         public void PlayAListOfFiles(List<string> playList)
         {
+            if (playList.Count == 0)
+            {
+                return;
+            }
             SubtitleUtil.PrepareSubtitle(SelectedPath);
             PrepareVLCMediaList(playList);
             StartPlay();

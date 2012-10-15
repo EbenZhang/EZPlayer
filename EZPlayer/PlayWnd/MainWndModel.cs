@@ -4,6 +4,7 @@ using EZPlayer.Common;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
+using System.Diagnostics;
 
 namespace EZPlayer.Model
 {
