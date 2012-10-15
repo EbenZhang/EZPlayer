@@ -17,6 +17,7 @@
             Name="m_listBoxhistoryItems"
             ItemsSource="{Binding HistoryItems}"
             HorizontalContentAlignment="Stretch"
+            MouseDoubleClick="OnBtnPlayClick"
             >
             <ListBox.CommandBindings>
                 <CommandBinding Command="ApplicationCommands.Delete"
