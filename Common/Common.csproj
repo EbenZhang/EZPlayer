@@ -46,6 +46,7 @@
     <Compile Include="LevenshteinDistance.cs" />
     <Compile Include="MathUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinPowerManage.cs" />
     <Compile Include="RegistryUtil\HChangeNotifyEventID.cs" />
     <Compile Include="RegistryUtil\HChangeNotifyFlags.cs" />
     <Compile Include="RegistryUtil\SHChangeNotifier.cs" />
