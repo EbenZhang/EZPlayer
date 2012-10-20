@@ -97,6 +97,7 @@ namespace EZPlayer
         {
             this.Closing += (sender, arg) => SaveLastPlayInfo();
             this.Closing += (sender, arg) => VlcContext.CloseAll();
+            SystemEvents.SessionEnding += (sender, arg) => SaveLastPlayInfo();
         }
 
         private void SetupMouseLeftClickActions()
