@@ -166,6 +166,11 @@ namespace EZPlayer.ViewModel
             }
         }
 
+        public int MaxVolume
+        {
+            get { return m_model.MaxVolume; }
+        }
+
         public string Title
         {
             get
