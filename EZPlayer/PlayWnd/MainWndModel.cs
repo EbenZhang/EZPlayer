@@ -53,8 +53,13 @@ namespace EZPlayer.Model
             }
             set
             {
-                m_vlcControl.AudioProperties.Volume = (int)MathUtil.Clamp(value, 0d, 100d);
+                m_vlcControl.AudioProperties.Volume = (int)MathUtil.Clamp(value, 0d, MaxVolume);
             }
+        }
+
+        public int MaxVolume
+        {
+            get { return 200; }
         }
 
         public string CurrentFilePath

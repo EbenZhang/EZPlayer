@@ -160,7 +160,7 @@
                             </Button>
                             <TextBlock Foreground="{StaticResource ControlBrush}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
                             <Slider x:Name="m_sliderVolume" 
-                                    Maximum="100"
+                                    Maximum="{Binding MaxVolume}"
                                     SmallChange="1"
                                     LargeChange="5"
                                     ToolTip="{StaticResource ToolTip_Volume}"
