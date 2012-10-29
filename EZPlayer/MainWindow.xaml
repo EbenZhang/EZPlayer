@@ -44,16 +44,6 @@
     <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid>
             <Grid Name ="m_gridPlayWnd" Grid.Row="0">
-                <Button 
-                    Visibility="{Binding IsPlaying, Converter={StaticResource FalseToVisible}}"
-                    Height="100" Width="100" x:Name="m_btnPlayShortCut"
-                    Click="OnBtnPlayClick"
-                    Style="{StaticResource TransparentButton}"
-                    ToolTip="{StaticResource ToolTip_Play}"
-                    ToolTipService.ShowOnDisabled="True"
-                    >
-                    <Image Source="Image/play.png" />
-                </Button>
             </Grid>
             <DockPanel x:Name="m_gridConsole"
                        Margin="0,400,0,11.2"
