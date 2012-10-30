@@ -370,16 +370,25 @@ namespace EZPlayer
 
         private void Open()
         {
-            var history = new HistoryView();
-            history.Owner = this;
+            var historyView = new HistoryView();
             ExecuteCommand.Execute(m_viewModel.PauseCommand);
-            history.ShowDialog();
+            historyView.Owner = this;
 
-            if (history.FileList.Count == 0)
+            HistoryModel historyModel = HistoryModel.Instance;
+            if (historyModel.HistoryItems.Count == 0)
+            {
+                historyView.BrowseFiles();
+            }
+            else
+            {
+                historyView.ShowDialog();
+            }
+
+            if (historyView.FileList.Count == 0)
             {
                 return;
             }
-            var playList = m_viewModel.GenerateFileList(history.FileList);
+            var playList = m_viewModel.GenerateFileList(historyView.FileList);
             if (playList.Count != 0)
             {
                 m_viewModel.PlayAListOfFiles(playList);
