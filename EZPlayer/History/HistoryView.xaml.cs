@@ -25,6 +25,14 @@ namespace EZPlayer.History
 
         private void OnBtnBrowse(object sender, RoutedEventArgs e)
         {
+            if (BrowseFiles())
+            {
+                Close();
+            }
+        }
+
+        public bool BrowseFiles()
+        {
             var openFileDialog = new OpenFileDialog
             {
                 Title = "Open media file for playback",
@@ -38,8 +46,9 @@ namespace EZPlayer.History
             if (openFileDialog.ShowDialog() == true)
             {
                 FileList.AddRange(openFileDialog.FileNames);
-                Close();
+                return true;
             }
+            return false;
         }
 
         private void OnBtnPlayClick(object sender, RoutedEventArgs e)
