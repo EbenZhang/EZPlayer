@@ -13,7 +13,6 @@ using EZPlayer.Model;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
-using Microsoft.Win32;
 
 namespace EZPlayer.ViewModel
 {
@@ -256,6 +255,7 @@ namespace EZPlayer.ViewModel
                 return;
             }
             SubtitleUtil.PrepareSubtitle(SelectedPath);
+            SaveLastPlayInfo();
             PrepareVLCMediaList(playList);
             StartPlay();
         }
