@@ -29,6 +29,7 @@ namespace EZPlayer.ViewModel
         {
             m_model.EvtTimeChanged += OnTimeChanged;
             m_model.EvtTimeChanged += () => NotifyPropertyChange(() => Position);
+            m_model.EvtMediaParsed += () => UpdateTitle();
         }
 
         public void Init()
