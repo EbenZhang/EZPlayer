@@ -14,6 +14,7 @@ namespace EZPlayer.Model
 
         public delegate void NotifyChange();
         public event NotifyChange EvtTimeChanged;
+        public event NotifyChange EvtMediaParsed;
         
         public MainWndModel()
         {
@@ -147,15 +148,9 @@ namespace EZPlayer.Model
         /// <param name="e">VLC event arguments. </param>
         private void OnMediaParsed(MediaBase sender, VlcEventArgs<int> e)
         {
-            TimeIndicator = string.Format(
-                "{0:00}:{1:00}:{2:00}",
-                m_vlcControl.Media.Duration.Hours,
-                m_vlcControl.Media.Duration.Minutes,
-                m_vlcControl.Media.Duration.Seconds);
-
-            if (EvtTimeChanged != null)
+            if (EvtMediaParsed != null)
             {
-                EvtTimeChanged();
+                EvtMediaParsed();
             }
         }
 
@@ -181,7 +176,9 @@ namespace EZPlayer.Model
 
         public void AddMedia(string mediaPath)
         {
-            m_vlcControl.Medias.Add(new PathMedia(mediaPath));
+            var media = new PathMedia(mediaPath);
+            media.ParsedChanged += this.OnMediaParsed;
+            m_vlcControl.Medias.Add(media);
         }
     }
 }
