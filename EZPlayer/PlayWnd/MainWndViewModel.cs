@@ -20,7 +20,6 @@ namespace EZPlayer.ViewModel
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
 
-        private HistoryModel m_historyModel = HistoryModel.Instance;
         private SleepBarricade m_sleepBarricade;
         private bool m_isPlaying = false;
         private MainWndModel m_model = new MainWndModel();
@@ -215,8 +214,8 @@ namespace EZPlayer.ViewModel
                     Volume = m_model.Volume,
                     PlayedDate = DateTime.Now
                 };
-                m_historyModel.LastPlayedFile = item;
-                m_historyModel.Save();
+                HistoryModel.Instance.LastPlayedFile = item;
+                HistoryModel.Instance.Save();
             }
         }
 
@@ -274,9 +273,9 @@ namespace EZPlayer.ViewModel
 
         public bool TryLoadLastPlayedFile()
         {
-            if (m_historyModel.LastPlayedFile != null)
+            if (HistoryModel.Instance.LastPlayedFile != null)
             {
-                SelectedPath = m_historyModel.LastPlayedFile.FilePath;
+                SelectedPath = HistoryModel.Instance.LastPlayedFile.FilePath;
                 PlayAListOfFiles(PlayListUtil.GetPlayList(SelectedPath, DirectorySearcher.Instance));
                 return true;
             }
@@ -327,7 +326,7 @@ namespace EZPlayer.ViewModel
 
         private void RestoreLastPlayStatus()
         {
-            var history = m_historyModel.GetHistoryInfo(SelectedPath);
+            var history = HistoryModel.Instance.GetHistoryInfo(SelectedPath);
             if (history != null)
             {
                 Position = history.Position;

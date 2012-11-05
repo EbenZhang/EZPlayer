@@ -21,8 +21,6 @@ namespace EZPlayer
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var logger = log4net.LogManager.GetLogger(typeof(App));
-            logger.Info("Application started...\n");
             CheckForShortcut();
             LoadLanguage();
             InitVlcContext();
@@ -66,13 +64,6 @@ namespace EZPlayer
 
             // Initialize the VlcContext
             VlcContext.Initialize();
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            var logger = log4net.LogManager.GetLogger(typeof(App));
-            logger.Info("Application exited...\n");
-            base.OnExit(e);
         }
 
         private void LoadLanguage()
