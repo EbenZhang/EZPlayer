@@ -13,6 +13,7 @@ using EZPlayer.Model;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
+using System.Threading.Tasks;
 
 namespace EZPlayer.ViewModel
 {
@@ -265,10 +266,11 @@ namespace EZPlayer.ViewModel
             m_sleepBarricade = new SleepBarricade(() => IsPlaying);
         }
 
-        private void SetupFileAssoc()
+        private async Task<bool> SetupFileAssoc()
         {
-            FileAssocModel.Instance.Load();
-            FileAssocModel.Instance.Save();
+            await Task.Run(() => FileAssocModel.Instance.Load());
+            await Task.Run(() => FileAssocModel.Instance.Save());
+            return true;
         }
 
         public bool TryLoadLastPlayedFile()
