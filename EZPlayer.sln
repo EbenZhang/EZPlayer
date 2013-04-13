@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZPlayer", "EZPlayer\EZPlayer.csproj", "{EBEEAA78-CDE5-403B-A157-559656B1C063}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{70A270CC-D782-4191-8342-2D56849705D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EZPlayerTests", "EZPlayerTests\EZPlayerTests.csproj", "{2CC6ED9C-B116-4277-BF47-1AE81DEBC62D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSubtitles", "OpenSubtitles\OpenSubtitles.csproj", "{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,16 @@ Global
 		{2CC6ED9C-B116-4277-BF47-1AE81DEBC62D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2CC6ED9C-B116-4277-BF47-1AE81DEBC62D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2CC6ED9C-B116-4277-BF47-1AE81DEBC62D}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A5752B0-43CA-4F08-8364-E4F32D5AE9BF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -180,5 +180,10 @@ namespace EZPlayer.Model
             media.ParsedChanged += this.OnMediaParsed;
             m_vlcControl.Medias.Add(media);
         }
+
+        public void SetSubtitleFile(string subTitleFilePath)
+        {
+            m_vlcControl.VideoProperties.SetSubtitleFile(subTitleFilePath);
+        }
     }
 }

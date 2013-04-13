@@ -20,7 +20,7 @@
     <PublisherName>EZPlayer</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>58</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -81,6 +81,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\xmlrpc\bin\$(Configuration)\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\Log4net\log4net.dll</HintPath>
     </Reference>
@@ -120,6 +124,9 @@
     </ApplicationDefinition>
     <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
     <Compile Include="BindingUtils\RelayCommand.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Subtitle\ISubtitleSearcher.cs" />
+    <Compile Include="Subtitle\OpenSubtitleSearcher.cs" />
     <Compile Include="WPFCommon\ExecuteCommand.cs" />
     <Compile Include="FileAssociation\Model\AssociationUtil.cs" />
     <Compile Include="BindingUtils\CompositeConverter.cs" />
@@ -231,7 +238,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
@@ -275,6 +282,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{70A270CC-D782-4191-8342-2D56849705D2}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenSubtitles\OpenSubtitles.csproj">
+      <Project>{9a5752b0-43ca-4f08-8364-e4f32d5ae9bf}</Project>
+      <Name>OpenSubtitles</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

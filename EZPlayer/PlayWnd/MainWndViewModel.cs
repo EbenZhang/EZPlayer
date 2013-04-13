@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using System.Xml.Serialization;
-using EZPlayer.Common;
+﻿using EZPlayer.Common;
 using EZPlayer.FileAssociation.Model;
 using EZPlayer.History;
 using EZPlayer.Model;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace EZPlayer.ViewModel
 {
@@ -259,6 +259,20 @@ namespace EZPlayer.ViewModel
             SaveLastPlayInfo();
             PrepareVLCMediaList(playList);
             StartPlay();
+            SearchOnlineSubtitle();
+        }
+
+        private async void SearchOnlineSubtitle()
+        {
+            var searcher = new OpenSubtitleSearcher();
+
+            string subtitleFileName = await Task.Run(() => searcher.DownloadSubtitles(CurrentFilePath));
+
+            if(!string.IsNullOrEmpty(subtitleFileName))
+            {
+                SubtitleUtil.PrepareSubtitle(SelectedPath);
+                m_model.SetSubtitleFile(subtitleFileName);
+            }
         }
 
         private void SetupSleepBarricade()
@@ -266,11 +280,10 @@ namespace EZPlayer.ViewModel
             m_sleepBarricade = new SleepBarricade(() => IsPlaying);
         }
 
-        private async Task<bool> SetupFileAssoc()
+        private async void SetupFileAssoc()
         {
             await Task.Run(() => FileAssocModel.Instance.Load());
             await Task.Run(() => FileAssocModel.Instance.Save());
-            return true;
         }
 
         public bool TryLoadLastPlayedFile()
