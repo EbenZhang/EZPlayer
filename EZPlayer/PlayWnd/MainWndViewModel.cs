@@ -178,7 +178,7 @@ namespace EZPlayer.ViewModel
                 var filePath = m_model.CurrentFilePath;
                 if (filePath == null)
                 {
-                    return Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.ModuleName);
+                    return "EZPlayer";
                 }
                 else
                 {
