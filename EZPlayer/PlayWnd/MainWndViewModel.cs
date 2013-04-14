@@ -360,8 +360,7 @@ namespace EZPlayer.ViewModel
         {
             if (m_model.IsPlaying)
             {
-                m_model.Pause();
-                IsPlaying = false;
+                Pause();
             }
             else
             {

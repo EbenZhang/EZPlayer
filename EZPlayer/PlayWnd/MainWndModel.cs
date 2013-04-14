@@ -1,10 +1,9 @@
-﻿using System;
+﻿using EZPlayer.Common;
+using System;
 using System.Windows;
-using EZPlayer.Common;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
 using Vlc.DotNet.Wpf;
-using System.Diagnostics;
 
 namespace EZPlayer.Model
 {
@@ -176,6 +175,10 @@ namespace EZPlayer.Model
 
         public void AddMedia(string mediaPath)
         {
+            if (m_vlcControl.Media != null)
+            {
+                m_vlcControl.Media.ParsedChanged -= this.OnMediaParsed;
+            }
             var media = new PathMedia(mediaPath);
             media.ParsedChanged += this.OnMediaParsed;
             m_vlcControl.Medias.Add(media);
