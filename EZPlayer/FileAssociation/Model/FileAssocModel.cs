@@ -33,8 +33,8 @@ namespace EZPlayer.FileAssociation.Model
                 if (!existing.IsAssociated)
                 {
                     existing.IsAssociated = true;
+                    Save();
                 }
-                Save();
             }
             else
             {
