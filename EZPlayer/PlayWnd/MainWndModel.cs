@@ -13,6 +13,11 @@ namespace EZPlayer.Model
 
         public delegate void NotifyChange();
         public event NotifyChange EvtTimeChanged;
+
+        /// <summary>
+        /// Will be triggered when the first time a media is loaded.
+        /// Will be triggered when vlc switches to next media automatically.
+        /// </summary>
         public event NotifyChange EvtMediaParsed;
         
         public MainWndModel()

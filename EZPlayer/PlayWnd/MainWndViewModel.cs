@@ -28,8 +28,13 @@ namespace EZPlayer.ViewModel
         public MainWndViewModel()
         {
             m_model.EvtTimeChanged += OnTimeChanged;
-            m_model.EvtTimeChanged += () => NotifyPropertyChange(() => Position);
-            m_model.EvtMediaParsed += () => UpdateTitle();
+            m_model.EvtMediaParsed += OnMediaChanged;
+        }
+
+        void OnMediaChanged()
+        {
+            UpdateTitle();
+            SearchOnlineSubtitle();
         }
 
         public void Init()
@@ -259,7 +264,6 @@ namespace EZPlayer.ViewModel
             SaveLastPlayInfo();
             PrepareVLCMediaList(playList);
             StartPlay();
-            SearchOnlineSubtitle();
         }
 
         private async void SearchOnlineSubtitle()
@@ -309,13 +313,13 @@ namespace EZPlayer.ViewModel
         private void Previous()
         {
             m_model.Previous();
-            UpdateTitle();
+            OnMediaChanged();
         }
 
         private void Next()
         {
             m_model.Next();
-            UpdateTitle();
+            OnMediaChanged();
         }
         
         private void Forward()
@@ -335,7 +339,7 @@ namespace EZPlayer.ViewModel
             m_model.Play();
             IsPlaying = true;
             RestoreLastPlayStatus();
-            UpdateTitle();
+            OnMediaChanged();
             UpdateFileAssoc();
         }
 

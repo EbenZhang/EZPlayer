@@ -57,6 +57,11 @@ namespace EZPlayer.Subtitle
 
                 foreach (var item in subtitleDataInfo.Values)
                 {
+                    var fileName = GetSubtitleFileName(movieFilePath, item);
+                    if(File.Exists(fileName))
+                    {
+                        continue;
+                    }
                     var downloadResult = m_openSubtitles.DownloadSubtitles(m_token, new string[] { item.IDSubtitleFile });
                     if (downloadResult.status == "200 OK")
                     {
@@ -69,8 +74,6 @@ namespace EZPlayer.Subtitle
                         {
                             throw new Exception("Received gzBase64Data is empty.");
                         }
-
-                        var fileName = GetSubtitleFileName(movieFilePath, item);
 
                         //from: http://trac.opensubtitles.org/projects/opensubtitles/wiki/XmlRpcIntro
                         //it's gzipped without header.
