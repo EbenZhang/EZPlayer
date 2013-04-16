@@ -409,6 +409,8 @@ namespace EZPlayer.ViewModel
         {
             NotifyPropertyChange(() => TimeIndicator);
 
+            NotifyPropertyChange(() => Position);
+
             SyncPlayStatusWithModel();
         }
 
