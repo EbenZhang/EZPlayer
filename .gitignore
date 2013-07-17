@@ -63,3 +63,5 @@ packages/
 
 #Test files
 *.testsettings
+
+plugins.dat
