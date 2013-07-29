@@ -4,74 +4,125 @@
         <name>Vlc.DotNet.Core</name>
     </assembly>
     <members>
-        <member name="T:Vlc.DotNet.Core.VlcTrackDescription">
+        <member name="T:Vlc.DotNet.Core.IVlcControl">
             <summary>
-            VlcTrackDescription class
+            Interface for VlcControl
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.VlcContext">
+        <member name="M:Vlc.DotNet.Core.IVlcControl.Stop">
             <summary>
-            The vlc context
+            Stop media player
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.VlcContext.Initialize">
+        <member name="T:Vlc.DotNet.Core.Medias.EmptyMedia">
             <summary>
-            Initialize library
+            Empty media class
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.VlcContext.CloseAll">
+        <member name="T:Vlc.DotNet.Core.Medias.MediaBase">
             <summary>
-            Close of LibVlc and VlcControls instance
+            Media abstract base class
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.ErrorHandling">
+        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.#ctor">
             <summary>
-            Error handling of vlc 
+            Initializes a new instance of the <see cref="T:Vlc.DotNet.Core.Medias.MediaBase"/> class. 
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.LibVlcDllsPath">
+        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.Initialize">
             <summary>
-            Get / Set the libvlc.dll and libvlccore.dll path 
+            Initialize media
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.LibVlcPluginsPath">
+        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.AddOption(System.String)">
             <summary>
-            Get / Set the plugins directory for vlc
+            Add option for media
+            </summary>
+            <param name="option">The options (as a string)</param>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.AddOption(System.String,Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Option)">
+            <summary>
+            Add option for media
+            </summary>
+            <param name="option">The options (as a string)</param>
+            <param name="flag">The flags for this option</param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Duration">
+            <summary>
+            Retreive the duration of the media
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.StartupOptions">
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.MRL">
             <summary>
-            Options of the starting of Vlc
+            Gets Media Resource Locator
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.IsInitialized">
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.State">
             <summary>
-            Check if VlcContext is initialized.
+            Gets the current state of the media
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.Version">
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Statistics">
             <summary>
-            Get the vlc version
+            Gets the current statistics about the media
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.Compiler">
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.TrackInfos">
             <summary>
-            Get the vlc compiler
+            Gets media descriptor's elementary streams description
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.VlcContext.ChangeSet">
+        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Metadatas">
             <summary>
-            Get the vlc change set
+            Gets the meta of the media
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.VlcAudioOutputDevices">
+        <member name="M:Vlc.DotNet.Core.Medias.EmptyMedia.#ctor(System.String)">
             <summary>
-            VlcOutputDevices class
+            Constructor of EmptyMedia
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Medias.EmptyMedia.Name">
+            <summary>
+            Retreive the specified name of the media
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.VlcAudioOutputDevices.#ctor">
+        <member name="T:Vlc.DotNet.Core.Medias.LocationMedia">
             <summary>
-            VlcOutputDevices constructor
+            LocationMedia class
+            </summary>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Medias.LocationMedia.#ctor(System.String)">
+            <summary>
+            LocationMedia constructor
+            </summary>
+            <param name="location"></param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Medias.LocationMedia.Location">
+            <summary>
+            Retreive the specified location of the media
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Medias.LocationMedia.SubItems">
+            <summary>
+            Retrive list of sub media items.
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Medias.PathMedia">
+            <summary>
+            Path media
+            </summary>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Medias.PathMedia.#ctor(System.String)">
+            <summary>
+            Constructor of path media
+            </summary>
+            <param name="path">The path of the media</param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Medias.PathMedia.Path">
+            <summary>
+            Retreive the specified path of the media
             </summary>
         </member>
         <member name="T:Vlc.DotNet.Core.Medias.VlcMediaMetadatas">
@@ -176,52 +227,6 @@
             Gets or sets the URL metadata
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.VlcStartupOptions">
-            <summary>
-            VlcStartupOptions class
-            </summary>
-        </member>
-        <member name="F:Vlc.DotNet.Core.VlcStartupOptions.Options">
-            <summary>
-            List of options
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.VlcStartupOptions.#ctor">
-            <summary>
-            Constructor of VlcStartupOptions
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.VlcStartupOptions.AddOption(System.String)">
-            <summary>
-            Add startup vlc command line option
-            </summary>
-            <param name="option">Option value</param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.IgnoreConfig">
-            <summary>
-            Get / Set ignore config
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.ScreenSaverEnabled">
-            <summary>
-            Get / Set enable screensaver
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.UserAgent">
-            <summary>
-            Get / Set the startup user agent
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.LogOptions">
-            <summary>
-            Get / Set the startup log options
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.ShowLoggerConsole">
-            <summary>
-            Get / Set the show of log console
-            </summary>
-        </member>
         <member name="T:Vlc.DotNet.Core.Medias.VlcMediaTrackInfos">
             <summary>
              VlcMediaTrackInfos class
@@ -244,84 +249,136 @@
             </summary>
             <returns>Media track informations</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Medias.LocationMedia">
+        <member name="T:Vlc.DotNet.Core.VlcAudioOutputDevice">
             <summary>
-            LocationMedia class
+            VlcAudioOutput class
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.Medias.MediaBase">
+        <member name="M:Vlc.DotNet.Core.VlcAudioOutputDevice.#ctor(Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaPlayer.AudioOutput)">
             <summary>
-            Media abstract base class
+            VlcAudioOutput constrctor
+            </summary>
+            <param name="audioOutput">The libvlc audio output structure</param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcAudioOutputDevice.Name">
+            <summary>
+            Retreive the audio output name
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.#ctor">
+        <member name="P:Vlc.DotNet.Core.VlcAudioOutputDevice.Description">
             <summary>
-            Initializes a new instance of the <see cref="T:Vlc.DotNet.Core.Medias.MediaBase"/> class. 
+            Retreive the audio output description
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.Initialize">
+        <member name="T:Vlc.DotNet.Core.VlcDeinterlaceModes">
             <summary>
-            Initialize media
+             VlcDeinterlaceModes class
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.AddOption(System.String)">
+        <member name="T:Vlc.DotNet.Core.VlcErrorHandling">
             <summary>
-            Add option for media
-            </summary>
-            <param name="option">The options (as a string)</param>
-        </member>
-        <member name="M:Vlc.DotNet.Core.Medias.MediaBase.AddOption(System.String,Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.Option)">
-            <summary>
-            Add option for media
-            </summary>
-            <param name="option">The options (as a string)</param>
-            <param name="flag">The flags for this option</param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Duration">
-            <summary>
-            Retreive the duration of the media
+            VlcErrorHandling class
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.MRL">
+        <member name="T:Vlc.DotNet.Core.VlcLogMessage">
             <summary>
-            Gets Media Resource Locator
+            VlcLogMessage class
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.State">
+        <member name="T:Vlc.DotNet.Core.VlcLogVerbosities">
             <summary>
-            Gets the current state of the media
+            Verbosities enumeration
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Statistics">
+        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.None">
             <summary>
-            Gets the current statistics about the media
+            None verbosity
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.TrackInfos">
+        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Standard">
             <summary>
-            Gets media descriptor's elementary streams description
+            Standard verbosity
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.MediaBase.Metadatas">
+        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Warnings">
             <summary>
-            Gets the meta of the media
+            Warnings verbosity
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Medias.LocationMedia.#ctor(System.String)">
+        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Debug">
             <summary>
-            LocationMedia constructor
-            </summary>
-            <param name="location"></param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Medias.LocationMedia.Location">
-            <summary>
-            Retreive the specified location of the media
+            Debug verbosity
             </summary>
         </member>
-        <member name="P:Vlc.DotNet.Core.Medias.LocationMedia.SubItems">
+        <member name="T:Vlc.DotNet.Core.VlcContext">
             <summary>
-            Retrive list of sub media items.
+            The vlc context
             </summary>
+        </member>
+        <member name="M:Vlc.DotNet.Core.VlcContext.Initialize">
+            <summary>
+            Initialize library
+            </summary>
+        </member>
+        <member name="M:Vlc.DotNet.Core.VlcContext.CloseAll">
+            <summary>
+            Close of LibVlc and VlcControls instance
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.ErrorHandling">
+            <summary>
+            Error handling of vlc 
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.LibVlcDllsPath">
+            <summary>
+            Get / Set the libvlc.dll and libvlccore.dll path 
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.LibVlcPluginsPath">
+            <summary>
+            Get / Set the plugins directory for vlc
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.StartupOptions">
+            <summary>
+            Options of the starting of Vlc
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.IsInitialized">
+            <summary>
+            Check if VlcContext is initialized.
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.Version">
+            <summary>
+            Get the vlc version
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.Compiler">
+            <summary>
+            Get the vlc compiler
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcContext.ChangeSet">
+            <summary>
+            Get the vlc change set
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.VlcEventArgs`1">
+            <summary>
+            Vlc event args
+            </summary>
+            <typeparam name="T">Type of return data</typeparam>
+        </member>
+        <member name="T:Vlc.DotNet.Core.VlcEventHandler`2">
+            <summary>
+            EventHandler for Vlc events
+            </summary>
+            <typeparam name="TSender">Type of the sender</typeparam>
+            <typeparam name="TArg">Type of the args</typeparam>
+            <param name="sender">The sender</param>
+            <param name="e">The args</param>
         </member>
         <member name="T:Vlc.DotNet.Core.CommonStrings">
             <summary>
@@ -348,51 +405,6 @@
             "C:\Program Files\VideoLAN\VLC\plugins\"
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.VlcEventHandler`2">
-            <summary>
-            EventHandler for Vlc events
-            </summary>
-            <typeparam name="TSender">Type of the sender</typeparam>
-            <typeparam name="TArg">Type of the args</typeparam>
-            <param name="sender">The sender</param>
-            <param name="e">The args</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.VlcDeinterlaceModes">
-            <summary>
-             VlcDeinterlaceModes class
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Medias.PathMedia">
-            <summary>
-            Path media
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.Medias.PathMedia.#ctor(System.String)">
-            <summary>
-            Constructor of path media
-            </summary>
-            <param name="path">The path of the media</param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Medias.PathMedia.Path">
-            <summary>
-            Retreive the specified path of the media
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.VlcLogMessage">
-            <summary>
-            VlcLogMessage class
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.IVlcControl">
-            <summary>
-            Interface for VlcControl
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.IVlcControl.Stop">
-            <summary>
-            Stop media player
-            </summary>
-        </member>
         <member name="T:Vlc.DotNet.Core.VlcLogOptions">
             <summary>
             VlcLogOptions class
@@ -416,32 +428,6 @@
         <member name="P:Vlc.DotNet.Core.VlcLogOptions.ShowLoggerConsole">
             <summary>
             Get / Set enable the show of console
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.VlcAudioOutputDevice">
-            <summary>
-            VlcAudioOutput class
-            </summary>
-        </member>
-        <member name="M:Vlc.DotNet.Core.VlcAudioOutputDevice.#ctor(Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaPlayer.AudioOutput)">
-            <summary>
-            VlcAudioOutput constrctor
-            </summary>
-            <param name="audioOutput">The libvlc audio output structure</param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcAudioOutputDevice.Name">
-            <summary>
-            Retreive the audio output name
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.VlcAudioOutputDevice.Description">
-            <summary>
-            Retreive the audio output description
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.VlcErrorHandling">
-            <summary>
-            VlcErrorHandling class
             </summary>
         </member>
         <member name="T:Vlc.DotNet.Core.VlcLogProperties">
@@ -496,51 +482,65 @@
             Count log messages
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.Medias.EmptyMedia">
+        <member name="T:Vlc.DotNet.Core.VlcAudioOutputDevices">
             <summary>
-            Empty media class
+            VlcOutputDevices class
             </summary>
         </member>
-        <member name="M:Vlc.DotNet.Core.Medias.EmptyMedia.#ctor(System.String)">
+        <member name="M:Vlc.DotNet.Core.VlcAudioOutputDevices.#ctor">
             <summary>
-            Constructor of EmptyMedia
-            </summary>
-            <param name="name"></param>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Medias.EmptyMedia.Name">
-            <summary>
-            Retreive the specified name of the media
+            VlcOutputDevices constructor
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.VlcEventArgs`1">
+        <member name="T:Vlc.DotNet.Core.VlcStartupOptions">
             <summary>
-            Vlc event args
-            </summary>
-            <typeparam name="T">Type of return data</typeparam>
-        </member>
-        <member name="T:Vlc.DotNet.Core.VlcLogVerbosities">
-            <summary>
-            Verbosities enumeration
+            VlcStartupOptions class
             </summary>
         </member>
-        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.None">
+        <member name="F:Vlc.DotNet.Core.VlcStartupOptions.Options">
             <summary>
-            None verbosity
+            List of options
             </summary>
         </member>
-        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Standard">
+        <member name="M:Vlc.DotNet.Core.VlcStartupOptions.#ctor">
             <summary>
-            Standard verbosity
+            Constructor of VlcStartupOptions
             </summary>
         </member>
-        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Warnings">
+        <member name="M:Vlc.DotNet.Core.VlcStartupOptions.AddOption(System.String)">
             <summary>
-            Warnings verbosity
+            Add startup vlc command line option
+            </summary>
+            <param name="option">Option value</param>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.IgnoreConfig">
+            <summary>
+            Get / Set ignore config
             </summary>
         </member>
-        <member name="F:Vlc.DotNet.Core.VlcLogVerbosities.Debug">
+        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.ScreenSaverEnabled">
             <summary>
-            Debug verbosity
+            Get / Set enable screensaver
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.UserAgent">
+            <summary>
+            Get / Set the startup user agent
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.LogOptions">
+            <summary>
+            Get / Set the startup log options
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.VlcStartupOptions.ShowLoggerConsole">
+            <summary>
+            Get / Set the show of log console
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.VlcTrackDescription">
+            <summary>
+            VlcTrackDescription class
             </summary>
         </member>
     </members>

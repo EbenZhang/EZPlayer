@@ -4,6 +4,58 @@
         <name>Vlc.DotNet.Core.Interops</name>
     </assembly>
     <members>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcErrorHandling">
+            <summary>
+            LibVlcErrorHandling class
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcFunction`1">
+            <summary>
+            LibVlcFunction class
+            </summary>
+            <typeparam name="T">Function signature type</typeparam>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.VlcFunctionName">
+            <summary>
+            The function name in libvlc.
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.Invoke">
+            <summary>
+            Invoke the method.
+            </summary>
+        </member>
+        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.IsAvailable">
+            <summary>
+            Check if this method is available with this version of libvlc.
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcInteropsManager">
+            <summary>
+            LibVlcInteropsManager class
+            </summary>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.LibVlcInteropsManager.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the LibVlcInteropsManager class.
+            </summary>
+            <param name="libVlcDllsDirectory">The path to libvlc.dll and libvlccore.dll</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaList">
+            <summary>
+            LibVlcMediaList class
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerAudio">
+            <summary>
+            LibVlcMediaPlayerAudio class
+            </summary>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerVideo">
+            <summary>
+            LibVlcMediaPlayerVideo class
+            </summary>
+        </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.MediaTrackInfo">
             <summary>
             Information of Media Track
@@ -199,143 +251,10 @@
             <param name="trackInfo">Tracks address to store an allocated array of Elementary Streams descriptions (must be freed by the caller).</param>
             <returns>Number of Elementary Streams.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerVideo">
+        <member name="T:Vlc.DotNet.Core.Interops.LibVlcAsynchronousEvents">
             <summary>
-            LibVlcMediaPlayerVideo class
+            LibVlcAsynchronousEvents class
             </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcFunction`1">
-            <summary>
-            LibVlcFunction class
-            </summary>
-            <typeparam name="T">Function signature type</typeparam>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.VlcFunctionName">
-            <summary>
-            The function name in libvlc.
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.Invoke">
-            <summary>
-            Invoke the method.
-            </summary>
-        </member>
-        <member name="P:Vlc.DotNet.Core.Interops.LibVlcFunction`1.IsAvailable">
-            <summary>
-            Check if this method is available with this version of libvlc.
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaList">
-            <summary>
-            LibVlcMediaList class
-            </summary>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.NewInstance">
-            <summary>
-            Create an empty media list.
-            </summary>
-            <param name="vlcInstance">The libvlc instance.</param>
-            <returns>Empty media list instance, or NULL on error.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.ReleaseInstance">
-            <summary>
-            Release media list created with NewInstance().
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.RetainInstance">
-            <summary>
-            Retain reference to a media list.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.SetMedia">
-            <summary>
-            Associate media instance with this media list instance.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="mediaInstance">The media instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.GetMedia">
-            <summary>
-            Get media instance from this media list instance.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <returns>The media instance.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.AddMedia">
-            <summary>
-            Add media instance to media list.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>0 on success, -1 if the media list is read-only.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.InsertMedia">
-            <summary>
-             Insert media instance in media list on a position.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="mediaInstance">The media instance.</param>
-            <param name="index">Position in array where to insert.</param>
-            <returns>0 on success, -1 if the media list si read-only.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.RemoveAt">
-            <summary>
-            Remove media instance from media list on a position.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="index">Position in array where to remove.</param>
-            <returns>0 on success, -1 if the list is read-only or the item was not found.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Count">
-            <summary>
-            Get count on media list items.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <returns>Number of items in media list.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.GetItemAt">
-            <summary>
-            List media instance in media list at a position.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="index">Position in array where to get.</param>
-            <returns>Media instance at position.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.IndexOf">
-            <summary>
-            Find index position of List media instance in media list.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <param name="mediaInstance">The media instance.</param>
-            <returns>Position of media instance.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.IsReadOnly">
-            <summary>
-            This indicates if this media list is read-only from a user point of view.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <returns>0 on readonly, 1 on readwrite.</returns>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Lock">
-            <summary>
-            Get lock on media list items.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Unlock">
-            <summary>
-            Release lock on media list items.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-        </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.EventManager">
-            <summary>
-            Get libvlc_event_manager from this media list instance.
-            </summary>
-            <param name="mediaListInstance">The media list instance.</param>
-            <returns>The event manager associated with mediaListInstance.</returns>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.ErrorHandling.GetErrorMessage">
             <summary>
@@ -516,21 +435,69 @@
             <param name="buffer">Log buffer.</param>
             <returns>Log message object or NULL if none left.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcMediaPlayerAudio">
+        <member name="T:Vlc.DotNet.Core.Interops.Win32Interop">
             <summary>
-            LibVlcMediaPlayerAudio class
+            Win32 Interops
             </summary>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcInteropsManager">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.GetProcAddress(System.IntPtr,System.String)">
             <summary>
-            LibVlcInteropsManager class
+            Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).
             </summary>
+            <param name="hModule">A handle to the DLL module that contains the function or variable.</param>
+            <param name="lpProcName">he function or variable name, or the function's ordinal value. If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero.</param>
+            <returns>If the function succeeds, the return value is the address of the exported function or variable. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.LibVlcInteropsManager.#ctor(System.String)">
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.FreeLibrary(System.IntPtr)">
             <summary>
-            Initializes a new instance of the LibVlcInteropsManager class.
+            Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid.
             </summary>
-            <param name="libVlcDllsDirectory">The path to libvlc.dll and libvlccore.dll</param>
+            <param name="hModule">A handle to the loaded library module.</param>
+            <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call the GetLastError function.</returns>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.LoadLibrary(System.String)">
+            <summary>
+            Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.
+            </summary>
+            <param name="lpFileName">The name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition (.def) file. If the string specifies a full path, the function searches only that path for the module. If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module; for more information, see the Remarks. If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/). For more information about paths, see Naming a File or Directory. If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name string.</param>
+            <returns>If the function succeeds, the return value is a handle to the module. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CreateFileMapping(System.IntPtr,System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.PageAccess,System.Int32,System.Int32,System.String)">
+            <summary>
+            Creates or opens a named or unnamed file mapping object for a specified file.
+            </summary>
+            <param name="hFile">A handle to the file from which to create a file mapping object.</param>
+            <param name="lpAttributes">A pointer to a SECURITY_ATTRIBUTES structure that determines whether a returned handle can be inherited by child processes. The lpSecurityDescriptor member of the SECURITY_ATTRIBUTES structure specifies a security descriptor for a new file mapping object.</param>
+            <param name="flProtect">Specifies the page protection of the file mapping object. All mapped views of the object must be compatible with this protection.</param>
+            <param name="dwMaximumSizeLow">The high-order DWORD of the maximum size of the file mapping object.</param>
+            <param name="dwMaximumSizeHigh">The low-order DWORD of the maximum size of the file mapping object.</param>
+            <param name="lpName">The name of the file mapping object.</param>
+            <returns>The value is a handle to the newly created file mapping object.</returns>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.MapViewOfFile(System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.FileMapAccess,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Maps a view of a file mapping into the address space of a calling process.
+            </summary>
+            <param name="hFileMappingObject">A handle to a file mapping object. The CreateFileMapping and OpenFileMapping functions return this handle.</param>
+            <param name="dwDesiredAccess">The type of access to a file mapping object, which determines the protection of the pages. This parameter can be one of the following values.</param>
+            <param name="dwFileOffsetHigh">A high-order DWORD of the file offset where the view begins.</param>
+            <param name="dwFileOffsetLow">A low-order DWORD of the file offset where the view is to begin. The combination of the high and low offsets must specify an offset within the file mapping.</param>
+            <param name="dwNumberOfBytesToMap">The number of bytes of a file mapping to map to the view. All bytes must be within the maximum size specified by CreateFileMapping. If this parameter is 0 (zero), the mapping extends from the specified offset to the end of the file mapping.</param>
+            <returns>The value is the starting address of the mapped view.</returns>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.UnmapViewOfFile(System.IntPtr)">
+            <summary>
+            Unmaps a mapped view of a file from the calling process's address space.
+            </summary>
+            <param name="lpBaseAddress">A pointer to the base address of the mapped view of a file that is to be unmapped. This value must be identical to the value returned by a previous call to the MapViewOfFile or MapViewOfFileEx function.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
+        </member>
+        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CloseHandle(System.IntPtr)">
+            <summary>
+            Closes an open object handle.
+            </summary>
+            <param name="handle">A valid handle to an open object.</param>
+            <returns>If the function succeeds, the return value is nonzero.</returns>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaPlayer.NewInstance">
             <summary>
@@ -1188,79 +1155,112 @@
             <param name="delay">The audio delay (microseconds)</param>
             <returns>0 on success, -1 on error</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.Win32Interop">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.NewInstance">
             <summary>
-            Win32 Interops
+            Create an empty media list.
             </summary>
+            <param name="vlcInstance">The libvlc instance.</param>
+            <returns>Empty media list instance, or NULL on error.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.GetProcAddress(System.IntPtr,System.String)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.ReleaseInstance">
             <summary>
-            Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).
+            Release media list created with NewInstance().
             </summary>
-            <param name="hModule">A handle to the DLL module that contains the function or variable.</param>
-            <param name="lpProcName">he function or variable name, or the function's ordinal value. If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero.</param>
-            <returns>If the function succeeds, the return value is the address of the exported function or variable. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.FreeLibrary(System.IntPtr)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.RetainInstance">
             <summary>
-            Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid.
+            Retain reference to a media list.
             </summary>
-            <param name="hModule">A handle to the loaded library module.</param>
-            <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call the GetLastError function.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.LoadLibrary(System.String)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.SetMedia">
             <summary>
-            Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.
+            Associate media instance with this media list instance.
             </summary>
-            <param name="lpFileName">The name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition (.def) file. If the string specifies a full path, the function searches only that path for the module. If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module; for more information, see the Remarks. If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/). For more information about paths, see Naming a File or Directory. If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll to the module name. To prevent the function from appending .dll to the module name, include a trailing point character (.) in the module name string.</param>
-            <returns>If the function succeeds, the return value is a handle to the module. If the function fails, the return value is NULL. To get extended error information, call GetLastError.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="mediaInstance">The media instance.</param>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CreateFileMapping(System.IntPtr,System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.PageAccess,System.Int32,System.Int32,System.String)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.GetMedia">
             <summary>
-            Creates or opens a named or unnamed file mapping object for a specified file.
+            Get media instance from this media list instance.
             </summary>
-            <param name="hFile">A handle to the file from which to create a file mapping object.</param>
-            <param name="lpAttributes">A pointer to a SECURITY_ATTRIBUTES structure that determines whether a returned handle can be inherited by child processes. The lpSecurityDescriptor member of the SECURITY_ATTRIBUTES structure specifies a security descriptor for a new file mapping object.</param>
-            <param name="flProtect">Specifies the page protection of the file mapping object. All mapped views of the object must be compatible with this protection.</param>
-            <param name="dwMaximumSizeLow">The high-order DWORD of the maximum size of the file mapping object.</param>
-            <param name="dwMaximumSizeHigh">The low-order DWORD of the maximum size of the file mapping object.</param>
-            <param name="lpName">The name of the file mapping object.</param>
-            <returns>The value is a handle to the newly created file mapping object.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
+            <returns>The media instance.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.MapViewOfFile(System.IntPtr,Vlc.DotNet.Core.Interops.Win32Interop.FileMapAccess,System.UInt32,System.UInt32,System.UInt32)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.AddMedia">
             <summary>
-            Maps a view of a file mapping into the address space of a calling process.
+            Add media instance to media list.
             </summary>
-            <param name="hFileMappingObject">A handle to a file mapping object. The CreateFileMapping and OpenFileMapping functions return this handle.</param>
-            <param name="dwDesiredAccess">The type of access to a file mapping object, which determines the protection of the pages. This parameter can be one of the following values.</param>
-            <param name="dwFileOffsetHigh">A high-order DWORD of the file offset where the view begins.</param>
-            <param name="dwFileOffsetLow">A low-order DWORD of the file offset where the view is to begin. The combination of the high and low offsets must specify an offset within the file mapping.</param>
-            <param name="dwNumberOfBytesToMap">The number of bytes of a file mapping to map to the view. All bytes must be within the maximum size specified by CreateFileMapping. If this parameter is 0 (zero), the mapping extends from the specified offset to the end of the file mapping.</param>
-            <returns>The value is the starting address of the mapped view.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>0 on success, -1 if the media list is read-only.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.UnmapViewOfFile(System.IntPtr)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.InsertMedia">
             <summary>
-            Unmaps a mapped view of a file from the calling process's address space.
+             Insert media instance in media list on a position.
             </summary>
-            <param name="lpBaseAddress">A pointer to the base address of the mapped view of a file that is to be unmapped. This value must be identical to the value returned by a previous call to the MapViewOfFile or MapViewOfFileEx function.</param>
-            <returns>If the function succeeds, the return value is nonzero.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="mediaInstance">The media instance.</param>
+            <param name="index">Position in array where to insert.</param>
+            <returns>0 on success, -1 if the media list si read-only.</returns>
         </member>
-        <member name="M:Vlc.DotNet.Core.Interops.Win32Interop.CloseHandle(System.IntPtr)">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.RemoveAt">
             <summary>
-            Closes an open object handle.
+            Remove media instance from media list on a position.
             </summary>
-            <param name="handle">A valid handle to an open object.</param>
-            <returns>If the function succeeds, the return value is nonzero.</returns>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="index">Position in array where to remove.</param>
+            <returns>0 on success, -1 if the list is read-only or the item was not found.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcAsynchronousEvents">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Count">
             <summary>
-            LibVlcAsynchronousEvents class
+            Get count on media list items.
             </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+            <returns>Number of items in media list.</returns>
         </member>
-        <member name="T:Vlc.DotNet.Core.Interops.LibVlcErrorHandling">
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.GetItemAt">
             <summary>
-            LibVlcErrorHandling class
+            List media instance in media list at a position.
             </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="index">Position in array where to get.</param>
+            <returns>Media instance at position.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.IndexOf">
+            <summary>
+            Find index position of List media instance in media list.
+            </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+            <param name="mediaInstance">The media instance.</param>
+            <returns>Position of media instance.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.IsReadOnly">
+            <summary>
+            This indicates if this media list is read-only from a user point of view.
+            </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+            <returns>0 on readonly, 1 on readwrite.</returns>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Lock">
+            <summary>
+            Get lock on media list items.
+            </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.Unlock">
+            <summary>
+            Release lock on media list items.
+            </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+        </member>
+        <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaList.EventManager">
+            <summary>
+            Get libvlc_event_manager from this media list instance.
+            </summary>
+            <param name="mediaListInstance">The media list instance.</param>
+            <returns>The event manager associated with mediaListInstance.</returns>
         </member>
         <member name="T:Vlc.DotNet.Core.Interops.Signatures.LibVlc.MediaListPlayer.NewInstance">
             <summary>
