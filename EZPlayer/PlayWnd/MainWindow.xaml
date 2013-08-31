@@ -5,7 +5,7 @@
     xmlns:vm="clr-namespace:EZPlayer.ViewModel"
     xmlns:BindingUtils="clr-namespace:EZPlayer.BindingUtils"
     x:Class="EZPlayer.MainWindow"
-    Title="{Binding Title}" Height="260.1" Width="509.2"
+    Title="{Binding Title}"
     Name ="ThisWindow"
     AllowDrop="True"
     Drop="OnDropFile"
@@ -41,138 +41,141 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Viewbox Name="m_viewBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid>
-            <Grid Name ="m_gridPlayWnd" Grid.Row="0">
-            </Grid>
-            <DockPanel x:Name="m_gridConsole"
-                       Margin="0,400,0,11.2"
-                       Grid.ColumnSpan="2"
-                       Opacity="{BindingUtils:BoolToValueBinding IsPlaying, 0.4, 1}"
-                       >
-                <Grid>
-                    <Grid Margin="0,-393.392,0,0">
-                        <TextBlock
-                            Foreground="{StaticResource ControlBrush}"
-                            x:Name="m_timeIndicator"
-                            Margin="742,350,5,133"
-                            RenderTransformOrigin="0.51,0.179"
-                            Text="{Binding TimeIndicator}"
-                            />
-                        <Slider x:Name="m_sliderPosition"
-                                Maximum="1"
-                                Value="{Binding Position}"
-                                Margin="0,378.769,10,104.76"
-                                Width="906.186"
-                                IsEnabled="{Binding IsPlaying}"
-                                />
-                    </Grid>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" Margin="97.407,20,0,0">
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnOpen"
-                                    Click="OnBtnOpenClick"
-                                    ToolTip="{StaticResource ToolTip_Open}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Margin="10,0,0,0"
-                                    Style="{StaticResource TransparentButton}"
-                                    >
-                                <Image Source="/Image/open.png" />
-                            </Button>
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnPrevious"
-                                    Command="{Binding PreviousCommand}"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Previous}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Margin="10,0,0,0">
-                                <Image Source="/Image/previous.png" />
-                            </Button>
-                            <RepeatButton Height="50" Width="50"
-                                    x:Name="m_btnRewind"
-                                    Click="OnBtnRewindClick"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Rewind}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Margin="10,0,0,0">
-                                <Image Source="/Image/rewind.png" />
-                            </RepeatButton>
-                            <Button Height="90" Width="90"
-                                    x:Name="m_btnPlay"
-                                    Click="OnBtnPlayClick"
-                                    Margin="10,0,0,0"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_PlayPause}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    >
-                                <Image>
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsPlaying}" Value="False">
-                                                    <Setter Property="Source" Value="/Image/play.png"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsPlaying}" Value="True">
-                                                    <Setter Property="Source" Value="/Image/pause.png"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </Button>
-                            <Button Height="80" Width="80"
-                                    x:Name="m_btnFullscreen"
-                                    Click="OnBtnFullScreenClick"
-                                    Margin="10,0,0,0"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_FullScreen}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    >
-                                <Image Source="/Image/fullscreen.png" />
-                            </Button>
-                            <RepeatButton Height="50" Width="50"
-                                    x:Name="m_btnForward"
-                                    Click="OnBtnForwardClick"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Forward}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Margin="10,0,0,0">
-                                <Image Source="/Image/forward.png" />
-                            </RepeatButton>
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnNext"
-                                    Command="{Binding NextCommand}"
-                                    Style="{StaticResource TransparentButton}"
-                                    ToolTip="{StaticResource ToolTip_Next}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Margin="10,0,0,0">
-                                <Image Source="/Image/next.png" />
-                            </Button>
-                            <TextBlock Foreground="{StaticResource ControlBrush}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
-                            <Slider x:Name="m_sliderVolume" 
-                                    Maximum="{Binding MaxVolume}"
-                                    SmallChange="1"
-                                    LargeChange="5"
-                                    ToolTip="{StaticResource ToolTip_Volume}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Value="{Binding Path=Volume}"
-                                    VerticalAlignment="Center"
-                                    Margin="10,0,0,0"
-                                    Width="72"/>
-                            <Button Height="50" Width="50"
-                                    x:Name="m_btnSettings"
-                                    Click="OnBtnSettingsClick"
-                                    Margin="10,0,0,0"
-                                    ToolTip="{StaticResource ToolTip_Settings}"
-                                    ToolTipService.ShowOnDisabled="True"
-                                    Style="{StaticResource TransparentButton}"
-                                    >
-                                <Image Source="/Image/settings.png" />
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </DockPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"  Name ="m_gridPlayWnd">
         </Grid>
-    </Viewbox>
+        <DockPanel x:Name="m_gridConsole"
+                   Margin="10"
+                   Opacity="{BindingUtils:BoolToValueBinding IsPlaying, 0.4, 1}"
+                   >
+            <Grid VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <TextBlock
+                        HorizontalAlignment="Right"
+                        Foreground="{StaticResource ControlBrush}"
+                        x:Name="m_timeIndicator"
+                        Text="{Binding TimeIndicator}"
+                        />
+                    <Slider x:Name="m_sliderPosition"
+                            Maximum="1"
+                            Value="{Binding Position}"
+                            IsEnabled="{Binding IsPlaying}"
+                            />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Height="50" Width="50"
+                            x:Name="m_btnOpen"
+                            Click="OnBtnOpenClick"
+                            ToolTip="{StaticResource ToolTip_Open}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource TransparentButton}"
+                            >
+                        <Image Source="/Image/open.png" />
+                    </Button>
+                    <Button Height="50" Width="50"
+                            x:Name="m_btnPrevious"
+                            Command="{Binding PreviousCommand}"
+                            Style="{StaticResource TransparentButton}"
+                            ToolTip="{StaticResource ToolTip_Previous}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Margin="10,0,0,0">
+                        <Image Source="/Image/previous.png" />
+                    </Button>
+                    <RepeatButton Height="50" Width="50"
+                                  x:Name="m_btnRewind"
+                                  Click="OnBtnRewindClick"
+                                  Style="{StaticResource TransparentButton}"
+                                  ToolTip="{StaticResource ToolTip_Rewind}"
+                                  ToolTipService.ShowOnDisabled="True"
+                                  Margin="10,0,0,0">
+                        <Image Source="/Image/rewind.png" />
+                    </RepeatButton>
+                    <Button Height="90" Width="90"
+                            x:Name="m_btnPlay"
+                            Click="OnBtnPlayClick"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource TransparentButton}"
+                            ToolTip="{StaticResource ToolTip_PlayPause}"
+                            ToolTipService.ShowOnDisabled="True"
+                            >
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsPlaying}" Value="False">
+                                            <Setter Property="Source" Value="/Image/play.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsPlaying}" Value="True">
+                                            <Setter Property="Source" Value="/Image/pause.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+                    <Button Height="80" Width="80"
+                            x:Name="m_btnFullscreen"
+                            Click="OnBtnFullScreenClick"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource TransparentButton}"
+                            ToolTip="{StaticResource ToolTip_FullScreen}"
+                            ToolTipService.ShowOnDisabled="True"
+                            >
+                        <Image Source="/Image/fullscreen.png" />
+                    </Button>
+                    <RepeatButton Height="50" Width="50"
+                                  x:Name="m_btnForward"
+                                  Click="OnBtnForwardClick"
+                                  Style="{StaticResource TransparentButton}"
+                                  ToolTip="{StaticResource ToolTip_Forward}"
+                                  ToolTipService.ShowOnDisabled="True"
+                                  Margin="10,0,0,0">
+                        <Image Source="/Image/forward.png" />
+                    </RepeatButton>
+                    <Button Height="50" Width="50"
+                            x:Name="m_btnNext"
+                            Command="{Binding NextCommand}"
+                            Style="{StaticResource TransparentButton}"
+                            ToolTip="{StaticResource ToolTip_Next}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Margin="10,0,0,0">
+                        <Image Source="/Image/next.png" />
+                    </Button>
+                    <TextBlock Foreground="{StaticResource ControlBrush}" VerticalAlignment="Center" Margin="10,0,0,0"><Run Text="Volume:"/></TextBlock>
+                    <Slider x:Name="m_sliderVolume" 
+                            Maximum="{Binding MaxVolume}"
+                            SmallChange="1"
+                            LargeChange="5"
+                            ToolTip="{StaticResource ToolTip_Volume}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Value="{Binding Path=Volume}"
+                            VerticalAlignment="Center"
+                            Margin="10,0,0,0"
+                            Width="72"/>
+                    <Button Height="50" Width="50"
+                            x:Name="m_btnSettings"
+                            Click="OnBtnSettingsClick"
+                            Margin="10,0,0,0"
+                            ToolTip="{StaticResource ToolTip_Settings}"
+                            ToolTipService.ShowOnDisabled="True"
+                            Style="{StaticResource TransparentButton}"
+                            >
+                        <Image Source="/Image/settings.png" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        
+        <Grid Grid.Column="1" Visibility="Collapsed"></Grid>
+    </Grid>
 </Window>
