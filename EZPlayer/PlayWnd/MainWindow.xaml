@@ -4,12 +4,12 @@
     xmlns:local="clr-namespace:EZPlayer"
     xmlns:vm="clr-namespace:EZPlayer.ViewModel"
     xmlns:BindingUtils="clr-namespace:EZPlayer.BindingUtils"
+    xmlns:conv="clr-namespace:EZPlayer.Conv"
     x:Class="EZPlayer.MainWindow"
     Title="{Binding Title}"
     Name ="ThisWindow"
     AllowDrop="True"
     Drop="OnDropFile"
-    KeyDown="OnKeyDown"
     WindowStartupLocation="CenterOwner" 
     Background="Black" >
     <Window.DataContext>
@@ -28,6 +28,8 @@
                 <BindingUtils:InverseBooleanConverter/>
                 <BooleanToVisibilityConverter/>
             </BindingUtils:CompositeConverter>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <conv:PathFileConverter x:Key="PathFileConverter"/>
             <Style TargetType="ButtonBase" x:Key="TransparentButton">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -46,7 +48,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0"  Name ="m_gridPlayWnd">
+        <Grid KeyDown="OnKeyDown" Grid.Column="0"  Name ="m_gridPlayWnd">
         </Grid>
         <DockPanel x:Name="m_gridConsole"
                    Margin="10"
@@ -172,10 +174,34 @@
                             >
                         <Image Source="/Image/settings.png" />
                     </Button>
+                    <ToggleButton Name="TogglePlayList" Height="50" Width="50"
+                                  Margin="10,0,0,0"
+                                  ToolTip="{StaticResource ToolTip_PlayList}"
+                                  ToolTipService.ShowOnDisabled="True"
+                                  Style="{StaticResource TransparentButton}"
+                                  >
+                        <Image Source="/Image/PlayList.png" />
+                    </ToggleButton>
                 </StackPanel>
             </Grid>
         </DockPanel>
-        
-        <Grid Grid.Column="1" Visibility="Collapsed"></Grid>
+
+        <Grid
+            Width="350"            
+            Grid.Column="1"
+            Visibility="{Binding Path=IsChecked, ElementName=TogglePlayList, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ListBox Background="Black" Foreground="White" ItemsSource="{Binding Path=PlayingFiles}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource PathFileConverter}}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <EventSetter Event="MouseDoubleClick" Handler="PlayListItemDbClick"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>

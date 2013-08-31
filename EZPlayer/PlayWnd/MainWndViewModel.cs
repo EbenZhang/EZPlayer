@@ -7,6 +7,7 @@ using EZPlayer.Power;
 using EZPlayer.Subtitle;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace EZPlayer.ViewModel
         {
             m_model.EvtTimeChanged += OnTimeChanged;
             m_model.EvtMediaParsed += OnMediaChanged;
+            PlayingFiles = new ObservableCollection<string>();
         }
 
         void OnMediaChanged()
@@ -118,6 +120,10 @@ namespace EZPlayer.ViewModel
         public string CurrentFilePath
         {
             get { return m_model.CurrentFilePath; }
+            set
+            {
+                m_model.CurrentFilePath = value;
+            }
         }
         public bool IsPlaying
         {
@@ -252,14 +258,22 @@ namespace EZPlayer.ViewModel
             {
                 throw new ApplicationException("No file in the list");
             }
-        }        
+        }
+
+        public ObservableCollection<String> PlayingFiles
+        {
+            get;
+            set;
+        }
 
         public void PlayAListOfFiles(List<string> playList)
         {
+            PlayingFiles.Clear();
             if (playList.Count == 0)
-            {
+            {   
                 return;
             }
+            playList.ForEach(r => PlayingFiles.Add(r));
             SubtitleUtil.PrepareSubtitle(SelectedPath);
             SaveLastPlayInfo();
             PrepareVLCMediaList(playList);

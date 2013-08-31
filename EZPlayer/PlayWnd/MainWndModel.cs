@@ -80,6 +80,10 @@ namespace EZPlayer.Model
                     return null;
                 }
             }
+            set
+            {
+                SetMedia(value);
+            }
         }
 
         public string TimeIndicator

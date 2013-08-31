@@ -124,6 +124,7 @@
     </ApplicationDefinition>
     <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
     <Compile Include="BindingUtils\RelayCommand.cs" />
+    <Compile Include="Conv\PathFileConverter.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Subtitle\ISubtitleSearcher.cs" />
     <Compile Include="Subtitle\OpenSubtitleSearcher.cs" />
@@ -164,6 +165,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Resource Include="image\Playlist.png" />
     <Content Include="image\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -313,12 +315,12 @@
   <ItemGroup>
     <PublishFile Include="DefaultConfig\DefaultExtensionList.xml">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
