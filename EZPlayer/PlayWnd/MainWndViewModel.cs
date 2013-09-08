@@ -35,8 +35,10 @@ namespace EZPlayer.ViewModel
 
         void OnMediaChanged()
         {
+            RestoreLastPlayStatus();
             UpdateTitle();
             SearchOnlineSubtitle();
+            UpdateFileAssoc();
         }
 
         public void Init()
@@ -122,7 +124,20 @@ namespace EZPlayer.ViewModel
             get { return m_model.CurrentFilePath; }
             set
             {
-                m_model.CurrentFilePath = value;
+                if (m_model.CurrentFilePath != value)
+                {
+                    if (!string.IsNullOrWhiteSpace(m_model.CurrentFilePath))
+                    {
+                        SaveLastPlayInfo();
+                    }
+                    m_model.CurrentFilePath = value;
+
+                    IsPlaying = true;
+                    
+                    //OnMediaChanged();
+
+                    NotifyPropertyChange(() => CurrentFilePath);
+                }
             }
         }
         public bool IsPlaying
@@ -136,11 +151,6 @@ namespace EZPlayer.ViewModel
                 m_isPlaying = value;
                 NotifyPropertyChange(() => IsPlaying);
             }
-        }
-        public string SelectedPath
-        {
-            get;
-            set;
         }
 
         public float Position
@@ -240,8 +250,7 @@ namespace EZPlayer.ViewModel
                 {
                     return new List<string>();
                 }
-                SelectedPath = fileList[0];
-                return PlayListUtil.GetPlayList(SelectedPath, DirectorySearcher.Instance);
+                return PlayListUtil.GetPlayList(fileList[0], DirectorySearcher.Instance);
             }
             else if (fileList.Count > 1)
             {
@@ -251,7 +260,6 @@ namespace EZPlayer.ViewModel
                 {
                     return sortedFileList;
                 }
-                SelectedPath = sortedFileList[0];
                 return sortedFileList;
             }
             else
@@ -267,17 +275,16 @@ namespace EZPlayer.ViewModel
         }
 
         public void PlayAListOfFiles(List<string> playList)
-        {
+        {            
             PlayingFiles.Clear();
             if (playList.Count == 0)
             {   
                 return;
             }
             playList.ForEach(r => PlayingFiles.Add(r));
-            SubtitleUtil.PrepareSubtitle(SelectedPath);
-            SaveLastPlayInfo();
-            PrepareVLCMediaList(playList);
-            StartPlay();
+            NotifyPropertyChange(() => PlayingFiles);
+            SubtitleUtil.PrepareSubtitle(playList[0]);
+            this.CurrentFilePath = playList[0];
         }
 
         private async void SearchOnlineSubtitle()
@@ -288,7 +295,7 @@ namespace EZPlayer.ViewModel
 
             if(!string.IsNullOrEmpty(subtitleFileName))
             {
-                SubtitleUtil.PrepareSubtitle(SelectedPath);
+                SubtitleUtil.PrepareSubtitle(CurrentFilePath);
                 m_model.SetSubtitleFile(subtitleFileName);
             }
         }
@@ -308,8 +315,7 @@ namespace EZPlayer.ViewModel
         {
             if (HistoryModel.Instance.LastPlayedFile != null)
             {
-                SelectedPath = HistoryModel.Instance.LastPlayedFile.FilePath;
-                PlayAListOfFiles(PlayListUtil.GetPlayList(SelectedPath, DirectorySearcher.Instance));
+                PlayAListOfFiles(PlayListUtil.GetPlayList(HistoryModel.Instance.LastPlayedFile.FilePath, DirectorySearcher.Instance));
                 return true;
             }
             return false;
@@ -326,14 +332,20 @@ namespace EZPlayer.ViewModel
 
         private void Previous()
         {
-            m_model.Previous();
-            OnMediaChanged();
+            int pre = PlayingFiles.IndexOf(CurrentFilePath) - 1;
+            if (pre >= 0)
+            {
+                CurrentFilePath = PlayingFiles[pre];
+            }
         }
 
         private void Next()
         {
-            m_model.Next();
-            OnMediaChanged();
+            int next = PlayingFiles.IndexOf(CurrentFilePath) + 1;
+            if (next < PlayingFiles.Count)
+            {
+                CurrentFilePath = PlayingFiles[next];
+            }
         }
         
         private void Forward()
@@ -348,18 +360,9 @@ namespace EZPlayer.ViewModel
             Position = newValue;
         }
 
-        private void StartPlay()
-        {
-            m_model.Play();
-            IsPlaying = true;
-            RestoreLastPlayStatus();
-            OnMediaChanged();
-            UpdateFileAssoc();
-        }
-
         private void RestoreLastPlayStatus()
         {
-            var history = HistoryModel.Instance.GetHistoryInfo(SelectedPath);
+            var history = HistoryModel.Instance.GetHistoryInfo(CurrentFilePath);
             if (history != null)
             {
                 Position = history.Position;
@@ -389,7 +392,7 @@ namespace EZPlayer.ViewModel
         
         private void UpdateFileAssoc()
         {
-            FileAssocModel.Instance.AddNewExt(Path.GetExtension(SelectedPath));
+            FileAssocModel.Instance.AddNewExt(Path.GetExtension(CurrentFilePath));
         }
 
         private void UpdateTitle()
@@ -411,14 +414,7 @@ namespace EZPlayer.ViewModel
                 Volume = 100;
             }
         }
-
-        private void PrepareVLCMediaList(List<string> playList)
-        {
-            m_model.SetMedia(playList[0]);
-            playList.RemoveAt(0);
-            playList.ForEach(f => m_model.AddMedia(f));
-        }
-
+        
         private void OnTimeChanged()
         {
             NotifyPropertyChange(() => TimeIndicator);

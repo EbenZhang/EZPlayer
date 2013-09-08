@@ -14,13 +14,13 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\EBENZHANG-PC\EZPlayer\</InstallUrl>
-    <UpdateUrl>\\EBEN-PC\Users\Public\EZPlayer\</UpdateUrl>
-    <SupportUrl>\\EBEN-PC\Users\Public\EZPlayer\</SupportUrl>
+    <UpdateUrl>\\EBENZHANG-PC\EZPlayer\</UpdateUrl>
+    <SupportUrl>\\EBENZHANG-PC\EZPlayer\</SupportUrl>
     <ProductName>EZPlayer</ProductName>
     <PublisherName>EZPlayer</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>75</ApplicationRevision>
+    <ApplicationRevision>78</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

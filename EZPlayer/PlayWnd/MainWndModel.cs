@@ -145,8 +145,9 @@ namespace EZPlayer.Model
 
         public void SetMedia(string mediaPath)
         {
-            m_vlcControl.Media = new PathMedia(mediaPath);
-            m_vlcControl.Media.ParsedChanged += OnMediaParsed;
+            var media = new PathMedia(mediaPath);
+            media.ParsedChanged += OnMediaParsed;
+            m_vlcControl.Media = media;
         }
 
         /// <summary>

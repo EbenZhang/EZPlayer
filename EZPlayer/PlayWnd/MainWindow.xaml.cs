@@ -394,12 +394,5 @@ namespace EZPlayer
                 m_viewModel.PlayAListOfFiles(playList);
             }
         }
-
-        private void PlayListItemDbClick(object sender, MouseButtonEventArgs e)
-        {
-            var item = sender as ListBoxItem;
-            var path = item.DataContext as string;
-            m_viewModel.CurrentFilePath = path;
-        }
     }
 }
