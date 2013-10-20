@@ -5,6 +5,7 @@ using EZPlayer.Model;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
+using Org.Mentalis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -341,11 +342,17 @@ namespace EZPlayer.ViewModel
 
         private void Next()
         {
-            int next = PlayingFiles.IndexOf(CurrentFilePath) + 1;
-            if (next < PlayingFiles.Count)
+            int next = GetNextMediaIndex();
+            if (next != -1)
             {
                 CurrentFilePath = PlayingFiles[next];
             }
+        }
+
+        private int GetNextMediaIndex()
+        {
+            int next = PlayingFiles.IndexOf(CurrentFilePath) + 1;
+            return next < PlayingFiles.Count ? next : -1;
         }
         
         private void Forward()
@@ -365,7 +372,7 @@ namespace EZPlayer.ViewModel
             var history = HistoryModel.Instance.GetHistoryInfo(CurrentFilePath);
             if (history != null)
             {
-                Position = history.Position;
+                Position = history.Position >= 1 ? 0 : history.Position;
                 Volume = history.Volume;
             }
         }
@@ -419,9 +426,24 @@ namespace EZPlayer.ViewModel
         {
             NotifyPropertyChange(() => TimeIndicator);
 
-            NotifyPropertyChange(() => Position);
+            NotifyPropertyChange(() => Position);            
 
             SyncPlayStatusWithModel();
+
+            if (Position >= 1)
+            {
+                if (GetNextMediaIndex() != -1)
+                {
+                    Next();
+                }
+                else
+                {
+                    if (App.PostPlayAction != null)
+                    {
+                        WindowsController.ExitWindows(App.PostPlayAction.Value, false);
+                    }
+                }
+            }
         }
 
         private void SyncPlayStatusWithModel()

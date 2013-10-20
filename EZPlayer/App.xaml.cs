@@ -7,6 +7,7 @@ using System.Windows;
 using Vlc.DotNet.Core;
 using System.IO;
 using System.Diagnostics;
+using Org.Mentalis.Utilities;
 
 namespace EZPlayer
 {
@@ -17,6 +18,8 @@ namespace EZPlayer
     {
         private readonly static string APP_START_PATH = Process.GetCurrentProcess().MainModule.FileName;
         private readonly static string APP_START_DIR = Path.GetDirectoryName(APP_START_PATH);
+
+        public static RestartOptions? PostPlayAction;
 
         protected override void OnStartup(StartupEventArgs e)
         {

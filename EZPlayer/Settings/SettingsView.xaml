@@ -1,0 +1,34 @@
+﻿<Window x:Class="EZPlayer.View.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:view="clr-namespace:EZPlayer.View"
+        Name="ThisWnd"
+        Title="Settings" Height="300" Width="300">
+    <TabControl>
+        <TabControl.Items>
+            <TabItem Header="{StaticResource PlaySettings}">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock Text="{StaticResource AfterPlaySettings}"/>
+                    <ComboBox Margin="2,0,0,0" Width="180" Height="20"
+                              Text="{Binding PostPlayAction, ElementName=ThisWnd}">
+                        <ComboBox.Items>
+                            <ComboBoxItem>
+                                <TextBlock Text="{StaticResource DoNothing}"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{StaticResource Shutdown}"/>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <TextBlock Text="{StaticResource Hibernate}"/>
+                            </ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="{StaticResource FileAssociationView}">
+                <view:FileAssociationView/>
+            </TabItem>
+        </TabControl.Items>
+    </TabControl>
+</Window>

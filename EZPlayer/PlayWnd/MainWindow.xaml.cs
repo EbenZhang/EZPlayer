@@ -14,6 +14,7 @@ using Vlc.DotNet.Core;
 using Microsoft.Win32;
 using EZPlayer.History;
 using System.Diagnostics;
+using Org.Mentalis.Utilities;
 
 namespace EZPlayer
 {
@@ -31,7 +32,7 @@ namespace EZPlayer
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             SetupUserDataDir();
 
@@ -342,7 +343,7 @@ namespace EZPlayer
 
         private void OnBtnSettingsClick(object sender, RoutedEventArgs e)
         {
-            var v = new FileAssociationView();
+            var v = new SettingsView();
             v.Owner = this;
             ExecuteCommand.Execute(m_viewModel.PauseCommand);
             v.ShowDialog();

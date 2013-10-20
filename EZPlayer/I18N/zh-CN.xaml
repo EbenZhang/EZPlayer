@@ -61,4 +61,24 @@
     <sys:String x:Key="ToolTip_PlayList">
         播放列表
     </sys:String>
+
+    <sys:String x:Key="Shutdown">
+        关机
+    </sys:String>
+
+    <sys:String x:Key="PlaySettings">
+        播放设置
+    </sys:String>
+
+    <sys:String x:Key="AfterPlaySettings">
+        播放完成后
+    </sys:String>
+
+    <sys:String x:Key="DoNothing">
+        什么也不做
+    </sys:String>
+    <sys:String x:Key="Hibernate">
+        休眠
+    </sys:String>  
+
 </ResourceDictionary>

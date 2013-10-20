@@ -61,4 +61,24 @@
     <sys:String x:Key="HistoryView">
         History
     </sys:String>
+
+    <sys:String x:Key="Shutdown">
+        Shutdown
+    </sys:String>
+
+    <sys:String x:Key="PlaySettings">
+        Play Settings
+    </sys:String>
+
+    <sys:String x:Key="AfterPlaySettings">
+        After all played
+    </sys:String>
+
+    <sys:String x:Key="DoNothing">
+        Do nothing
+    </sys:String>
+
+    <sys:String x:Key="Hibernate">
+        Hibernate
+    </sys:String>
 </ResourceDictionary>

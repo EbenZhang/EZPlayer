@@ -20,7 +20,7 @@
     <PublisherName>EZPlayer</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>78</ApplicationRevision>
+    <ApplicationRevision>80</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -126,17 +126,20 @@
     <Compile Include="BindingUtils\RelayCommand.cs" />
     <Compile Include="Conv\PathFileConverter.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Subtitle\ISubtitleSearcher.cs" />
     <Compile Include="Subtitle\OpenSubtitleSearcher.cs" />
     <Compile Include="WPFCommon\ExecuteCommand.cs" />
-    <Compile Include="FileAssociation\Model\AssociationUtil.cs" />
+    <Compile Include="Settings\FileAssociation\Model\AssociationUtil.cs" />
     <Compile Include="BindingUtils\CompositeConverter.cs" />
     <Compile Include="BindingUtils\InverseBooleanConverter.cs" />
     <Compile Include="DelayTask.cs" />
     <Compile Include="DesingerHelper.cs" />
     <Compile Include="Subtitle\EncodingDetector.cs" />
-    <Compile Include="FileAssociation\Model\ExtensionItem.cs" />
-    <Compile Include="FileAssociation\Model\FileAssocModel.cs" />
+    <Compile Include="Settings\FileAssociation\Model\ExtensionItem.cs" />
+    <Compile Include="Settings\FileAssociation\Model\FileAssocModel.cs" />
     <Compile Include="History\HistoryItem.cs" />
     <Compile Include="DirectorySearcher.cs" />
     <Compile Include="History\HistoryModel.cs" />
@@ -155,16 +158,24 @@
     </Compile>
     <Compile Include="ShortKeys.cs" />
     <Compile Include="Subtitle\SubtitleUtil.cs" />
-    <Compile Include="FileAssociation\FileAssocViewModel.cs" />
+    <Compile Include="Settings\FileAssociation\FileAssocViewModel.cs" />
     <Compile Include="WPFCommon\RelayCommand.cs" />
     <Compile Include="WPFCommon\ViewModelBase.cs" />
-    <Compile Include="FileAssociation\FileAssocView.xaml.cs">
+    <Compile Include="Settings\FileAssociation\FileAssocView.xaml.cs">
       <DependentUpon>FileAssocView.xaml</DependentUpon>
     </Compile>
     <Content Include="DefaultConfig\DefaultExtensionList.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Page Include="Resources\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="image\Playlist.png" />
     <Content Include="image\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -209,7 +220,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FileAssociation\FileAssocView.xaml">
+    <Page Include="Settings\FileAssociation\FileAssocView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

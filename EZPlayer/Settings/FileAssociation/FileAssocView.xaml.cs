@@ -16,7 +16,7 @@ namespace EZPlayer.View
     /// <summary>
     /// Interaction logic for FileAssociationView.xaml
     /// </summary>
-    public partial class FileAssociationView : Window
+    public partial class FileAssociationView : UserControl
     {
         public FileAssociationView()
         {
