@@ -31,9 +31,9 @@ namespace EZPlayer.Subtitle
         }
         public string DownloadSubtitles(string movieFilePath)
         {
-            TryLogin();
             try
             {
+                TryLogin();
                 var preferSubLanguage = CultureInfo.CurrentCulture.Name.Substring(0, 2).ToLower();
 
                 var searchResult = Search(movieFilePath);
