@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:view="clr-namespace:EZPlayer.View"
         Name="ThisWnd"
+        WindowStartupLocation="CenterOwner"
         Title="Settings" Height="300" Width="300">
     <TabControl>
         <TabControl.Items>
