@@ -81,4 +81,16 @@
     <sys:String x:Key="Hibernate">
         Hibernate
     </sys:String>
+
+    <sys:String x:Key="ShutdownPromptTitle">
+        Exiting Windows...
+    </sys:String>
+
+    <sys:String x:Key="ShutdownPromptMsg">
+        We Will {1} Your Operating System In {0}s
+    </sys:String>
+
+    <sys:String x:Key="Cancel">
+        Cancel
+    </sys:String>
 </ResourceDictionary>

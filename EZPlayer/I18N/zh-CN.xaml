@@ -79,6 +79,17 @@
     </sys:String>
     <sys:String x:Key="Hibernate">
         休眠
-    </sys:String>  
+    </sys:String>
 
+    <sys:String x:Key="ShutdownPromptTitle">
+        正在关机...
+    </sys:String>
+
+    <sys:String x:Key="ShutdownPromptMsg">
+        系统将在{0}秒后{1}
+    </sys:String>
+
+    <sys:String x:Key="Cancel">
+        取消
+    </sys:String>
 </ResourceDictionary>

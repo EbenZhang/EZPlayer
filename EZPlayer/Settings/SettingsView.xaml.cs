@@ -1,5 +1,7 @@
 ﻿using Org.Mentalis.Utilities;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace EZPlayer.View
 {
@@ -10,8 +12,8 @@ namespace EZPlayer.View
     {
         public SettingsView()
         {
-            InitializeComponent();
-            _postPlayAction = GetPostAction();
+            _postPlayAction = GetCurPostActionDesc();
+            InitializeComponent();            
         }
         private string _postPlayAction;
         public string PostPlayAction
@@ -38,7 +40,7 @@ namespace EZPlayer.View
             }
         }
 
-        private string GetPostAction()
+        private string GetCurPostActionDesc()
         {
             if (App.PostPlayAction == null)
             {
@@ -52,6 +54,18 @@ namespace EZPlayer.View
                     return FindResource("Shutdown").ToString();
             }
             return FindResource("DoNothing").ToString();
+        }
+
+        public ObservableCollection<string> PostActionOptions
+        {
+            get
+            {
+                var items = new ObservableCollection<string>();
+                items.Add(FindResource("DoNothing").ToString());
+                items.Add(FindResource("Shutdown").ToString());
+                items.Add(FindResource("Hibernate").ToString());
+                return items;
+            }
         }
     }
 }

@@ -125,6 +125,9 @@
     <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
     <Compile Include="BindingUtils\RelayCommand.cs" />
     <Compile Include="Conv\PathFileConverter.cs" />
+    <Compile Include="Power\ShutdownPrompt.xaml.cs">
+      <DependentUpon>ShutdownPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -168,6 +171,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Page Include="Power\ShutdownPrompt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\TextBlockStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -19,6 +19,9 @@ using System.Xml.Serialization;
 
 namespace EZPlayer.ViewModel
 {
+    // A delegate type for hooking up change notifications.
+    public delegate void AllPlayed();
+
     public class MainWndViewModel : ViewModelBase
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
@@ -26,6 +29,8 @@ namespace EZPlayer.ViewModel
         private SleepBarricade m_sleepBarricade;
         private bool m_isPlaying = false;
         private MainWndModel m_model = new MainWndModel();
+
+        public event AllPlayed EvtAllPlayed;
         
         public MainWndViewModel()
         {
@@ -426,7 +431,9 @@ namespace EZPlayer.ViewModel
         {
             NotifyPropertyChange(() => TimeIndicator);
 
-            NotifyPropertyChange(() => Position);            
+            NotifyPropertyChange(() => Position);
+
+            Trace.TraceInformation("time {0}, pos {1}", TimeIndicator, Position);
 
             SyncPlayStatusWithModel();
 
@@ -438,9 +445,9 @@ namespace EZPlayer.ViewModel
                 }
                 else
                 {
-                    if (App.PostPlayAction != null)
+                    if (EvtAllPlayed != null)
                     {
-                        WindowsController.ExitWindows(App.PostPlayAction.Value, false);
+                        EvtAllPlayed();
                     }
                 }
             }

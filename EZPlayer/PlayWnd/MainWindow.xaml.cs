@@ -15,6 +15,7 @@ using Microsoft.Win32;
 using EZPlayer.History;
 using System.Diagnostics;
 using Org.Mentalis.Utilities;
+using EZPlayer.Power;
 
 namespace EZPlayer
 {
@@ -32,7 +33,7 @@ namespace EZPlayer
 
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
 
             SetupUserDataDir();
 
@@ -87,6 +88,18 @@ namespace EZPlayer
             m_viewModel = this.DataContext as MainWndViewModel;
 
             m_viewModel.Init();
+
+            m_viewModel.EvtAllPlayed += m_viewModel_EvtAllPlayed;
+        }
+
+        void m_viewModel_EvtAllPlayed()
+        {
+            if (App.PostPlayAction != null)
+            {
+                ShutdownPrompt p = new ShutdownPrompt();
+                p.Owner = this;
+                p.ShowDialog();
+            }
         }
 
         private void SetupMouseWheelActions()

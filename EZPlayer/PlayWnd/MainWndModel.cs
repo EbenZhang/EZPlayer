@@ -1,5 +1,6 @@
 ﻿using EZPlayer.Common;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using Vlc.DotNet.Core;
 using Vlc.DotNet.Core.Medias;
@@ -22,6 +23,15 @@ namespace EZPlayer.Model
         
         public MainWndModel()
         {
+        }
+
+        void Media_StateChanged(MediaBase sender, VlcEventArgs<Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.States> e)
+        {
+            if (e.Data == Vlc.DotNet.Core.Interops.Signatures.LibVlc.Media.States.Ended)
+            {
+                Position = 1;
+                EvtTimeChanged();
+            }
         }
         
         public void Init()
@@ -145,8 +155,15 @@ namespace EZPlayer.Model
 
         public void SetMedia(string mediaPath)
         {
+            if (m_vlcControl.Media != null)
+            {
+                m_vlcControl.Media.ParsedChanged -= this.OnMediaParsed;
+                m_vlcControl.Media.StateChanged -= this.Media_StateChanged;
+            }
+
             var media = new PathMedia(mediaPath);
             media.ParsedChanged += OnMediaParsed;
+            media.StateChanged += Media_StateChanged;
             m_vlcControl.Media = media;
         }
 
@@ -181,17 +198,6 @@ namespace EZPlayer.Model
             {
                 EvtTimeChanged();
             }
-        }
-
-        public void AddMedia(string mediaPath)
-        {
-            if (m_vlcControl.Media != null)
-            {
-                m_vlcControl.Media.ParsedChanged -= this.OnMediaParsed;
-            }
-            var media = new PathMedia(mediaPath);
-            media.ParsedChanged += this.OnMediaParsed;
-            m_vlcControl.Medias.Add(media);
         }
 
         public void SetSubtitleFile(string subTitleFilePath)

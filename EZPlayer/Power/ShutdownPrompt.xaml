@@ -1,0 +1,12 @@
+﻿<Window x:Class="EZPlayer.Power.ShutdownPrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{StaticResource ShutdownPromptTitle}"
+        WindowState="Maximized"
+        Topmost="True"
+        Name="ThisWnd">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Name="TxtMsg" Text="{Binding ShutdownPromptMsg, ElementName=ThisWnd}" FontSize="18"></TextBlock>
+        <Button Click="CancelClicked" Content="{StaticResource Cancel}" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>

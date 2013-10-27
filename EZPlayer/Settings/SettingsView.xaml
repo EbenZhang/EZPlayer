@@ -10,18 +10,9 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <TextBlock Text="{StaticResource AfterPlaySettings}"/>
                     <ComboBox Margin="2,0,0,0" Width="180" Height="20"
-                              Text="{Binding PostPlayAction, ElementName=ThisWnd}">
-                        <ComboBox.Items>
-                            <ComboBoxItem>
-                                <TextBlock Text="{StaticResource DoNothing}"/>
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock Text="{StaticResource Shutdown}"/>
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                <TextBlock Text="{StaticResource Hibernate}"/>
-                            </ComboBoxItem>
-                        </ComboBox.Items>
+                              Name="CmbPostAction"
+                              SelectedItem="{Binding PostPlayAction, ElementName=ThisWnd}"
+                              ItemsSource="{Binding PostActionOptions, ElementName=ThisWnd}">
                     </ComboBox>
                 </StackPanel>
             </TabItem>
