@@ -433,8 +433,6 @@ namespace EZPlayer.ViewModel
 
             NotifyPropertyChange(() => Position);
 
-            Trace.TraceInformation("time {0}, pos {1}", TimeIndicator, Position);
-
             SyncPlayStatusWithModel();
 
             if (Position >= 1)

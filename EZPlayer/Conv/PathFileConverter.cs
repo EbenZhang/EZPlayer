@@ -15,7 +15,6 @@ namespace EZPlayer.Conv
         object IValueConverter.Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var path = value as string;
-            Trace.TraceInformation(path);
             if (path != null)
             {
                 return Path.GetFileName(path);

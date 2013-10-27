@@ -234,6 +234,10 @@ namespace EZPlayer
             {
                 Mouse.OverrideCursor = Cursors.None;
             }
+            else
+            {
+                Mouse.OverrideCursor = Cursors.Arrow;
+            }
         }
 
         private void RestartInputMonitorTimer()
