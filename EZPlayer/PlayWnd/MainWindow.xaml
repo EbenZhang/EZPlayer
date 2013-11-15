@@ -10,6 +10,7 @@
     Name ="ThisWindow"
     AllowDrop="True"
     Drop="OnDropFile"
+    KeyDown="OnKeyDown"
     WindowStartupLocation="CenterOwner" 
     Background="Black" >
     <Window.DataContext>
@@ -49,7 +50,7 @@
             <ColumnDefinition Width="2"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid KeyDown="OnKeyDown" Grid.Column="0"  Name ="m_gridPlayWnd">
+        <Grid Grid.Column="0"  Name ="m_gridPlayWnd">
             <DockPanel x:Name="m_gridConsole"
                        Margin="10"
                        Opacity="{BindingUtils:BoolToValueBinding IsPlaying, 0.4, 1}"
