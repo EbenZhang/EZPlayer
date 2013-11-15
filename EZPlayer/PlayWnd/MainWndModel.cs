@@ -161,10 +161,17 @@ namespace EZPlayer.Model
                 m_vlcControl.Media.StateChanged -= this.Media_StateChanged;
             }
 
-            var media = new PathMedia(mediaPath);
-            media.ParsedChanged += OnMediaParsed;
-            media.StateChanged += Media_StateChanged;
-            m_vlcControl.Media = media;
+            if (mediaPath != null)
+            {
+                var media = new PathMedia(mediaPath);
+                media.ParsedChanged += OnMediaParsed;
+                media.StateChanged += Media_StateChanged;
+                m_vlcControl.Media = media;
+            }
+            else
+            {
+                Stop();
+            }
         }
 
         /// <summary>

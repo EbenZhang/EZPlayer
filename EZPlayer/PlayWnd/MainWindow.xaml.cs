@@ -412,5 +412,21 @@ namespace EZPlayer
                 m_viewModel.PlayAListOfFiles(playList);
             }
         }
+
+        private void OnDropFileToPlayList(object sender, DragEventArgs e)
+        {
+            if (e.Data is DataObject && ((DataObject)e.Data).ContainsFileDropList())
+            {
+                var fileList = (e.Data as DataObject).GetFileDropList();
+                foreach (var r in fileList)
+                {
+                    if (!m_viewModel.PlayingFiles.Contains(r))
+                    {
+                        m_viewModel.PlayingFiles.Add(r);
+                    }
+                }
+                e.Handled = true;
+            }
+        }
     }
 }

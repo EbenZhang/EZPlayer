@@ -203,6 +203,7 @@
                 Background="Black"
                 Foreground="White"
                 Margin="8"
+                Drop="OnDropFileToPlayList"
                 SelectedItem="{Binding Path=CurrentFilePath}"
                 ItemsSource="{Binding Path=PlayingFiles}">
                 <ListView.ItemTemplate>

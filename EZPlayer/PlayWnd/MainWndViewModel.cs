@@ -138,7 +138,7 @@ namespace EZPlayer.ViewModel
                     }
                     m_model.CurrentFilePath = value;
 
-                    IsPlaying = true;
+                    IsPlaying = m_model.CurrentFilePath != null;
                     
                     //OnMediaChanged();
 
@@ -281,14 +281,17 @@ namespace EZPlayer.ViewModel
         }
 
         public void PlayAListOfFiles(List<string> playList)
-        {            
-            PlayingFiles.Clear();
+        {
             if (playList.Count == 0)
             {   
                 return;
             }
+
+            this.CurrentFilePath = null;
+
+            PlayingFiles.Clear();
             playList.ForEach(r => PlayingFiles.Add(r));
-            NotifyPropertyChange(() => PlayingFiles);
+            //NotifyPropertyChange(() => PlayingFiles);
             SubtitleUtil.PrepareSubtitle(playList[0]);
             this.CurrentFilePath = playList[0];
         }
