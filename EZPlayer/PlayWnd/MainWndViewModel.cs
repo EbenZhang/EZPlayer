@@ -9,6 +9,7 @@ using Org.Mentalis.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -296,17 +297,19 @@ namespace EZPlayer.ViewModel
             this.CurrentFilePath = playList[0];
         }
 
-        private async void SearchOnlineSubtitle()
+        private void SearchOnlineSubtitle()
         {
-            var searcher = new OpenSubtitleSearcher();
-
-            string subtitleFileName = await Task.Run(() => searcher.DownloadSubtitles(CurrentFilePath));
-
-            if(!string.IsNullOrEmpty(subtitleFileName))
+            Task<string> subtitleTask = new Task<string>(() => new OpenSubtitleSearcher().DownloadSubtitles(CurrentFilePath));
+            subtitleTask.ContinueWith((x) =>
             {
-                SubtitleUtil.PrepareSubtitle(CurrentFilePath);
-                m_model.SetSubtitleFile(subtitleFileName);
-            }
+                var filePath = x.Result;
+                if (!string.IsNullOrEmpty(filePath) && Path.GetDirectoryName(filePath) == Path.GetDirectoryName(CurrentFilePath))
+                {
+                    SubtitleUtil.PrepareSubtitle(CurrentFilePath);
+                    m_model.SetSubtitleFile(filePath);
+                }
+            }, TaskScheduler.Current);
+            subtitleTask.Start();
         }
 
         private void SetupSleepBarricade()
@@ -314,10 +317,11 @@ namespace EZPlayer.ViewModel
             m_sleepBarricade = new SleepBarricade(() => IsPlaying);
         }
 
-        private async void SetupFileAssoc()
+        private void SetupFileAssoc()
         {
-            await Task.Run(() => FileAssocModel.Instance.Load());
-            await Task.Run(() => FileAssocModel.Instance.Save());
+            Task.Factory.StartNew(
+                () => FileAssocModel.Instance.Load())
+                .ContinueWith((x) => FileAssocModel.Instance.Save());
         }
 
         public bool TryLoadLastPlayedFile()
