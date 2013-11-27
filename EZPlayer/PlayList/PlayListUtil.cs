@@ -21,7 +21,7 @@ namespace EZPlayer.PlayList
             var filesInTheSameDir = dirSearcher.SearchFiles(dir,
                 "*" + ext,
                 SearchOption.TopDirectoryOnly)
-                .Where(f => f.CompareTo(filePathToGetPlayListFor) >= 0).ToList();
+                .Where(f => f.CompareTo(filePathToGetPlayListFor) >= 0).OrderBy(f => f).ToList();
 
             var similarFiles = filesInTheSameDir.Where(f => IsSimilarFile(filePathToGetPlayListFor, f)).ToList();
             if (similarFiles.Count == 1)
