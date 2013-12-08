@@ -23,7 +23,7 @@ namespace EZPlayer.ViewModel
     // A delegate type for hooking up change notifications.
     public delegate void AllPlayed();
 
-    public class MainWndViewModel : ViewModelBase
+    public class MainWndViewModel : ViewModelBase<MainWndViewModel>
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
 
@@ -143,7 +143,7 @@ namespace EZPlayer.ViewModel
                     
                     //OnMediaChanged();
 
-                    NotifyPropertyChange(() => CurrentFilePath);
+                    NotifyPropertyChange(m => m.CurrentFilePath);
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_isPlaying = value;
-                NotifyPropertyChange(() => IsPlaying);
+                NotifyPropertyChange(m => m.IsPlaying);
             }
         }
 
@@ -169,7 +169,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_model.Position = value;
-                NotifyPropertyChange(() => Position);
+                NotifyPropertyChange(m => m.Position);
             }
         }
 
@@ -190,7 +190,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_model.Volume = value;
-                NotifyPropertyChange(() => Volume);
+                NotifyPropertyChange(m => m.Volume);
             }
         }
 
@@ -416,7 +416,7 @@ namespace EZPlayer.ViewModel
 
         private void UpdateTitle()
         {
-            NotifyPropertyChange(() => Title);
+            NotifyPropertyChange(m => m.Title);
         }
 
         private void LoadLastVolume()
@@ -436,9 +436,9 @@ namespace EZPlayer.ViewModel
         
         private void OnTimeChanged()
         {
-            NotifyPropertyChange(() => TimeIndicator);
+            NotifyPropertyChange(m => m.TimeIndicator);
 
-            NotifyPropertyChange(() => Position);
+            NotifyPropertyChange(m => m.Position);
 
             SyncPlayStatusWithModel();
 

@@ -6,7 +6,7 @@ using EZPlayer.ViewModel;
 
 namespace EZPlayer.History
 {
-    public class HistoryViewModel : ViewModelBase
+    public class HistoryViewModel : ViewModelBase<HistoryViewModel>
     {
         private HistoryModel m_model = HistoryModel.Instance;
 
@@ -66,7 +66,7 @@ namespace EZPlayer.History
         {
             items.ForEach(item => m_model.HistoryItems.Remove(item.ItemData));
             m_model.Save();
-            NotifyPropertyChange(() => HistoryItems);
+            NotifyPropertyChange(m => m.HistoryItems);
         }
     }
 }

@@ -6,7 +6,7 @@ using EZPlayer.FileAssociation.Model;
 
 namespace EZPlayer.ViewModel
 {
-    public class FileAssocViewModel : ViewModelBase
+    public class FileAssocViewModel : ViewModelBase<FileAssocViewModel>
     {
         private FileAssocModel m_model = FileAssocModel.Instance;
         public FileAssocViewModel()

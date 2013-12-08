@@ -5,30 +5,20 @@ using System.Linq.Expressions;
 
 namespace EZPlayer.ViewModel
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase<TViewModel> : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChange<TProperty>(Expression<Func<TProperty>> property)
+        protected void NotifyPropertyChange<TProperty>(Expression<Func<TViewModel, TProperty>> property)
         {
-            var lambda = (LambdaExpression)property;
-            MemberExpression memberExpression;
-            if (lambda.Body is UnaryExpression)
-            {
-                var unaryExpression = (UnaryExpression)lambda.Body;
-                memberExpression = (MemberExpression)unaryExpression.Operand;
-            }
-            else
-            {
-                memberExpression = (MemberExpression)lambda.Body;
-            }
+            string propertyName = ((MemberExpression)property.Body).Member.Name;
 
-            this.VerifyPropertyName(memberExpression.Member.Name);
+            this.VerifyPropertyName(propertyName);
 
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(memberExpression.Member.Name);
+                var e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
         }
