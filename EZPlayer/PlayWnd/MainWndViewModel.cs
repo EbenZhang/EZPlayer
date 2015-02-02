@@ -253,6 +253,11 @@ namespace EZPlayer.ViewModel
             if (fileList.Count == 1)
             {
                 var file = fileList[0];
+
+                if (file.ToUpperInvariant().StartsWith("HTTP"))
+                {
+                    return fileList;
+                }
                 if (!File.Exists(file))
                 {
                     return new List<string>();

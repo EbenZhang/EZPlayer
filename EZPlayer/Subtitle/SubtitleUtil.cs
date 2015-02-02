@@ -10,6 +10,10 @@ namespace EZPlayer.Subtitle
     {
         public static void PrepareSubtitle(string mediaFilePath)
         {
+            if (mediaFilePath.ToUpperInvariant().StartsWith("HTTP"))
+            {
+                return;
+            }
             var files = FindAllSubtitleFiles(mediaFilePath);
             foreach (var f in files)
             {
