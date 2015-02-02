@@ -183,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="image\Playlist.png" />
+    <Content Include="image\Playlist.png" />
     <Content Include="image\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
