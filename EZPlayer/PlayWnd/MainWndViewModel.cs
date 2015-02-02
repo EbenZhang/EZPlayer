@@ -5,6 +5,8 @@ using EZPlayer.Model;
 using EZPlayer.PlayList;
 using EZPlayer.Power;
 using EZPlayer.Subtitle;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using Org.Mentalis.Utilities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace EZPlayer.ViewModel
     // A delegate type for hooking up change notifications.
     public delegate void AllPlayed();
 
-    public class MainWndViewModel : ViewModelBase<MainWndViewModel>
+    public class MainWndViewModel : ViewModelBase
     {
         private static readonly string VOLUME_INFO_FILE = Path.Combine(AppDataDir.EZPLAYER_DATA_DIR, "volume.xml");
 
@@ -64,8 +66,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => PlayOrPause(),
-                    param => CurrentFilePath != null);
+                return new RelayCommand(() => PlayOrPause(),
+                    () => CurrentFilePath != null);
             }
         }
 
@@ -73,8 +75,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Stop(),
-                    param => IsPlaying);
+                return new RelayCommand(() => Stop(),
+                    () => IsPlaying);
             }
         }
 
@@ -82,8 +84,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Previous(),
-                    param => m_model.CurrentFilePath != null);
+                return new RelayCommand(() => Previous(),
+                    () => m_model.CurrentFilePath != null);
             }
         }
 
@@ -91,8 +93,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Next(),
-                    param => m_model.CurrentFilePath != null);
+                return new RelayCommand(() => Next(),
+                    () => m_model.CurrentFilePath != null);
             }
         }
 
@@ -100,8 +102,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Forward(),
-                    param => IsPlaying);
+                return new RelayCommand(() => Forward(),
+                    () => IsPlaying);
             }
         }
 
@@ -109,8 +111,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Rewind(),
-                    param => IsPlaying);
+                return new RelayCommand(() => Rewind(),
+                    () => IsPlaying);
             }
         }
 
@@ -118,8 +120,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => Pause(),
-                    param => IsPlaying);
+                return new RelayCommand(() => Pause(),
+                    () => IsPlaying);
             }
         }
 
@@ -143,7 +145,7 @@ namespace EZPlayer.ViewModel
                     
                     //OnMediaChanged();
 
-                    NotifyPropertyChange(m => m.CurrentFilePath);
+                    RaisePropertyChanged(() => CurrentFilePath);
                 }
             }
         }
@@ -156,7 +158,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_isPlaying = value;
-                NotifyPropertyChange(m => m.IsPlaying);
+                RaisePropertyChanged(() => IsPlaying);
             }
         }
 
@@ -169,7 +171,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_model.Position = value;
-                NotifyPropertyChange(m => m.Position);
+                RaisePropertyChanged(() => Position);
             }
         }
 
@@ -190,7 +192,7 @@ namespace EZPlayer.ViewModel
             set
             {
                 m_model.Volume = value;
-                NotifyPropertyChange(m => m.Volume);
+                RaisePropertyChanged(() => Volume);
             }
         }
 
@@ -421,7 +423,7 @@ namespace EZPlayer.ViewModel
 
         private void UpdateTitle()
         {
-            NotifyPropertyChange(m => m.Title);
+            RaisePropertyChanged(() => Title);
         }
 
         private void LoadLastVolume()
@@ -441,9 +443,9 @@ namespace EZPlayer.ViewModel
         
         private void OnTimeChanged()
         {
-            NotifyPropertyChange(m => m.TimeIndicator);
+            RaisePropertyChanged(() => TimeIndicator);
 
-            NotifyPropertyChange(m => m.Position);
+            RaisePropertyChanged(() => Position);
 
             SyncPlayStatusWithModel();
 

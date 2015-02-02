@@ -198,7 +198,7 @@ namespace EZPlayer
             }
             else
             {
-                ExecuteCommand.Execute(m_viewModel.PlayPauseCommand);
+                m_viewModel.PlayPauseCommand.Execute(null);
             }
         }
 
@@ -331,11 +331,11 @@ namespace EZPlayer
             RestartInputMonitorTimer();
             if (ShortKeys.IsRewindShortKey(e))
             {
-                ExecuteCommand.Execute(m_viewModel.RewindCommand);
+                m_viewModel.RewindCommand.Execute(null);
             }
             if (ShortKeys.IsForwardShortKey(e))
             {
-                ExecuteCommand.Execute(m_viewModel.ForwardCommand);
+                m_viewModel.ForwardCommand.Execute(null);
             }
 
             if (ShortKeys.IsDecreaseVolumeShortKey(e))
@@ -362,18 +362,18 @@ namespace EZPlayer
         {
             var v = new SettingsView();
             v.Owner = this;
-            ExecuteCommand.Execute(m_viewModel.PauseCommand);
+            m_viewModel.PauseCommand.Execute(null);
             v.ShowDialog();
         }
 
         private void OnBtnRewindClick(object sender, RoutedEventArgs e)
         {
-            ExecuteCommand.Execute(m_viewModel.RewindCommand);
+            m_viewModel.RewindCommand.Execute(null);
         }
 
         private void OnBtnForwardClick(object sender, RoutedEventArgs e)
         {
-            ExecuteCommand.Execute(m_viewModel.ForwardCommand);
+            m_viewModel.ForwardCommand.Execute(null);
         }
 
         private void OnBtnOpenClick(object sender, RoutedEventArgs e)
@@ -389,7 +389,7 @@ namespace EZPlayer
         private void Open()
         {
             var historyView = new HistoryView();
-            ExecuteCommand.Execute(m_viewModel.PauseCommand);
+            m_viewModel.PauseCommand.Execute(null);
             historyView.Owner = this;
 
             HistoryModel historyModel = HistoryModel.Instance;

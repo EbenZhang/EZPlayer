@@ -3,15 +3,17 @@ using System.IO;
 using System.Windows.Input;
 using EZPlayer.Common;
 using EZPlayer.FileAssociation.Model;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace EZPlayer.ViewModel
 {
-    public class FileAssocViewModel : ViewModelBase<FileAssocViewModel>
+    public class FileAssocViewModel : ViewModelBase
     {
         private FileAssocModel m_model = FileAssocModel.Instance;
         public FileAssocViewModel()
         {
-            if (DesingerHelper.IsDesigner)
+            if (base.IsInDesignMode)
             {
                 return;
             }
@@ -30,8 +32,8 @@ namespace EZPlayer.ViewModel
         {
             get
             {
-                return new RelayCommand(param => m_model.Save(),
-                    param => true);
+                return new RelayCommand(() => m_model.Save(),
+                    () => true);
             }
         }
     }

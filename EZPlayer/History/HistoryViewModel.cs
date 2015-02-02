@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EZPlayer.ViewModel;
+using GalaSoft.MvvmLight;
 
 namespace EZPlayer.History
 {
-    public class HistoryViewModel : ViewModelBase<HistoryViewModel>
+    public class HistoryViewModel : ViewModelBase
     {
         private HistoryModel m_model = HistoryModel.Instance;
 
@@ -66,7 +67,7 @@ namespace EZPlayer.History
         {
             items.ForEach(item => m_model.HistoryItems.Remove(item.ItemData));
             m_model.Save();
-            NotifyPropertyChange(m => m.HistoryItems);
+            RaisePropertyChanged(() => HistoryItems);
         }
     }
 }
