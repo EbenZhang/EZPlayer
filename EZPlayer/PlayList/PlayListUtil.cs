@@ -24,6 +24,10 @@ namespace EZPlayer.PlayList
                 .Where(f => f.CompareTo(filePathToGetPlayListFor) >= 0).OrderBy(f => f).ToList();
 
             var similarFiles = filesInTheSameDir.Where(f => IsSimilarFile(filePathToGetPlayListFor, f)).ToList();
+            if (similarFiles.Count == 1)
+            {// only find itself.
+                return filesInTheSameDir;
+            }
             return similarFiles;
         }
 
