@@ -3,14 +3,14 @@ using System.Linq;
 using EZPlayer;
 using EZPlayer.PlayList;
 using NSubstitute;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EZPlayerTests
 {
-    [TestFixture]
+    [TestClass]
     public class PlayListUtilTests
     {
-        [Test]
+        [TestMethod]
         public void TestGetPlayList()
         {
             var filesInTheSameDir = new string[] 
@@ -23,7 +23,7 @@ namespace EZPlayerTests
             DoTestPlayList(filesInTheSameDir[1], filesInTheSameDir, expected);
         }
 
-        [Test]
+        [TestMethod]
         public void TestCaseInsensative()
         {
             var filesInTheSameDir = new string[] 
@@ -37,7 +37,7 @@ namespace EZPlayerTests
             DoTestPlayList(filesInTheSameDir[1], filesInTheSameDir, expected);
         }
 
-        [Test]
+        [TestMethod]
         public void TestNotSimilarFile()
         {
             var filesInTheSameDir = new string[] 
@@ -51,7 +51,7 @@ namespace EZPlayerTests
             DoTestPlayList(filesInTheSameDir[1], filesInTheSameDir, expected);
         }
 
-        [Test]
+        [TestMethod]
         public void TestNotSimilarFileOnlyGreaterFilesShouldBeIncluded()
         {
             var filesInTheSameDir = new string[] 
@@ -75,7 +75,7 @@ namespace EZPlayerTests
 
             var result = PlayListUtil.GetPlayList(fileToGetPlayListFor, dirSearcher);
 
-            Assert.AreEqual(expected, result);
+            CollectionAssert.AreEqual(expected, result);
         }
     }
 }

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.IO;
 using EZPlayer.History;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EZPlayerTests
 {
-    [TestFixture]
+    [TestClass]
     public class HistoryModelTests
     {
         private readonly static string m_lastPlayInfoPath = "TestLastPlay.xml";
         private readonly static string m_historyInfoPath = "TestHistory.xml";
         private HistoryModel m_model = null;
-        [SetUp]
+        [TestInitialize]
         public void Setup()
         {
             if (File.Exists(m_lastPlayInfoPath))
@@ -28,19 +28,19 @@ namespace EZPlayerTests
             m_model.Reload();
         }
 
-        [Test]
+        [TestMethod]
         public void TestEmptyLastPlayedFile()
         {
             Assert.IsNull(m_model.LastPlayedFile);
         }
 
-        [Test]
+        [TestMethod]
         public void TestEmptyHistory()
         {
             Assert.IsNull(m_model.GetHistoryInfo("DummyPath"));
         }
 
-        [Test]
+        [TestMethod]
         public void TestSetLastPlayedFile()
         {
             var expected = new HistoryItem()
@@ -54,11 +54,11 @@ namespace EZPlayerTests
             Assert2ItemsAreEqual(expected, m_model.LastPlayedFile);
 
             var historyItem = m_model.GetHistoryInfo(expected.FilePath);
-            Assert.NotNull(historyItem);
+            Assert.IsNotNull(historyItem);
             Assert2ItemsAreEqual(expected, historyItem);
         }
 
-        [Test]
+        [TestMethod]
         public void TestAddFilesToHistory()
         {
             var firstFile = new HistoryItem()
@@ -80,15 +80,15 @@ namespace EZPlayerTests
             m_model.LastPlayedFile = secondFile;
 
             var historyItem = m_model.GetHistoryInfo(firstFile.FilePath);
-            Assert.NotNull(historyItem);
+            Assert.IsNotNull(historyItem);
             Assert2ItemsAreEqual(firstFile, historyItem);
 
             historyItem = m_model.GetHistoryInfo(secondFile.FilePath);
-            Assert.NotNull(historyItem);
+            Assert.IsNotNull(historyItem);
             Assert2ItemsAreEqual(secondFile, historyItem);
         }
 
-        [Test]
+        [TestMethod]
         public void TestPlaySameFileServalTimes()
         {
             var playedYesterday = new HistoryItem()
@@ -111,7 +111,7 @@ namespace EZPlayerTests
             m_model.LastPlayedFile = playedToday;
 
             var historyItem = m_model.GetHistoryInfo(playedToday.FilePath);
-            Assert.NotNull(historyItem);
+            Assert.IsNotNull(historyItem);
             Assert2ItemsAreEqual(playedToday, historyItem);
             Assert2ItemsAreEqual(playedToday, m_model.LastPlayedFile);
         }
