@@ -135,7 +135,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BindingUtils\BoolToValueConvertor.cs" />
-    <Compile Include="BindingUtils\RelayCommand.cs" />
     <Compile Include="Conv\PathFileConverter.cs" />
     <Compile Include="Power\ShutdownPrompt.xaml.cs">
       <DependentUpon>ShutdownPrompt.xaml</DependentUpon>
