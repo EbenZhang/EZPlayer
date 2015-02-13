@@ -24,7 +24,7 @@ namespace EZPlayer.BindingUtils
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            for (int index = Converters.Count - 1; index >= 0; index--)
+            for (var index = Converters.Count - 1; index >= 0; index--)
             {
                 value = Converters[index].ConvertBack(value, targetType,
                     parameter, culture);
@@ -35,11 +35,6 @@ namespace EZPlayer.BindingUtils
             return value;
         }
 
-        public List<IValueConverter> Converters
-        {
-            get { return mConverters; }
-        }
-
-        private List<IValueConverter> mConverters = new List<IValueConverter>();
+        public List<IValueConverter> Converters { get; } = new List<IValueConverter>();
     }
 }
